@@ -34,6 +34,10 @@
     <url>https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary</url>
     <tag>log4j-${Log4jReleaseVersion}</tag>
   </scm>
+  <properties>
+    <maven-site-plugin.version>3.6</maven-site-plugin.version>
+    <log4jParentDir>${basedir}</log4jParentDir>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -59,4 +63,27 @@
     <module>log4j-api-scala_2.12</module>
     <module>log4j-api-scala-sample</module>
   </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven-site-plugin.version}</version>
+          <configuration>
+            <locales>en</locales>
+            <templateDirectory>${log4jParentDir}/src/site</templateDirectory>
+            <template>site.vm</template>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>
