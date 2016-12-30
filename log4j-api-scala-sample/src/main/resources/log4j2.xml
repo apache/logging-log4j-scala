@@ -20,7 +20,7 @@
     <Appenders>
         <Console name="Console">
             <PatternLayout>
-                <Pattern>%d %5p %c{1} %X %F:%L - %m%n</Pattern>
+                <Pattern>%d [%X{correlationId}] %5p %c{1} %X %F:%L - %m%n</Pattern>
             </PatternLayout>
         </Console>
     </Appenders>

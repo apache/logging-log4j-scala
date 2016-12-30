@@ -16,9 +16,11 @@
  */
 package org.apache.logging.log4j.scala.sample
 
+import java.util.UUID
+
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.message.MessageFactory2
-import org.apache.logging.log4j.scala.Logging
+import org.apache.logging.log4j.scala.{Logging, LoggingContext}
 
 object LoggingApp extends App with Logging {
 
@@ -43,5 +45,10 @@ object LoggingApp extends App with Logging {
 
   logger.catching(t)
   logger.catching(Level.INFO, t)
+
+  LoggingContext("correlationId") = UUID.randomUUID().toString
+  logger.info("Logging with a correlation ID set")
+  LoggingContext.clear()
+  logger.info("Logging without the correlation ID")
 
 }
