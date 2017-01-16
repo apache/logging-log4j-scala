@@ -17,27 +17,32 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>log4j-scala</artifactId>
-  <packaging>pom</packaging>
-  <name>Apache Log4j 2 Scala API</name>
-  <version>2.7.1-SNAPSHOT</version>
   <parent>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j</artifactId>
     <version>2.7.1-SNAPSHOT</version>
   </parent>
+
+  <artifactId>log4j-scala</artifactId>
+  <version>2.7.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Apache Log4j 2 Scala API</name>
   <description>Apache Log4j 2 Scala API</description>
   <url>http://logging.apache.org/log4j/2.x/</url>
+
   <scm>
     <connection>scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git</connection>
     <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git</developerConnection>
     <url>https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary</url>
     <tag>log4j-${Log4jReleaseVersion}</tag>
   </scm>
+
   <properties>
     <maven-site-plugin.version>3.6</maven-site-plugin.version>
     <log4jParentDir>${basedir}</log4jParentDir>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -57,6 +62,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
   <modules>
     <module>log4j-api-scala_2.10</module>
     <module>log4j-api-scala_2.11</module>
@@ -86,4 +92,26 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>apache.releases.https</id>
+      <name>Apache Release Distribution Repository</name>
+      <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+    </repository>
+    <snapshotRepository>
+      <id>apache.snapshots.https</id>
+      <name>Apache Development Snapshot Repository</name>
+      <url>https://repository.apache.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </snapshotRepository>
+    <site>
+      <id>apache.website</id>
+      <url>scp://people.apache.org/www/logging.apache.org/log4j/2.0</url>
+    </site>
+    <downloadUrl>https://logging.apache.org/log4j/2.x/download.html</downloadUrl>
+  </distributionManagement>
+
 </project>
