@@ -8,7 +8,7 @@ provider implementations). Idiomatic Scala features are provided as an
 alternative to using the Log4j 2 Java API.
 
 Note that Scala 2.12 support requires Java 8 at minimum and was introduced
-as in Log4j 2.8.1 (earlier versions of Log4j Scala API do not have Scala
+in Log4j 2.8.1 (earlier versions of Log4j Scala API do not have Scala
 2.12 compatible binaries available other than in nightly snapshots).
 
 [![Build Status](https://builds.apache.org/buildStatus/icon?job=Log4jScala)](https://builds.apache.org/job/Log4jScala)
