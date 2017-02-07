@@ -18,7 +18,8 @@ in Log4j 2.8.1 (earlier versions of Log4j Scala API do not have Scala
 SBT users can add the following dependencies to their `build.sbt` file:
 
 ```scala
-libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "2.8"
+libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "2.8.1"
+libraryDependencies += "org.apache.logging.log4j" %% "log4j-core" % "2.8.1" % "runtime"
 ```
 
 Basic usage of the API:
@@ -48,9 +49,9 @@ and in the [ScalaDocs](https://logging.apache.org/log4j/2.x/log4j-api-scala_2.11
 ## Requirements
 
 Log4j Scala API requires at least Java 7 for Scala 2.10/2.11, or Java 8 for
-Scala 2.12. This also requires Log4j 2 API and Log4j 2 Core, but these are
-specified as transitive dependencies automatically if you are using SBT, Maven,
-Gradle, or some other similar build system. Some Log4j 2 features require optional
+Scala 2.12. This also requires Log4j 2 API, but it is specified as transitive dependencies automatically 
+if you are using SBT, Maven, Gradle, or some other similar build system. This also requires Log4j 2 Core 
+(or possibly an other implementation of Log4j 2 API) as a runtime dependency. Some Log4j 2 Core features require optional
 dependencies which are documented in the [Log4j 2 manual](https://logging.apache.org/log4j/2.x/manual/index.html).
 
 ## License
