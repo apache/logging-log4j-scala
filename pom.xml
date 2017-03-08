@@ -25,7 +25,7 @@
 
   <groupId>org.apache.logging.log4j</groupId>
   <artifactId>log4j-scala</artifactId>
-  <version>2.8.1-SNAPSHOT</version>
+  <version>11.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Log4j 2 Scala API</name>
@@ -36,13 +36,14 @@
     <connection>scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git</connection>
     <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git</developerConnection>
     <url>https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary</url>
-    <tag>log4j-${Log4jReleaseVersion}</tag>
+    <tag>log4j-scala-${Log4jScalaApiReleaseVersion}</tag>
   </scm>
 
   <properties>
     <maven-site-plugin.version>3.6</maven-site-plugin.version>
     <log4jParentDir>${basedir}</log4jParentDir>
-    <Log4jReleaseVersion>2.8</Log4jReleaseVersion>
+    <Log4jScalaApiReleaseVersion>11.0</Log4jScalaApiReleaseVersion>
+    <log4j.version>2.8.1</log4j.version>
     <changes.plugin.version>2.12.1</changes.plugin.version>
     <pmd.plugin.version>3.7</pmd.plugin.version>
   </properties>
@@ -67,24 +68,24 @@
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>${project.version}</version>
+        <version>${log4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-api</artifactId>
-        <version>${project.version}</version>
+        <version>${log4j.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>${project.version}</version>
+        <version>${log4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>${project.version}</version>
+        <version>${log4j.version}</version>
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>

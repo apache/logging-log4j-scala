@@ -1,15 +1,14 @@
 # [Apache Log4j 2 Scala API](http://logging.apache.org/log4j/2.x/)
 
 Log4j Scala API is a Scala logging facade based on Log4j 2. This supports
-Scala 2.10, 2.11, and 2.12, on Java 7 at minimum. Log4j Scala API provides
-Log4j 2 as its default logging implementation, but this is not strictly
+Scala 2.10, and 2.11 on Java 7 at minimum, and Scala 2.12 on Java 8 at minimum. 
+Log4j Scala API provides Log4j 2 as its default logging implementation, but this is not strictly
 required (e.g., this API can also be used with Logback or other Log4j 2 API
 provider implementations). Idiomatic Scala features are provided as an
 alternative to using the Log4j 2 Java API.
 
-Note that Scala 2.12 support requires Java 8 at minimum and was introduced
-in Log4j 2.8.1 (earlier versions of Log4j Scala API do not have Scala
-2.12 compatible binaries available other than in nightly snapshots).
+Note that this Scala API was versioned and released in sync with Log4j up until version 2.8.1, but from now on it will 
+be versioned and released independently, that's why the version was bumped to 11.0. 
 
 [![Build Status](https://builds.apache.org/buildStatus/icon?job=Log4jScala)](https://builds.apache.org/job/Log4jScala)
 
@@ -18,7 +17,7 @@ in Log4j 2.8.1 (earlier versions of Log4j Scala API do not have Scala
 SBT users can add the following dependencies to their `build.sbt` file:
 
 ```scala
-libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "2.8.1"
+libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0"
 libraryDependencies += "org.apache.logging.log4j" %% "log4j-core" % "2.8.1" % "runtime"
 ```
 
