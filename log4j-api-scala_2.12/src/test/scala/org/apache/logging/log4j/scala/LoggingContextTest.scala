@@ -20,6 +20,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
 
+import scala.collection.mutable
+
 @RunWith(classOf[JUnitRunner])
 class LoggingContextTest extends FunSuite with Matchers {
 
@@ -97,6 +99,17 @@ class LoggingContextTest extends FunSuite with Matchers {
     LoggingContext += ("key2" -> "value2")
 
     LoggingContext.iterator.toSet shouldBe Set("key1" -> "value1", "key2" -> "value2")
+  }
+
+  test("foreach") {
+    LoggingContext += ("key1" -> "value1")
+    LoggingContext += ("key2" -> "value2")
+
+    val result = mutable.Set.empty[(String, String)]
+
+    LoggingContext.foreach { result += _ }
+
+    result shouldBe Set("key1" -> "value1", "key2" -> "value2")
   }
 
 }

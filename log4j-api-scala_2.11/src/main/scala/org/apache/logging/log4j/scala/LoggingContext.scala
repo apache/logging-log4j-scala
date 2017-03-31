@@ -75,6 +75,8 @@ object LoggingContext extends mutable.Map[String, String] {
 
   override def iterator: Iterator[(String, String)] = ThreadContext.getImmutableContext.asScala.iterator
 
+  override def foreach[U](f: ((String, String)) => U): Unit = ThreadContext.getImmutableContext.asScala.foreach(f)
+
   override def size: Int = ThreadContext.getImmutableContext.size()
 
   override def isEmpty: Boolean = ThreadContext.isEmpty
