@@ -7,7 +7,7 @@ required (e.g., this API can also be used with Logback or other Log4j 2 API
 provider implementations). Idiomatic Scala features are provided as an
 alternative to using the Log4j 2 Java API.
 
-Note that this Scala API was versioned and released in sync with Log4j up until version 2.8.1, but from now on it will 
+Note that this Scala API was versioned and released in sync with Log4j up until version 2.8.2, but from now on it will 
 be versioned and released independently, that's why the version was bumped to 11.0. 
 
 [![Build Status](https://builds.apache.org/buildStatus/icon?job=Log4jScala)](https://builds.apache.org/job/Log4jScala)
@@ -18,7 +18,7 @@ SBT users can add the following dependencies to their `build.sbt` file:
 
 ```scala
 libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0"
-libraryDependencies += "org.apache.logging.log4j" %% "log4j-core" % "2.8.1" % "runtime"
+libraryDependencies += "org.apache.logging.log4j" %% "log4j-core" % "2.8.2" % "runtime"
 ```
 
 Basic usage of the API:
