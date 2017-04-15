@@ -46,6 +46,7 @@
             </includes>
         </fileSet>
     </fileSets>
+    <!--
     <files>
          <file>
             <source>../RELEASE-NOTES.md</source>
@@ -53,4 +54,5 @@
             <destName>RELEASE-NOTES.md</destName>
         </file>
     </files>
+    -->
 </assembly>
