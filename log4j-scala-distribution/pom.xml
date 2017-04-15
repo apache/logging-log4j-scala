@@ -98,7 +98,7 @@
               <goal>single</goal>
             </goals>
             <configuration>
-              <finalName>apache-log4j-scala-${project.version}}</finalName>
+              <finalName>apache-log4j-scala-${project.version}</finalName>
               <descriptors>
                 <descriptor>src/assembly/src.xml</descriptor>
               </descriptors>
@@ -108,7 +108,7 @@
           <execution>
             <id>binary</id>
             <configuration>
-              <finalName>apache-log4j-scala-${project.version}}</finalName>
+              <finalName>apache-log4j-scala-${project.version}</finalName>
               <descriptors>
                 <descriptor>src/assembly/bin.xml</descriptor>
               </descriptors>
