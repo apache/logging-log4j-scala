@@ -132,6 +132,26 @@
             </execution>
           </executions>
         </plugin>
+        <!-- RAT report -->
+        <plugin>
+          <groupId>org.apache.rat</groupId>
+          <artifactId>apache-rat-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <!-- jQuery is MIT-licensed, but RAT can't figure it out -->
+              <exclude>src/site/resources/js/jquery.js</exclude>
+              <exclude>src/site/resources/js/jquery.min.js</exclude>
+              <!-- Generated files -->
+              <exclude>log4j-distribution/target/**/*</exclude>
+              <exclude>log4j-distribution/.project</exclude>
+              <exclude>log4j-distribution/.settings/**</exclude>
+              <exclude>velocity.log</exclude>
+              <!-- Other -->
+              <exclude>felix-cache/**</exclude>
+              <exclude>RELEASE-NOTES.md</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
