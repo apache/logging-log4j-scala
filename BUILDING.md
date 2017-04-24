@@ -16,8 +16,7 @@
 -->
 # Building Log4j 2 Scala API
   
-To build Log4j 2 Scala API, you need a JDK implementation version 1.8 or greater and Apache Maven.
-Note that building the site requires Maven 3.0.5, while everything else works fine with any version of Maven 3.
+To build Log4j 2 Scala API, you need a JDK implementation version 1.8 or greater and Apache Maven 3.x.
 
 To perform the license release audit, a.k.a. "RAT check", run.
 
