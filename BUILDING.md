@@ -32,13 +32,3 @@ Next, to build the site:
     mvn site
 
 On Windows, use a local staging directory, for example:
-
-    mvn site:stage-deploy -DstagingSiteURL=file:///%HOMEDRIVE%%HOMEPATH%/log4j-scala
-
-On UNIX, use a local staging directory, for example:
-
-    mvn site:stage-deploy -DstagingSiteURL=file:///$HOME/log4j-scala
-
-To test, run:
-
-    mvn clean install
