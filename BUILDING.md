@@ -29,5 +29,3 @@ To install the jars in your local Maven repository, from a command line, run:
 Next, to build the site:
 
     mvn site
-
-On Windows, use a local staging directory, for example:
