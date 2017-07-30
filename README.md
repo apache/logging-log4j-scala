@@ -17,9 +17,11 @@ be versioned and released independently, that's why the version was bumped to 11
 SBT users can add the following dependencies to their `build.sbt` file:
 
 ```scala
-libraryDependencies += "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0"
-libraryDependencies += "org.apache.logging.log4j" %  "log4j-api" % "2.8.2"
-libraryDependencies += "org.apache.logging.log4j" %  "log4j-core" % "2.8.2" % "runtime"
+libraryDependencies ++= Seq(
+  "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0",
+  "org.apache.logging.log4j" % "log4j-api" % "2.8.2",
+  "org.apache.logging.log4j" % "log4j-core" % "2.8.2" % Runtime
+)
 ```
 
 Basic usage of the API:
