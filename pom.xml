@@ -45,7 +45,7 @@
     <Log4jScalaApiReleaseVersion>11.0</Log4jScalaApiReleaseVersion>
     <log4j.version>2.8.2</log4j.version>
     <changes.plugin.version>2.12.1</changes.plugin.version>
-    <pmd.plugin.version>3.7</pmd.plugin.version>
+    <pmd.plugin.version>3.8</pmd.plugin.version>
   </properties>
 
   <dependencyManagement>
