@@ -28,8 +28,8 @@
   <name>Scala API samples</name>
   <url>http://http://logging.apache.org/log4j/2.x/</url>
   <properties>
-    <scala.version>2.12.1</scala.version>
-    <scala.maven.plugin.version>3.2.2</scala.maven.plugin.version>
+    <scala.version>2.12.4</scala.version>
+    <scala.maven.plugin.version>3.3.1</scala.maven.plugin.version>
     <log4jParentDir>${basedir}/..</log4jParentDir>
   </properties>
   <dependencies>
