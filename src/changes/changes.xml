@@ -37,6 +37,9 @@
       <action issue="LOG4J2-1996" dev="ggregory" type="update">
         Update log4j-api-scala_2.12 from Scala 2.12.1 to 2.12.3.
       </action>
+      <action issue="LOG4J2-2115" dev="ggregory" type="update">
+        Update Log4j dependency from 2.8.1 to 2.9.1.
+      </action>
     </release>
   </body>
 </document>
