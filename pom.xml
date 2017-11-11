@@ -140,6 +140,7 @@
         <plugin>
           <groupId>org.apache.rat</groupId>
           <artifactId>apache-rat-plugin</artifactId>
+          <version>0.12</version>
           <configuration>
             <excludes>
               <!-- README does not need a license header -->
