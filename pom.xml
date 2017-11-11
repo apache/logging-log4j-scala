@@ -106,6 +106,7 @@
     <module>log4j-api-scala_2.10</module>
     <module>log4j-api-scala_2.11</module>
     <module>log4j-api-scala_2.12</module>
+<!--<module>log4j-api-scala_2.13</module> -->
     <module>log4j-api-scala-sample</module>
   </modules>
 
