@@ -41,7 +41,7 @@
         Update Log4j dependency from 2.8.1 to 2.9.1.
       </action>
       <action issue="LOG4J2-2116" dev="ggregory" type="update">
-        Update Scala from 2.12.3 to 2.12.4.
+        Update log4j-api-scala_2.12 from Scala 2.12.3 to 2.12.4.
       </action>
     </release>
   </body>
