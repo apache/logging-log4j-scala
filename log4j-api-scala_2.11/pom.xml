@@ -31,7 +31,7 @@
     <log4jParentDir>${basedir}/..</log4jParentDir>
     <projectDir>/scala_2.11</projectDir>
     <scala.version>2.11.11</scala.version>
-    <scala.maven.plugin.version>3.2.2</scala.maven.plugin.version>
+    <scala.maven.plugin.version>3.3.1</scala.maven.plugin.version>
   </properties>
   <dependencies>
     <dependency>
