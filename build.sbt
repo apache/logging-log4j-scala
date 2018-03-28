@@ -1,12 +1,12 @@
 import Dependencies._
 
 name := "Log4j Scala API"
-organization := "org.apache.logging.log4j"
-//organizationName := "Apache Software Foundation"
-//organizationHomepage := Some(url("https://www.apache.org/"))
-homepage := Some(url("https://logging.apache.org/log4j/scala/"))
-//licenses := Seq("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
-scmInfo := Some(ScmInfo(
+organization in ThisBuild := "org.apache.logging.log4j"
+organizationName in ThisBuild := "Apache Software Foundation"
+organizationHomepage in ThisBuild := Some(url("https://www.apache.org/"))
+homepage in ThisBuild := Some(url("https://logging.apache.org/log4j/scala/"))
+licenses in ThisBuild := Seq("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
+scmInfo in ThisBuild := Some(ScmInfo(
   url("https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
   "scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git",
   "scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git"
@@ -28,8 +28,14 @@ lazy val publishSettings = Seq(
   }
 )
 
+lazy val releaseSettings = Seq(
+  releaseCrossBuild := true
+)
+
 lazy val api = (project in file("api"))
   .settings(commonSettings: _*)
+  .settings(publishSettings: _*)
+  .settings(releaseSettings: _*)
   .settings(
     name := "log4j-api-scala",
     scalaVersion := scala211,
@@ -63,7 +69,7 @@ lazy val api = (project in file("api"))
 //  )
 //  .dependsOn(api)
 
-pomExtra := {
+pomExtra in ThisBuild := {
   <parent>
     <groupId>org.apache.logging</groupId>
     <artifactId>logging-parent</artifactId>
