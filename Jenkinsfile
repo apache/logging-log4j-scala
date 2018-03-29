@@ -28,6 +28,7 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     sh './sbt -batch "+ compile"'
+                    archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true, onlyIfSuccessful: true
                 }
             }
         }
@@ -38,13 +39,17 @@ pipeline {
                 }
             }
         }
+        // FIXME: LOG4J2-2291
+        /*
         stage('Deploy') {
+            when { branch 'master' }
             steps {
                 ansiColor('xterm') {
                     sh './sbt -batch "+ publish"'
                 }
             }
         }
+        */
     }
 }
 
