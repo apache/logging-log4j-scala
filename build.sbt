@@ -1,4 +1,5 @@
 import Dependencies._
+//import OsgiKeys._
 
 lazy val metadataSettings = Seq(
   organization := "org.apache.logging.log4j",
@@ -45,40 +46,47 @@ lazy val publishSettings = Seq(
   publishArtifact in Test := false,
   publishTo := {
     if (isSnapshot.value) {
-      Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
+      // FIXME: LOG4J2-2291
+      //Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
+      Some(Resolver.file("file", file("target/repository/")))
     } else {
       Some("Apache Releases" at "https://repository.apache.org/service/local/staging/deploy/maven2")
     }
-  },
-  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
+  }
+//  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
 //  managedResources
 //  resourceGenerators in Compile += inlineTask(Seq(file("LICENSE.txt"), file("NOTICE.txt")))
 )
 
 lazy val releaseSettings = Seq(
-  releaseCrossBuild := true
+  releaseCrossBuild := true,
+  apiURL := Some(url(s"https://logging.apache.org/log4j/scala/log4j-api-scala_${scalaBinaryVersion.value}/scaladocs/"))
 )
 
 lazy val apiDependencies = Seq(
   libraryDependencies ++= Seq(
-    "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-    "org.apache.logging.log4j" % "log4j-api" % log4j,
-    "org.apache.logging.log4j" % "log4j-api" % log4j % Test classifier "tests",
-    "junit" % "junit" % junit % Test,
-    "org.scalatest" %% "scalatest" % scalatest % Test,
-    "org.mockito" % "mockito-core" % mockito % Test
+    scalaReflect(scalaVersion.value),
+    osgiCoreApi,
+    log4jApi,
+    log4jApiTests,
+    junit,
+    scalatest,
+    mockito
   )
 )
 
 lazy val apiInputFiles = Seq(
-  sources in Compile := {
-    val filteredFiles = {
-      for ((_, minor) <- CrossVersion.partialVersion(scalaVersion.value) if minor == 10)
-        yield ((baseDirectory.value / "src" / "main" / "scala") ** "*Macro.scala").get
-    }.getOrElse(Seq())
-    (sources in Compile).value.filterNot(filteredFiles.contains)
+  unmanagedSources in Compile := {
+    val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
+    val extras = if (minor > 10) ((baseDirectory.value / "src" / "main" / "scala-2.11+") ** "*.scala").get else Nil
+    (unmanagedSources in Compile).value ++ extras
   }
 )
+
+//lazy val bundleSettings = osgiSettings ++ Seq(
+//  bundleSymbolicName := "org.apache.logging.log4j.scala",
+//  exportPackage := Seq("org.apache.logging.log4j.scala")
+//)
 
 lazy val root = (project in file("."))
   .settings(name := "log4j-api-scala")
@@ -88,6 +96,8 @@ lazy val root = (project in file("."))
   .settings(releaseSettings: _*)
   .settings(apiDependencies: _*)
   .settings(apiInputFiles: _*)
+//  .enablePlugins(SbtOsgi)
+//  .settings(bundleSettings: _*)
 
 //lazy val nopublish = Seq(
 //  publish := {},
