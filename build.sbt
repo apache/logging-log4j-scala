@@ -21,35 +21,31 @@ enablePlugins(org.apache.logging.log4j.scala.sbt.copyresources.CopyResourcesPlug
 
 lazy val metadataSettings = Seq(
   organization := "org.apache.logging.log4j",
-  organizationName := "Apache Software Foundation",
-  organizationHomepage := Some(url("https://www.apache.org/")),
-  homepage := Some(url("https://logging.apache.org/log4j/scala/")),
-  licenses := Seq("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
-  scmInfo := Some(ScmInfo(
-    url("https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
-    "scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git",
-    "scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git"
-  )),
+  projectInfo := ModuleInfo(
+    nameFormal = "Apache Log4j Scala API",
+    description = "Scala logging API facade for Log4j",
+    homepage = Some(url("https://logging.apache.org/log4j/scala/")),
+    startYear = Some(2016),
+    licenses = Vector("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+    organizationName = "Apache Software Foundation",
+    organizationHomepage = Some(url("https://www.apache.org/")),
+    scmInfo = Some(ScmInfo(
+      url("https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
+      "scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git",
+      "scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git"
+    )),
+    developers = Vector(
+      Developer("mikes", "Mikael Ståldal", "mikes@apache.org", null),
+      Developer("mattsicker", "Matt Sicker", "mattsicker@apache.org", null),
+      Developer("ggregory", "Gary Gregory", "ggregory@apache.org", null)
+    )
+  ),
   pomExtra := {
     <parent>
       <groupId>org.apache.logging</groupId>
       <artifactId>logging-parent</artifactId>
       <version>2</version>
     </parent>
-    <developers>
-      <developer>
-        <id>mikes</id>
-        <name>Mikael Ståldal</name>
-      </developer>
-      <developer>
-        <id>mattsicker</id>
-        <name>Matt Sicker</name>
-      </developer>
-      <developer>
-        <id>ggregory</id>
-        <name>Gary Gregory</name>
-      </developer>
-    </developers>
   }
 )
 
