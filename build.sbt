@@ -76,15 +76,26 @@ lazy val publishSettings = Seq(
     } yield Credentials("Sonatype Nexus Repository Manager", "repository.apache.org", username, password)
   }.toList,
   // FIXME: https://github.com/sbt/sbt/issues/3519
-  updateOptions := updateOptions.value.withGigahorse(false),
+  updateOptions := updateOptions.value.withGigahorse(false)
+)
+
+lazy val packagingSettings = Seq(
   extraResources := Seq(
     (baseDirectory.value / "LICENSE.txt", "META-INF/LICENSE"),
     (baseDirectory.value / "NOTICE.txt", "META-INF/NOTICE")
-  )
+  ),
+  unmanagedSources in Compile := {
+    val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
+    val extras = if (minor > 10) ((baseDirectory.value / "src" / "main" / "scala-2.11+") ** "*.scala").get else Nil
+    (unmanagedSources in Compile).value ++ extras
+  }
 )
 
 lazy val releaseSettings = Seq(
-  releaseCrossBuild := true,
+  releaseCrossBuild := true
+)
+
+lazy val siteSettings = Seq(
   apiURL := Some(url(s"https://logging.apache.org/log4j/scala/api/${version.value}/")),
   siteSubdirName in SiteScaladoc := s"api/${version.value}"
 )
@@ -101,14 +112,6 @@ lazy val apiDependencies = Seq(
   )
 )
 
-lazy val apiInputFiles = Seq(
-  unmanagedSources in Compile := {
-    val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
-    val extras = if (minor > 10) ((baseDirectory.value / "src" / "main" / "scala-2.11+") ** "*.scala").get else Nil
-    (unmanagedSources in Compile).value ++ extras
-  }
-)
-
 //lazy val bundleSettings = osgiSettings ++ Seq(
 //  bundleSymbolicName := "org.apache.logging.log4j.scala",
 //  exportPackage := Seq("org.apache.logging.log4j.scala")
@@ -119,9 +122,10 @@ lazy val root = (project in file("."))
   .settings(metadataSettings: _*)
   .settings(compileSettings: _*)
   .settings(publishSettings: _*)
+  .settings(packagingSettings: _*)
   .settings(releaseSettings: _*)
+  .settings(siteSettings: _*)
   .settings(apiDependencies: _*)
-  .settings(apiInputFiles: _*)
   .enablePlugins(AsciidoctorPlugin)
   .enablePlugins(SiteScaladocPlugin)
 //  .enablePlugins(SbtOsgi)
