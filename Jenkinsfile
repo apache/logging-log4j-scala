@@ -39,7 +39,12 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when { branch 'master' }
+            when {
+                anyOf {
+                    branch 'master'
+                    branch 'sbt'
+                }
+            }
             steps {
                 ansiColor('xterm') {
                     withCredentials([
