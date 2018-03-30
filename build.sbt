@@ -85,7 +85,8 @@ lazy val publishSettings = Seq(
 
 lazy val releaseSettings = Seq(
   releaseCrossBuild := true,
-  apiURL := Some(url(s"https://logging.apache.org/log4j/scala/log4j-api-scala_${scalaBinaryVersion.value}/scaladocs/"))
+  apiURL := Some(url(s"https://logging.apache.org/log4j/scala/api/${version.value}/")),
+  siteSubdirName in SiteScaladoc := s"api/${version.value}"
 )
 
 lazy val apiDependencies = Seq(
@@ -122,6 +123,7 @@ lazy val root = (project in file("."))
   .settings(apiDependencies: _*)
   .settings(apiInputFiles: _*)
   .enablePlugins(AsciidoctorPlugin)
+  .enablePlugins(SiteScaladocPlugin)
 //  .enablePlugins(SbtOsgi)
 //  .settings(bundleSettings: _*)
 
