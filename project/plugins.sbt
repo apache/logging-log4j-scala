@@ -1,3 +1,5 @@
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.1")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
 addSbtPlugin("com.typesafe.sbt" % "sbt-license-report" % "1.2.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.3.2")
+//addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.3")

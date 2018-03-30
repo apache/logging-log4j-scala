@@ -96,6 +96,7 @@ lazy val root = (project in file("."))
   .settings(releaseSettings: _*)
   .settings(apiDependencies: _*)
   .settings(apiInputFiles: _*)
+  .enablePlugins(AsciidoctorPlugin)
 //  .enablePlugins(SbtOsgi)
 //  .settings(bundleSettings: _*)
 
