@@ -30,7 +30,10 @@
          - "update" - Change
          - "remove" - Removed
     -->
-    <release version="12.0.0" date="2017-MM-DD" description="GA Release 12.0.0">
+    <release version="11.1" date="2018-MM-DD" description="GA Release 11.1">
+      <action issue="LOG4J2-2290" dev="mattsicker" type="update">
+        Update Log4j from 2.9.1 to 2.11.0.
+      </action>
       <action issue="LOG4J2-1995" dev="ggregory" type="update">
         Update log4j-api-scala_2.11 from Scala 2.11.8 to 2.11.11.
       </action>
