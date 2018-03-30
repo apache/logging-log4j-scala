@@ -42,12 +42,16 @@ pipeline {
             when { branch 'master' }
             steps {
                 ansiColor('xterm') {
-                    sh './sbt -batch "+ publish"'
-                    // FIXME: LOG4J2-2291
-                    archiveArtifacts artifacts: 'target/repository/**'
+                    withCredentials([
+                            usernamePassword(
+                                    credentialsId: 'logging-snapshots',
+                                    passwordVariable: 'NEXUS_PASSWORD',
+                                    usernameVariable: 'NEXUS_USERNAME')
+                    ]) {
+                        sh './sbt -batch "+ publish"'
+                    }
                 }
             }
         }
     }
 }
-

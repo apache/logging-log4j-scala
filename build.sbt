@@ -46,15 +46,20 @@ lazy val publishSettings = Seq(
   publishArtifact in Test := false,
   publishTo := {
     if (isSnapshot.value) {
-      // FIXME: LOG4J2-2291
-      //Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
-      Some(Resolver.file("file", file("target/repository/")))
+      Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
     } else {
       Some("Apache Releases" at "https://repository.apache.org/service/local/staging/deploy/maven2")
     }
-  }
-//  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
-//  managedResources
+  },
+  credentials ++= {
+    for {
+      username <- sys.env.get("NEXUS_USERNAME")
+      password <- sys.env.get("NEXUS_PASSWORD")
+    } yield Credentials("Sonatype Nexus Repository Manager", "repository.apache.org", username, password)
+  }.toList,
+  // FIXME: https://github.com/sbt/sbt/issues/3519
+  updateOptions := updateOptions.value.withGigahorse(false)
+  //  managedResources
 //  resourceGenerators in Compile += inlineTask(Seq(file("LICENSE.txt"), file("NOTICE.txt")))
 )
 
