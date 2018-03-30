@@ -1,0 +1,70 @@
+////
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+////
+== Usage
+
+Log4j Scala API requires Log4j API. An example SBT dependency setup:
+
+.build.sbt
+[source,scala]
+----
+libraryDependencies ++= Seq(
+  "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0",
+  "org.apache.logging.log4j" % "log4j-api" % "2.11.0",
+  "org.apache.logging.log4j" % "log4j-core" % "2.11.0" % Runtime)
+----
+
+Using the Scala API is as simple as mixing in the `Logging` trait to your class. Example:
+
+[source,scala]
+----
+import org.apache.logging.log4j.scala.Logging
+import org.apache.logging.log4j.Level
+
+class MyClass extends BaseClass with Logging {
+  def doStuff(): Unit = {
+    logger.info("Doing stuff")
+  }
+  def doStuffWithLevel(level: Level): Unit = {
+    logger(level, "Doing stuff with arbitrary level")
+  }
+  def doStuffWithUser(user: User): Unit = {
+    logger.info(s"Doing stuff with ${user.getName}.")
+  }
+}
+----
+
+== Configuration
+
+Log4j Scala API uses https://logging.apache.org/log4j/2.x/manual/configuration.html[Log4j configuration] by default.
+This supports XML, properties files, and Java-based builders, as well as JSON and YAML with additional dependencies.
+
+== Substituting Parameters
+
+Unlike in Java, Scala provides native functionality for string interpolation https://docs.scala-lang.org/overviews/core/string-interpolation.html[beginning in Scala 2.10].
+As all logger calls are implemented as macros, using string interpolation directly does not require additional if checks.
+For example:
+
+[source,scala]
+----
+logger.debug(s"Logging in user ${user.getName} with birthday ${user.calcBirthday}")
+----
+
+== Logger Names
+
+Most logging implementations use a hierarchical scheme for matching logger names with logging configuration.
+In this scheme the logger name hierarchy is represented by '.' characters in the logger name, in a fashion very similar to the hierarchy used for Java/Scala package names.
+The `Logging` trait will automatically name the Logger accordingly to the class it is being used in.

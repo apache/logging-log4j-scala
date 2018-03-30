@@ -14,24 +14,29 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 ////
-= Apache Log4j Scala API
-:toc: left
+== ChangeLog
 
-Log4j Scala API is a Scala logging facade based on Log4j 2.
-Support for Scala versions 2.10, 2.11, and 2.12 are provided, and experimental support for pre-release versions of 2.13 is also provided.
-Log4j Scala API uses Log4j 2.x as its logging backend by default, but this can also be replaced with compatible libraries (e.g., Logback).
-While this library is not required to use Log4j API in Scala, it does provide idiomatic Scala APIs which are friendlier to use in Scala programs than the Java APIs.
+=== Version 11.1
 
-include::usage.adoc[]
+[vertical]
+New Features::
+[horizontal]
+LOG4J2-2298::: Add changelog to site.
+LOG4J2-2293::: Add required license files to SBT output artifacts.
+LOG4J2-2296::: Add sbt-site plugin and website configuration.
+LOG4J2-2291::: Add Jenkins pipeline for SBT build.
 
-include::changes.adoc[]
+[vertical]
+Bug Fixes:: None.
 
-////
-TODO:
-* Apache logo
-* Downloads page
-* License report
-* Other reports?
-* ScalaDocs links
-* Project links
-////
+[vertical]
+Changes::
+[horizontal]
+LOG4J2-2290::: Update Log4j from 2.9.1 to 2.11.0.
+LOG4J2-1995::: Update log4j-api-scala_2.11 from Scala 2.11.8 to 2.11.11.
+LOG4J2-1996::: Update log4j-api-scala_2.12 from Scala 2.12.1 to 2.12.3.
+LOG4J2-2115::: Update Log4j dependency from 2.8.1 to 2.9.1.
+LOG4J2-2116::: Update log4j-api-scala_2.12 from Scala 2.12.3 to 2.12.4.
+
+[vertical]
+Removed:: None.
