@@ -31,13 +31,13 @@ object CopyResourcesPlugin extends AutoPlugin {
       extraResources := Nil
     ) ++ addExtraResourcesInAll(Compile)(packageBin, packageSrc, packageDoc)
 
-    def addExtraResourcesIn(configuration: Configuration, scope: Scoped): Setting[Task[Seq[(File, String)]]] =
-      mappings in (configuration, scope) ++= extraResources.value
+    def addExtraResourcesIn(configuration: Configuration, task: ScopedTaskable[File]): Setting[Task[Seq[(File, String)]]] =
+      mappings in (configuration, task) ++= extraResources.value
 
-    def addExtraResourcesInAll(configurations: Configuration*)(scopes: Scoped*): Seq[Setting[Task[Seq[(File, String)]]]] =
+    def addExtraResourcesInAll(configurations: Configuration*)(tasks: ScopedTaskable[File]*): Seq[Setting[Task[Seq[(File, String)]]]] =
       for {
         configuration <- configurations
-        scope <- scopes
+        scope <- tasks
       } yield addExtraResourcesIn(configuration, scope)
   }
 
