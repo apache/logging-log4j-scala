@@ -28,11 +28,17 @@ object CopyResourcesPlugin extends AutoPlugin {
     val extraResources = taskKey[Seq[(File, String)]]("Additional files to copy into packages")
 
     lazy val baseCopyResourceSettings: Seq[Setting[_]] = Seq(
-      extraResources := Nil,
-      mappings in (Compile, packageBin) ++= extraResources.value,
-      mappings in (Compile, packageSrc) ++= extraResources.value,
-      mappings in (Compile, packageDoc) ++= extraResources.value
-    )
+      extraResources := Nil
+    ) ++ addExtraResourcesInAll(Compile)(packageBin, packageSrc, packageDoc)
+
+    def addExtraResourcesIn(configuration: Configuration, scope: Scoped): Setting[Task[Seq[(File, String)]]] =
+      mappings in (configuration, scope) ++= extraResources.value
+
+    def addExtraResourcesInAll(configurations: Configuration*)(scopes: Scoped*): Seq[Setting[Task[Seq[(File, String)]]]] =
+      for {
+        configuration <- configurations
+        scope <- scopes
+      } yield addExtraResourcesIn(configuration, scope)
   }
 
   import autoImport._
