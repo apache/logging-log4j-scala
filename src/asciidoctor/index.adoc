@@ -31,7 +31,7 @@ TODO:
 * Apache logo
 * Downloads page
 * License report
-* Other reports?
 * ScalaDocs links
 * Project links
+* Dependency report
 ////
