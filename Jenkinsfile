@@ -59,7 +59,7 @@ pipeline {
             }
             post {
                 failure {
-                    emailext body: "See <${env.BUILD_URL}>", replyTo: 'dev@logging.apache.org', subject: "[Scala] Jenkins build failure (#${env.BUILD_NUMBER})", 'notifications@logging.apache.org'
+                    emailext body: "See <${env.BUILD_URL}>", replyTo: 'dev@logging.apache.org', subject: "[Scala] Jenkins build failure (#${env.BUILD_NUMBER})", to: 'notifications@logging.apache.org'
                 }
             }
         }
