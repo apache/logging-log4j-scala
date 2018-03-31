@@ -27,6 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 ansiColor('xterm') {
+                    sh './sbt -batch auditCheck'
                     sh './sbt -batch "+ compile"'
                 }
             }
@@ -34,6 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 ansiColor('xterm') {
+                    sh './sbt -batch Test/auditCheck'
                     sh './sbt -batch "+ test"'
                 }
             }
