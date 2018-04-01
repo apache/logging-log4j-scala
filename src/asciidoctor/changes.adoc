@@ -21,6 +21,7 @@
 [vertical]
 New Features::
 [horizontal]
+LOG4J2-2294::: Add release audit information to build.
 LOG4J2-2298::: Add changelog to site.
 LOG4J2-2293::: Add required license files to SBT output artifacts.
 LOG4J2-2296::: Add sbt-site plugin and website configuration.
