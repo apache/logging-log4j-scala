@@ -14,4 +14,4 @@
  * See the license for the specific language governing permissions and
  * limitations under the license.
  */
-version in ThisBuild := "12.0-SNAPSHOT"
+version in ThisBuild := "11.1-SNAPSHOT"
