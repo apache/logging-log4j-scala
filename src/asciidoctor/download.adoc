@@ -36,7 +36,7 @@ The checksum and signature are links to the originals on the main distribution s
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz[apache-log4j-scala-{project-version}-src.tar.gz]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz.asc[apache-log4j-scala-{project-version}-src.tar.gz.asc]
 
-|Apache Log4j Scala API binary (zip)
+|Apache Log4j Scala API source (zip)
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip[apache-log4j-scala-{project-version}-src.zip]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip.asc[apache-log4j-scala-{project-version}-src.zip.asc]
 |===
