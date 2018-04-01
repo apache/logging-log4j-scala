@@ -86,4 +86,4 @@ mvn install
 
 ## Contributing
 
-We love contributions! Take a look at [our contributing page](https://github.com/apache/logging-log4j-scala/blob/master/CONTRIBUTING.md).
+We love contributions! Take a look at [our contributing page](https://github.com/apache/logging-log4j-scala/blob/master/src/asciidoctor/contributing.adoc).
