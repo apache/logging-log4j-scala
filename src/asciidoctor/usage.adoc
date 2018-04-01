@@ -36,6 +36,21 @@ class MyClass extends BaseClass with Logging {
 }
 ----
 
+=== API Documentation
+
+|===
+|Scala Version |API Link
+
+|Scala 2.10
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.10/scaladocs/[ScalaDocs]
+
+|Scala 2.11
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.11/scaladocs/[ScalaDocs]
+
+|Scala 2.12
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.12/scaladocs/[ScalaDocs]
+|===
+
 == Configuration
 
 Log4j Scala API uses https://logging.apache.org/log4j/2.x/manual/configuration.html[Log4j configuration] by default.

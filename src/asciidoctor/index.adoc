@@ -34,7 +34,6 @@ include::build.adoc[]
 TODO:
 * Apache logo
 * License report
-* ScalaDocs links
 * Project links
 * Dependency report
 ////
