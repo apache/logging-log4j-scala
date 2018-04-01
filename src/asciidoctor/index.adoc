@@ -30,6 +30,8 @@ include::changes.adoc[]
 
 include::build.adoc[]
 
+include::contributing.adoc[]
+
 ////
 TODO:
 * Apache logo
