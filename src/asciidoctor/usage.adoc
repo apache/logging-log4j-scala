@@ -16,7 +16,7 @@
 ////
 == Usage
 
-Using the Scala API is as simple as mixing in the `Logging` trait to your class. Example:
+Using the Scala API is as simple as mixing in the https://logging.apache.org/log4j/scala/log4j-api-scala_2.12/scaladocs/org/apache/logging/log4j/scala/[`Logging`] trait to your class. Example:
 
 [source,scala]
 ----
@@ -42,21 +42,21 @@ class MyClass extends BaseClass with Logging {
 |Scala Version |API Link
 
 |Scala 2.10
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.10/scaladocs/[ScalaDocs]
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.10/scaladocs/#org.apache.logging.log4j.scala.package[ScalaDocs]
 
 |Scala 2.11
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.11/scaladocs/[ScalaDocs]
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.11/scaladocs/#org.apache.logging.log4j.scala.package[ScalaDocs]
 
 |Scala 2.12
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.12/scaladocs/[ScalaDocs]
+|https://logging.apache.org/log4j/scala/log4j-api-scala_2.12/scaladocs/org/apache/logging/log4j/scala/[ScalaDocs]
 |===
 
-== Configuration
+=== Configuration
 
 Log4j Scala API uses https://logging.apache.org/log4j/2.x/manual/configuration.html[Log4j configuration] by default.
 This supports XML, properties files, and Java-based builders, as well as JSON and YAML with additional dependencies.
 
-== Substituting Parameters
+=== Substituting Parameters
 
 Unlike in Java, Scala provides native functionality for string interpolation https://docs.scala-lang.org/overviews/core/string-interpolation.html[beginning in Scala 2.10].
 As all logger calls are implemented as macros, using string interpolation directly does not require additional if checks.
@@ -67,7 +67,7 @@ For example:
 logger.debug(s"Logging in user ${user.getName} with birthday ${user.calcBirthday}")
 ----
 
-== Logger Names
+=== Logger Names
 
 Most logging implementations use a hierarchical scheme for matching logger names with logging configuration.
 In this scheme the logger name hierarchy is represented by '.' characters in the logger name, in a fashion very similar to the hierarchy used for Java/Scala package names.
