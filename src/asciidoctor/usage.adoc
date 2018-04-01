@@ -16,17 +16,6 @@
 ////
 == Usage
 
-Log4j Scala API requires Log4j API. An example SBT dependency setup:
-
-.build.sbt
-[source,scala,subs=attributes]
-----
-libraryDependencies ++= Seq(
-  "org.apache.logging.log4j" %% "log4j-api-scala" % "{project-version}",
-  "org.apache.logging.log4j" % "log4j-api" % "2.11.0",
-  "org.apache.logging.log4j" % "log4j-core" % "2.11.0" % Runtime)
-----
-
 Using the Scala API is as simple as mixing in the `Logging` trait to your class. Example:
 
 [source,scala]

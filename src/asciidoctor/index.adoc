@@ -24,12 +24,15 @@ While this library is not required to use Log4j API in Scala, it does provide id
 
 include::usage.adoc[]
 
+include::download.adoc[]
+
 include::changes.adoc[]
+
+include::build.adoc[]
 
 ////
 TODO:
 * Apache logo
-* Downloads page
 * License report
 * ScalaDocs links
 * Project links
