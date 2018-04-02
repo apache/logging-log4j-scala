@@ -127,23 +127,20 @@ lazy val root = (project in file("."))
   .enablePlugins(SbtOsgi)
   .settings(bundleSettings: _*)
 
-//lazy val nopublish = Seq(
-//  publish := {},
-//  publishLocal := {},
-//  publishM2 := {},
-//  skip in publish := true
-//)
+lazy val nopublish = Seq(
+  publish := {},
+  publishLocal := {},
+  publishM2 := {},
+  skip in publish := true
+)
 
-//lazy val sample = (project in file("sample"))
-//  .settings(metadataSettings: _*)
-//  .settings(nopublish: _*)
-//  .settings(
-//    name := "log4j-api-scala-sample",
-//    scalaVersion := scala212,
-//    libraryDependencies := Seq(
-//      "org.apache.logging.log4j" % "log4j-api" % log4j,
-//      "org.apache.logging.log4j" % "log4j-core" % log4j % Runtime
-//    )
-//  )
-//  .dependsOn(root)
+lazy val sample = (project in file("sample"))
+  .settings(metadataSettings: _*)
+  .settings(compileSettings: _*)
+  .settings(nopublish: _*)
+  .settings(
+    name := "log4j-api-scala-sample",
+    libraryDependencies := Seq(log4jApi, log4jCore)
+  )
+  .dependsOn(root)
 

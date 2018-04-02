@@ -29,6 +29,7 @@ object Dependencies {
   private val log4jV = "2.11.0"
   val log4jApi = "org.apache.logging.log4j" % "log4j-api" % log4jV
   val log4jApiTests = "org.apache.logging.log4j" % "log4j-api" % log4jV % Test classifier "tests"
+  val log4jCore = "org.apache.logging.log4j" % "log4j-core" % log4jV % Runtime
   val junit = "junit" % "junit" % "4.12" % Test
   val scalatest = "org.scalatest" %% "scalatest" % "3.0.4" % Test
   val mockito = "org.mockito" % "mockito-core" % "1.10.19" % Test
