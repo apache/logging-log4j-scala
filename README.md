@@ -19,8 +19,8 @@ SBT users can add the following dependencies to their `build.sbt` file:
 ```scala
 libraryDependencies ++= Seq(
   "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0",
-  "org.apache.logging.log4j" % "log4j-api" % "2.8.2",
-  "org.apache.logging.log4j" % "log4j-core" % "2.8.2" % Runtime
+  "org.apache.logging.log4j" % "log4j-api" % "2.11.0",
+  "org.apache.logging.log4j" % "log4j-core" % "2.11.0" % Runtime
 )
 ```
 
@@ -77,11 +77,11 @@ JIRA issue in the Pull Request.
 
 ## Building From Source
 
-Log4j Scala API requires Maven 3 and Java 8 to build. To install to your local
+Log4j Scala API requires Java 8 to build. To install to your local
 Maven repository, execute the following:
 
 ```sh
-mvn install
+./sbt "+ publishM2"
 ```
 
 ## Contributing

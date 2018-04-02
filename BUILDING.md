@@ -17,3 +17,7 @@
 # Building Log4j 2 Scala API
 
 Moved to [site docs](./src/asciidoctor/build.adoc).
+
+Summary:
+
+    ./sbt "+ publishM2"
