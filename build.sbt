@@ -15,7 +15,7 @@
  * limitations under the license.
  */
 import Dependencies._
-//import OsgiKeys._
+import OsgiKeys._
 
 enablePlugins(org.apache.logging.log4j.scala.sbt.copyresources.CopyResourcesPlugin)
 
@@ -108,10 +108,10 @@ lazy val apiDependencies = Seq(
   )
 )
 
-//lazy val bundleSettings = osgiSettings ++ Seq(
-//  bundleSymbolicName := "org.apache.logging.log4j.scala",
-//  exportPackage := Seq("org.apache.logging.log4j.scala")
-//)
+lazy val bundleSettings = osgiSettings ++ Seq(
+  bundleSymbolicName := "org.apache.logging.log4j.scala",
+  exportPackage := Seq("org.apache.logging.log4j.scala")
+)
 
 lazy val root = (project in file("."))
   .settings(name := "log4j-api-scala")
@@ -124,8 +124,8 @@ lazy val root = (project in file("."))
   .settings(apiDependencies: _*)
   .enablePlugins(AsciidoctorPlugin)
   .enablePlugins(SiteScaladocPlugin)
-//  .enablePlugins(SbtOsgi)
-//  .settings(bundleSettings: _*)
+  .enablePlugins(SbtOsgi)
+  .settings(bundleSettings: _*)
 
 //lazy val nopublish = Seq(
 //  publish := {},
