@@ -21,13 +21,14 @@
 [vertical]
 New Features::
 [horizontal]
+LOG4J2-1882::: Migrate log4j-api-scala to sbt.
 LOG4J2-2303::: Add release distribution script.
 LOG4J2-2295::: Add OSGi metadata to release jars.
 LOG4J2-2294::: Add release audit information to build.
 LOG4J2-2298::: Add changelog to site.
-LOG4J2-2293::: Add required license files to SBT output artifacts.
+LOG4J2-2293::: Add required license files to sbt output artifacts.
 LOG4J2-2296::: Add sbt-site plugin and website configuration.
-LOG4J2-2291::: Add Jenkins pipeline for SBT build.
+LOG4J2-2291::: Add Jenkins pipeline for sbt build.
 
 [vertical]
 Bug Fixes:: None.
