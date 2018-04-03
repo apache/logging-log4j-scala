@@ -82,7 +82,7 @@ lazy val packagingSettings = Seq(
   ),
   unmanagedSources in Compile := {
     val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
-    val extras = if (minor > 10) ((baseDirectory.value / "src" / "main" / "scala-2.11+") ** "*.scala").get else Nil
+    val extras = if (minor > 10) ((sourceDirectory.value / "main" / "scala-2.11+") ** "*.scala").get else Nil
     (unmanagedSources in Compile).value ++ extras
   }
 )
@@ -126,6 +126,7 @@ lazy val root = (project in file("."))
   .enablePlugins(SiteScaladocPlugin)
   .enablePlugins(SbtOsgi)
   .settings(bundleSettings: _*)
+  .enablePlugins(Distributions)
 
 lazy val nopublish = Seq(
   publish := {},
