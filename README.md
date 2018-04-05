@@ -10,7 +10,8 @@ alternative to using the Log4j 2 Java API.
 Note that this Scala API was versioned and released in sync with Log4j up until version 2.8.2, but from now on it will 
 be versioned and released independently, that's why the version was bumped to 11.0. 
 
-[![Build Status](https://builds.apache.org/buildStatus/icon?job=Log4jScala)](https://builds.apache.org/job/Log4jScala)
+[![Jenkins Status](https://builds.apache.org/job/Log4jScala/job/master/badge/icon)](https://builds.apache.org/job/Log4jScala)
+[![Travis Status](https://travis-ci.org/apache/logging-log4j-scala.svg?branch=master)](https://travis-ci.org/apache/logging-log4j-scala)
 
 ## Usage
 
