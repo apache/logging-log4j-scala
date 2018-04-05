@@ -20,4 +20,6 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-license-report" % "1.2.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.3.2")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.3")
-addSbtPlugin("org.musigma" % "sbt-rat" % "0.5.0")
+// for quicker resolutions from Maven Central of new releases, uncomment:
+//resolvers += Resolver.sonatypeRepo("public")
+addSbtPlugin("org.musigma" % "sbt-rat" % "0.5.1")

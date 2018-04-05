@@ -14,10 +14,9 @@
  * See the license for the specific language governing permissions and
  * limitations under the license.
  */
-import Dependencies._
-import OsgiKeys._
 
-enablePlugins(org.apache.logging.log4j.scala.sbt.copyresources.CopyResourcesPlugin)
+import Dependencies._
+import com.typesafe.sbt.osgi.SbtOsgi.autoImport.OsgiKeys._
 
 lazy val metadataSettings = Seq(
   organization := "org.apache.logging.log4j",
@@ -75,17 +74,20 @@ lazy val publishSettings = Seq(
   updateOptions := updateOptions.value.withGigahorse(false)
 )
 
-lazy val packagingSettings = Seq(
-  extraResources := Seq(
-    (baseDirectory.value / "LICENSE.txt", "META-INF/LICENSE"),
-    (baseDirectory.value / "NOTICE.txt", "META-INF/NOTICE")
-  ),
-  unmanagedSources in Compile := {
-    val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
-    val extras = if (minor > 10) ((sourceDirectory.value / "main" / "scala-2.11+") ** "*.scala").get else Nil
-    (unmanagedSources in Compile).value ++ extras
-  }
-)
+lazy val licensePackagingSettings =
+  for (task <- Seq(packageBin, packageSrc, packageDoc)) yield
+    mappings in (Compile, task) ++= Seq(
+      (baseDirectory.value / "LICENSE.txt", "META-INF/LICENSE"),
+      (baseDirectory.value / "NOTICE.txt", "META-INF/NOTICE")
+    )
+
+lazy val sourceSettings = Seq(
+    unmanagedSources in Compile := {
+      val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
+      val extras = if (minor > 10) ((sourceDirectory.value / "main" / "scala-2.11+") ** "*.scala").get else Nil
+      (unmanagedSources in Compile).value ++ extras
+    }
+  )
 
 lazy val releaseSettings = Seq(
   releaseCrossBuild := true
@@ -93,7 +95,11 @@ lazy val releaseSettings = Seq(
 
 lazy val siteSettings = Seq(
   apiURL := Some(url(s"https://logging.apache.org/log4j/scala/api/${version.value}/")),
-  siteSubdirName in SiteScaladoc := s"api/${version.value}"
+  siteSubdirName in SiteScaladoc := s"api/${version.value}",
+  managedSources in Asciidoc += {
+    (auditReport in Compile).value
+    (target in Compile).value / "rat.adoc"
+  }
 )
 
 lazy val apiDependencies = Seq(
@@ -115,18 +121,16 @@ lazy val bundleSettings = osgiSettings ++ Seq(
 
 lazy val root = (project in file("."))
   .settings(name := "log4j-api-scala")
+  .enablePlugins(AsciidocPlugin, SiteScaladocPlugin, SbtOsgi, Distributions)
   .settings(metadataSettings: _*)
   .settings(compileSettings: _*)
   .settings(publishSettings: _*)
-  .settings(packagingSettings: _*)
+  .settings(licensePackagingSettings: _*)
+  .settings(sourceSettings: _*)
   .settings(releaseSettings: _*)
   .settings(siteSettings: _*)
   .settings(apiDependencies: _*)
-  .enablePlugins(AsciidoctorPlugin)
-  .enablePlugins(SiteScaladocPlugin)
-  .enablePlugins(SbtOsgi)
   .settings(bundleSettings: _*)
-  .enablePlugins(Distributions)
 
 lazy val nopublish = Seq(
   publish := {},

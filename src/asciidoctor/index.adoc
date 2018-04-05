@@ -32,10 +32,11 @@ include::build.adoc[]
 
 include::contributing.adoc[]
 
+include::../../target/rat.adoc[]
+
 ////
 TODO:
 * Apache logo
-* License report
 * Project links
 * Dependency report
 ////
