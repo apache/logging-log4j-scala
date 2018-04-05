@@ -1,5 +1,9 @@
-Apache Log4j
+Apache Log4j Scala API
 Copyright 2016-2018 Apache Software Foundation
 
 This product includes software developed at
 The Apache Software Foundation (http://www.apache.org/).
+
+AsciidocPlugin.scala
+Copyright (c) 2008, 2009, 2010, 2011 Josh Suereth, Steven Blundy, Josh Cough,
+Mark Harrah, Stuart Roebuck, Tony Sloane, Vesa Vilhonen, Jason Zaugg
