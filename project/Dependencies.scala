@@ -20,7 +20,7 @@ object Dependencies {
   val scala210 = "2.10.7"
   val scala211 = "2.11.12"
   val scala212 = "2.12.4"
-  val scala213 = "2.13.0-M2"
+  val scala213 = "2.13.0-M3"
 
   def scalaReflect(version: String): ModuleID =
     "org.scala-lang" % "scala-reflect" % version
@@ -31,6 +31,6 @@ object Dependencies {
   val log4jApiTests = "org.apache.logging.log4j" % "log4j-api" % log4jV % Test classifier "tests"
   val log4jCore = "org.apache.logging.log4j" % "log4j-core" % log4jV % Runtime
   val junit = "junit" % "junit" % "4.12" % Test
-  val scalatest = "org.scalatest" %% "scalatest" % "3.0.4" % Test
+  val scalatest = "org.scalatest" %% "scalatest" % "3.0.5-M1" % Test
   val mockito = "org.mockito" % "mockito-core" % "1.10.19" % Test
 }
