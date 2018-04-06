@@ -49,7 +49,7 @@ First download the https://www.apache.org/dist/logging/KEYS[KEYS] as well as the
 Make sure you get these files from the https://www.apache.org/dist/logging/[main distribution directory], rather than from a mirror.
 Then verify the signatures using:
 
-[source,bash,subs=attributes]
+[source,sh,subs=attributes]
 ----
 gpg --import KEYS
 gpg --verify apache-log4j-scala-{project-version}-bin.tar.gz.asc apache-log4j-scala-{project-version}-bin.tar.gz
