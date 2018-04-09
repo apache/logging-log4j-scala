@@ -90,7 +90,27 @@ lazy val sourceSettings = Seq(
   )
 
 lazy val releaseSettings = Seq(
-  releaseCrossBuild := true
+  releaseCrossBuild := true,
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+  releaseVcsSign := true,
+  releaseProcess := {
+    import ReleaseTransformations._
+    Seq(
+      checkSnapshotDependencies,
+      inquireVersions,
+      runClean,
+      releaseStepTask(auditCheck),
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      releaseStepTask(packageSite),
+      publishArtifacts,
+      setNextVersion,
+      commitNextVersion,
+      pushChanges
+    )
+  }
 )
 
 lazy val siteSettings = Seq(
@@ -99,7 +119,11 @@ lazy val siteSettings = Seq(
   managedSources in Asciidoc += {
     (auditReport in Compile).value
     (target in Compile).value / "rat.adoc"
-  }
+  },
+  mappings in makeSite ++= Seq(
+    (baseDirectory.value / "LICENSE.txt", "LICENSE"),
+    (baseDirectory.value / "NOTICE.txt", "NOTICE")
+  )
 )
 
 lazy val apiDependencies = Seq(
