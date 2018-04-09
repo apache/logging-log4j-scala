@@ -22,7 +22,7 @@ function sign_file() {
 function create_sources_from_tag() {
   out_format=$1
   release_version=$2
-  git archive --prefix=apache-log4j-api-scala-${release_version}-src/ -o target/apache-log4j-api-scala-${release_version}-src.${out_format} ${release_version}
+  git archive --prefix=apache-log4j-api-scala-${release_version}-src/ -o target/apache-log4j-api-scala-${release_version}-src.${out_format} v${release_version}
   sign_file target/apache-log4j-api-scala-${release_version}-src.${out_format}
 }
 
