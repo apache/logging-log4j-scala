@@ -99,7 +99,7 @@ lazy val releaseSettings = Seq(
       checkSnapshotDependencies,
       inquireVersions,
       runClean,
-      releaseStepTask(auditCheck),
+      releaseStepTask(auditCheck in Compile),
       runTest,
       setReleaseVersion,
       commitReleaseVersion,
