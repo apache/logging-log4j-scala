@@ -92,7 +92,6 @@ lazy val sourceSettings = Seq(
 lazy val releaseSettings = Seq(
   releaseCrossBuild := true,
   releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-  releaseVcsSign := true,
   releaseProcess := {
     import ReleaseTransformations._
     Seq(
