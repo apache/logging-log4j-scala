@@ -50,7 +50,7 @@ lazy val metadataSettings = Seq(
 
 lazy val compileSettings = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
-  scalaVersion := scala211,
+  scalaVersion := scala213,
   crossScalaVersions := Seq(scala210, scala211, scala212, scala213)
 )
 
@@ -86,7 +86,15 @@ lazy val sourceSettings = Seq(
       val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
       val extras = if (minor > 10) ((sourceDirectory.value / "main" / "scala-2.11+") ** "*.scala").get else Nil
       (unmanagedSources in Compile).value ++ extras
+    },
+    unmanagedSourceDirectories in Compile ++= {
+    (unmanagedSourceDirectories in Compile).value.map { dir =>
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, 13)) => file(dir.getPath ++ "-2.13+")
+        case _             => file(dir.getPath ++ "-2.12-")
+      }
     }
+  }
   )
 
 lazy val releaseSettings = Seq(
@@ -133,6 +141,8 @@ lazy val apiDependencies = Seq(
     log4jApiTests,
     junit,
     scalatest,
+    scalatestJunit,
+    scalatestMockito,
     mockito
   )
 )

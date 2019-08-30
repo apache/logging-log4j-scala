@@ -18,8 +18,8 @@ package org.apache.logging.log4j.scala
 
 import org.apache.logging.log4j.ThreadContext
 
-import scala.collection.JavaConverters._
 import scala.collection.{immutable, mutable}
+import scala.collection.JavaConverters._
 
 /** Manages the context data (context map, MDC) that is added to log events.
   *
