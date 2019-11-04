@@ -144,6 +144,8 @@ lazy val apiDependencies = Seq(
     log4jApiTests,
     junit,
     scalatest,
+    scalatestFunsuit,
+    scalatestMatcher,
     scalatestJunit,
     scalatestMockito,
     mockito

@@ -16,13 +16,13 @@
  */
 package org.apache.logging.log4j.scala
 
-import org.apache.logging.log4j.message.{DefaultFlowMessageFactory, Message, ParameterizedMessage, ParameterizedMessageFactory}
+import org.apache.logging.log4j.message.{DefaultFlowMessageFactory, EntryMessage, Message, ParameterizedMessage, ParameterizedMessageFactory}
 import org.apache.logging.log4j.spi.{AbstractLogger, ExtendedLogger}
 import org.apache.logging.log4j.{Level, Marker, MarkerManager}
 import org.junit.runner.RunWith
-import org.mockito.Matchers.{any, anyString, eq => eqv}
+import org.mockito.ArgumentMatchers.{any, anyString, eq => eqv}
 import org.mockito.Mockito._
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 import org.scalatestplus.mockito.MockitoSugar
 
@@ -35,15 +35,15 @@ trait Manager {
 }
 
 @RunWith(classOf[JUnitRunner])
-class LoggerTest extends FunSuite with Matchers with MockitoSugar {
+class LoggerTest extends AnyFunSuite with MockitoSugar {
 
-  val msg = new ParameterizedMessage("msg {}", 17)
-  val entryMsg = new DefaultFlowMessageFactory().newEntryMessage(msg)
-  val cseqMsg: CharSequence = new StringBuilder().append("cseq msg")
-  val objectMsg = Custom(17)
-  val cause = new RuntimeException("cause")
-  val marker = MarkerManager.getMarker("marker")
-  val result = "foo"
+  val msg                    = new ParameterizedMessage("msg {}", 17)
+  val entryMsg: EntryMessage = new DefaultFlowMessageFactory().newEntryMessage(msg)
+  val cseqMsg : CharSequence = new StringBuilder().append("cseq msg")
+  val objectMsg              = Custom(17)
+  val cause                  = new RuntimeException("cause")
+  val marker  : Marker       = MarkerManager.getMarker("marker")
+  val result                 = "foo"
 
   def fixture =
     new {

@@ -17,7 +17,7 @@
 package org.apache.logging.log4j.scala
 
 import org.junit.runner.RunWith
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 
@@ -66,7 +66,7 @@ class LoggingContextTest extends AnyFunSuite with Matchers {
     LoggingContext += ("key2" -> "value2")
     LoggingContext += ("key3" -> "value3")
 
-    LoggingContext -= ("key1", "key2")
+    LoggingContext --= Set("key1", "key2")
 
     LoggingContext.get("key1") shouldBe None
     LoggingContext.get("key2") shouldBe None
