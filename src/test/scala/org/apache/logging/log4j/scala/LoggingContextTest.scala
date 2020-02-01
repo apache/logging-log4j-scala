@@ -17,13 +17,14 @@
 package org.apache.logging.log4j.scala
 
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatestplus.junit.JUnitRunner
 
 import scala.collection.mutable
 
 @RunWith(classOf[JUnitRunner])
-class LoggingContextTest extends FunSuite with Matchers {
+class LoggingContextTest extends AnyFunSuite with Matchers {
 
   test("put single, contains, get") {
     LoggingContext += "key" -> "value"
@@ -35,7 +36,7 @@ class LoggingContextTest extends FunSuite with Matchers {
   }
 
   test("put multiple 1") {
-    LoggingContext += ("key1" -> "value1", "key2" -> "value2")
+    LoggingContext ++= Seq("key1" -> "value1", "key2" -> "value2")
 
     LoggingContext.get("key1") shouldBe Some("value1")
     LoggingContext.get("key2") shouldBe Some("value2")
@@ -65,7 +66,7 @@ class LoggingContextTest extends FunSuite with Matchers {
     LoggingContext += ("key2" -> "value2")
     LoggingContext += ("key3" -> "value3")
 
-    LoggingContext -= ("key1", "key2")
+    LoggingContext --= Set("key1", "key2")
 
     LoggingContext.get("key1") shouldBe None
     LoggingContext.get("key2") shouldBe None

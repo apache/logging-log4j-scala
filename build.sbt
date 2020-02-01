@@ -50,7 +50,7 @@ lazy val metadataSettings = Seq(
 
 lazy val compileSettings = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
-  scalaVersion := scala211,
+  scalaVersion := scala213,
   crossScalaVersions := Seq(scala210, scala211, scala212, scala213)
 )
 
@@ -82,11 +82,22 @@ lazy val licensePackagingSettings =
     )
 
 lazy val sourceSettings = Seq(
-    unmanagedSources in Compile := {
-      val Some((_, minor)) = CrossVersion.partialVersion(scalaVersion.value)
-      val extras = if (minor > 10) ((sourceDirectory.value / "main" / "scala-2.11+") ** "*.scala").get else Nil
-      (unmanagedSources in Compile).value ++ extras
+    unmanagedSourceDirectories in Compile ++= {
+        (unmanagedSourceDirectories in Compile).value.map { dir =>
+          CrossVersion.partialVersion(scalaVersion.value) match {
+            case Some((2, n11)) if n11 >= 11 => file(dir.getPath ++ "-2.11+")
+            case Some((2, n10)) if n10 <= 10 => file(dir.getPath ++ "-2.10")
+          }
+        }
+    },
+    unmanagedSourceDirectories in Compile ++= {
+    (unmanagedSourceDirectories in Compile).value.map { dir =>
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
+        case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
+      }
     }
+  }
   )
 
 lazy val releaseSettings = Seq(
@@ -133,6 +144,10 @@ lazy val apiDependencies = Seq(
     log4jApiTests,
     junit,
     scalatest,
+    scalatestFunsuit,
+    scalatestMatcher,
+    scalatestJunit,
+    scalatestMockito,
     mockito
   )
 )
