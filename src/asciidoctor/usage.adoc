@@ -42,13 +42,16 @@ class MyClass extends BaseClass with Logging {
 |Scala Version |API Link
 
 |Scala 2.10
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.10/scaladocs/#org.apache.logging.log4j.scala.package[ScalaDocs]
+|link:api/2.10/[ScalaDocs]
 
 |Scala 2.11
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.11/scaladocs/#org.apache.logging.log4j.scala.package[ScalaDocs]
+|link:api/2.11/[ScalaDocs]
 
 |Scala 2.12
-|https://logging.apache.org/log4j/scala/log4j-api-scala_2.12/scaladocs/org/apache/logging/log4j/scala/[ScalaDocs]
+|link:api/2.12/[ScalaDocs]
+
+|Scala 2.13
+|link:api/2.13/[ScalaDocs]
 |===
 
 === Configuration
