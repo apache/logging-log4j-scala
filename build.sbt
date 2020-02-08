@@ -29,9 +29,9 @@ lazy val metadataSettings = Seq(
     organizationName = "Apache Software Foundation",
     organizationHomepage = Some(url("https://www.apache.org/")),
     scmInfo = Some(ScmInfo(
-      url("https://git-wip-us.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
-      "scm:git:http://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git",
-      "scm:git:https://git-wip-us.apache.org/repos/asf/logging-log4j-scala.git"
+      url("https://gitbox.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
+      "scm:git:https://gitbox.apache.org/repos/asf/logging-log4j-scala.git",
+      "scm:git:https://gitbox.apache.org/repos/asf/logging-log4j-scala.git"
     )),
     developers = Vector(
       Developer("mikes", "Mikael Ståldal", "mikes@apache.org", null),
