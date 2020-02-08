@@ -16,7 +16,7 @@
 ////
 == ChangeLog
 
-=== Version 11.1
+=== Version 12.0
 
 [vertical]
 New Features::
@@ -29,6 +29,7 @@ LOG4J2-2298::: Add changelog to site.
 LOG4J2-2293::: Add required license files to sbt output artifacts.
 LOG4J2-2296::: Add sbt-site plugin and website configuration.
 LOG4J2-2291::: Add Jenkins pipeline for sbt build.
+LOG4J2-2668::: Add support for Scala 2.13.
 
 [vertical]
 Bug Fixes:: None.
