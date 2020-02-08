@@ -124,8 +124,8 @@ lazy val releaseSettings = Seq(
 )
 
 lazy val siteSettings = Seq(
-  apiURL := Some(url(s"https://logging.apache.org/log4j/scala/api/${version.value}/")),
-  siteSubdirName in SiteScaladoc := s"api/${version.value}",
+  apiURL := Some(url(s"https://logging.apache.org/log4j/log4j-scala-${version.value}/")),
+  siteSubdirName in SiteScaladoc := s"api/${scalaBinaryVersion.value}",
   managedSources in Asciidoc += {
     (auditReport in Compile).value
     (target in Compile).value / "rat.adoc"
