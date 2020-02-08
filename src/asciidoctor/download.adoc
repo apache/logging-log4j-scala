@@ -22,26 +22,34 @@ If you do not see that page, try a different browser.
 The checksum and signature are links to the originals on the main distribution server.
 
 |===
-|Distribution |Mirrors |Signature
+|Distribution |Mirrors |Signature |SHA-256 |SHA-512
 
 |Apache Log4j Scala API binary (tar.gz)
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.tar.gz[apache-log4j-scala-{project-version}-bin.tar.gz]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.tar.gz.asc[apache-log4j-scala-{project-version}-bin.tar.gz.asc]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.tar.gz.sha256[apache-log4j-scala-{project-version}-bin.tar.gz.sha256]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.tar.gz.sha512[apache-log4j-scala-{project-version}-bin.tar.gz.sha512]
 
 |Apache Log4j Scala API binary (zip)
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.zip[apache-log4j-scala-{project-version}-bin.zip]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.zip.asc[apache-log4j-scala-{project-version}-bin.zip.asc]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.zip.sha256[apache-log4j-scala-{project-version}-bin.zip.sha256]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-bin.zip.asc[apache-log4j-scala-{project-version}-bin.zip.asc]
 
 |Apache Log4j Scala API source (tar.gz)
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz[apache-log4j-scala-{project-version}-src.tar.gz]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz.asc[apache-log4j-scala-{project-version}-src.tar.gz.asc]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz.sha256[apache-log4j-scala-{project-version}-src.tar.gz.sha256]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.tar.gz.asc[apache-log4j-scala-{project-version}-src.tar.gz.asc]
 
 |Apache Log4j Scala API source (zip)
 |https://www.apache.org/dyn/closer.lua/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip[apache-log4j-scala-{project-version}-src.zip]
 |https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip.asc[apache-log4j-scala-{project-version}-src.zip.asc]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip.sha256[apache-log4j-scala-{project-version}-src.zip.sha256]
+|https://www.apache.org/dist/logging/log4j/scala/{project-version}/apache-log4j-scala-{project-version}-src.zip.asc[apache-log4j-scala-{project-version}-src.zip.asc]
 |===
 
-It is essential that you verify the integrity of the downloaded files using the PGP or MD5 signatures.
+It is essential that you verify the integrity of the downloaded files using the PGP signatures or the SHA-2 checksum files (SHA-256 or SHA-512).
 Please read https://httpd.apache.org/dev/verification.html[Verifying Apache HTTP Server Releases] for more information on why you should verify our releases.
 
 The PGP signatures can be verified using PGP or GPG.
@@ -69,6 +77,6 @@ How to add Log4j Scala API to your project using Log4j 2:
 ----
 libraryDependencies ++= Seq(
   "org.apache.logging.log4j" %% "log4j-api-scala" % "{project-version}",
-  "org.apache.logging.log4j" % "log4j-core" % "2.11.0" % Runtime
+  "org.apache.logging.log4j" % "log4j-core" % "2.13.0" % Runtime
 )
 ----
