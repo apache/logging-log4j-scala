@@ -38,7 +38,7 @@ Bug Fixes:: None.
 Changes::
 [horizontal]
 LOG4J2-2309::: Update Log4j Scala API for 2.13 from 2.13.0-M2 to 2.13.0-M3.
-LOG4J2-2290::: Update Log4j from 2.9.1 to 2.11.0.
+LOG4J2-2290::: Update Log4j from 2.9.1 to 2.13.2.
 LOG4J2-1995::: Update log4j-api-scala_2.11 from Scala 2.11.8 to 2.11.11.
 LOG4J2-1996::: Update log4j-api-scala_2.12 from Scala 2.12.1 to 2.12.3.
 LOG4J2-2115::: Update Log4j dependency from 2.8.1 to 2.9.1.

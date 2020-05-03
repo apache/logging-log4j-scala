@@ -25,7 +25,7 @@ object Dependencies {
   def scalaReflect(version: String): ModuleID =
     "org.scala-lang" % "scala-reflect" % version
 
-  private val log4jV = "2.13.0"
+  private val log4jV = "2.13.2"
   val osgiCoreApi      = "org.osgi" % "org.osgi.core" % "6.0.0" % Provided
   val log4jApi         = "org.apache.logging.log4j" % "log4j-api" % log4jV
   val log4jApiTests    = "org.apache.logging.log4j" % "log4j-api" % log4jV % Test classifier "tests"
