@@ -23,42 +23,48 @@ pipeline {
     tools {
         jdk 'JDK 1.8 (latest)'
     }
+    options {
+        ansiColor 'xterm'
+        buildDiscarder logRotator(numToKeepStr: '25')
+        timeout time: 1, unit: 'HOURS'
+    }
     stages {
         stage('Build') {
             steps {
-                ansiColor('xterm') {
-                    sh './sbt -batch auditCheck'
-                    sh './sbt -batch "+ compile"'
-                }
+                sh './sbt -batch auditCheck'
+                sh './sbt -batch "+ compile"'
             }
         }
         stage('Test') {
             steps {
-                ansiColor('xterm') {
-                    sh './sbt -batch Test/auditCheck'
-                    sh './sbt -batch "+ test"'
-                }
+                sh './sbt -batch Test/auditCheck'
+                sh './sbt -batch "+ test"'
             }
         }
         stage('Deploy') {
             when {
                 anyOf {
                     branch 'master'
-                    branch 'sbt'
                 }
+            }
+            environment {
+                NEXUS = credentials('logging-snapshots')
             }
             steps {
-                ansiColor('xterm') {
-                    sh './sbt -batch "+ publish"'
-                }
+                sh './sbt -batch "+ publish"'
             }
             post {
-                failure {
-                    emailext body: '${SCRIPT, template="groovy-html.template"}',
-                        replyTo: 'dev@logging.apache.org',
-                        subject: "[Scala] Jenkins build failure (#${env.BUILD_NUMBER})",
+                fixed {
+                    emailext to: 'notifications@logging.apache.org',
                         from: 'Mr. Jenkins <jenkins@ci-builds.apache.org>',
-                        to: 'notifications@logging.apache.org'
+                        subject: "[CI][SUCCESS] ${env.JOB_NAME}#${env.BUILD_NUMBER} back to normal",
+                        body: '${SCRIPT, template="groovy-text.template"}'
+                }
+                failure {
+                    emailext to: 'notifications@logging.apache.org',
+                        from: 'Mr. Jenkins <jenkins@ci-builds.apache.org>',
+                        subject: "[CI][FAILURE] ${env.JOB_NAME}#${env.BUILD_NUMBER} has potential issues",
+                        body: '${SCRIPT, template="groovy-text.template"}'
                 }
             }
         }
