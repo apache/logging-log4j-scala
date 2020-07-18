@@ -49,19 +49,16 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    withCredentials([
-                            usernamePassword(
-                                    credentialsId: 'logging-snapshots',
-                                    passwordVariable: 'NEXUS_PASSWORD',
-                                    usernameVariable: 'NEXUS_USERNAME')
-                    ]) {
-                        sh './sbt -batch "+ publish"'
-                    }
+                    sh './sbt -batch "+ publish"'
                 }
             }
             post {
                 failure {
-                    emailext body: "See <${env.BUILD_URL}>", replyTo: 'dev@logging.apache.org', subject: "[Scala] Jenkins build failure (#${env.BUILD_NUMBER})", to: 'notifications@logging.apache.org'
+                    emailext body: '${SCRIPT, template="groovy-html.template"}',
+                        replyTo: 'dev@logging.apache.org',
+                        subject: "[Scala] Jenkins build failure (#${env.BUILD_NUMBER})",
+                        from: 'Mr. Jenkins <jenkins@ci-builds.apache.org>',
+                        to: 'notifications@logging.apache.org'
                 }
             }
         }
