@@ -67,7 +67,7 @@ lazy val publishSettings = Seq(
   credentials ++= {
     for {
       username <- sys.env.get("NEXUS_USR")
-      password <- sys.env.get("NEXUS_PWD")
+      password <- sys.env.get("NEXUS_PSW")
     } yield Credentials("Sonatype Nexus Repository Manager", "repository.apache.org", username, password)
   }.toList,
   // FIXME: https://github.com/sbt/sbt/issues/3519
