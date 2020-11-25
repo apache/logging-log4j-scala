@@ -20,7 +20,7 @@ object Dependencies {
   val scala210 = "2.10.7"
   val scala211 = "2.11.12"
   val scala212 = "2.12.10"
-  val scala213 = "2.13.1"
+  val scala213 = "2.13.4"
 
   def scalaReflect(version: String): ModuleID =
     "org.scala-lang" % "scala-reflect" % version
