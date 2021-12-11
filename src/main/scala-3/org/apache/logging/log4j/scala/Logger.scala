@@ -64,14 +64,14 @@ object Logger {
   */
 class Logger private(val delegate: ExtendedLogger) extends AnyVal {
 
-  def fatal(marker: Marker, message: Message): Unit = ???
-    //macro LoggerMacro.fatalMarkerMsg
+  inline def fatal(inline marker: Marker, inline message: Message): Unit =
+    ${LoggerMacro.fatalMarkerMsg('delegate, 'marker, 'message)}
 
-  def fatal(marker: Marker, message: CharSequence): Unit = ???
-    //macro LoggerMacro.fatalMarkerCseq
+  inline def fatal(inline marker: Marker, inline message: CharSequence): Unit =
+    ${LoggerMacro.fatalMarkerCseq('delegate, 'marker, 'message)}
 
-  def fatal(marker: Marker, message: AnyRef): Unit = ???
-    //macro LoggerMacro.fatalMarkerObject
+  inline def fatal(inline marker: Marker, inline message: AnyRef): Unit =
+    ${LoggerMacro.fatalMarkerObject('delegate, 'marker, 'message)}
 
   def fatal(marker: Marker, message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.fatalMarkerMsgThrowable
@@ -82,14 +82,14 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   def fatal(marker: Marker, message: AnyRef, cause: Throwable): Unit = ???
     //macro LoggerMacro.fatalMarkerObjectThrowable
 
-  def fatal(message: Message): Unit = ???
-    //macro LoggerMacro.fatalMsg
+  inline def fatal(inline message: Message): Unit =
+    ${LoggerMacro.fatalMsg('delegate, 'message)}
 
-  def fatal(message: CharSequence): Unit = ???
-    //macro LoggerMacro.fatalCseq
+  inline def fatal(inline message: CharSequence): Unit =
+    ${LoggerMacro.fatalCseq('delegate, 'message)}
 
-  def fatal(message: AnyRef): Unit = ???
-    //macro LoggerMacro.fatalObject
+  inline def fatal(inline message: AnyRef): Unit =
+    ${LoggerMacro.fatalObject('delegate, 'message)}
 
   def fatal(message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.fatalMsgThrowable

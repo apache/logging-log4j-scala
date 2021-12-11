@@ -110,6 +110,34 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
   }
 
+  //Fatal
+
+  def fatalMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+  }
+
+  def fatalMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  }
+
+  def fatalCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, '{Level.FATAL}, messageFormat, Expr.ofSeq(args))
+  }
+
+  def fatalMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, '{Level.FATAL}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def fatalObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+  }
+
+  def fatalMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  }
+
   private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
