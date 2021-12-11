@@ -28,12 +28,25 @@ import scala.quoted.*
 private object LoggerMacro {
   // Info
 
-  def infoMessage(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def infoMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+  }
+
+  def infoCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     infoMessageArgs(underlying, messageFormat, Expr.ofSeq(args))
   }
 
-  def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+  def infoMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    infoMarkerMessageArgs(underlying, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def infoObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+  }
+
+  private def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}) }
@@ -41,6 +54,16 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+  }
+
+  private def infoMarkerMessageArgs(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+    val anyRefArgs = formatArgs(args)
+    if(anyRefArgs.isEmpty)
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}) }
+    else if(anyRefArgs.length == 1)
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    else
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */
@@ -79,7 +102,7 @@ private object LoggerMacro {
     }
   }
   
-  def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[Object]] = {
+  private def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[Object]] = {
     import quotes.reflect.*
     import util.*
 
@@ -98,7 +121,9 @@ private object LoggerMacro {
     }
   }
 
-  def charSequenceExprToStringExpr(expr: Expr[CharSequence])(using Quotes): Expr[String] = expr match {
+  private def charSequenceExprToStringExpr(expr: Expr[CharSequence])(using Quotes): Expr[String] = expr match {
     case '{ $cs } => Expr(cs.toString)
   }
+
+  private def anyRefExprToObjectExpr(expr: Expr[AnyRef])(using Quotes): Expr[Object] = expr
 }
