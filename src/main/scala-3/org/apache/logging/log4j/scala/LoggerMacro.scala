@@ -59,11 +59,11 @@ private object LoggerMacro {
   private def infoMarkerMessageArgs(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}) }
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */
