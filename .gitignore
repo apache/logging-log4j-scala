@@ -10,3 +10,4 @@ target/
 velocity.log
 felix-cache/
 bin/
+.bsp/sbt.json
