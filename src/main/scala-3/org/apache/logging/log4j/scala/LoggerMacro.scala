@@ -26,6 +26,34 @@ import scala.quoted.*
   * Inspired from [[https://github.com/typesafehub/scalalogging ScalaLogging]].
   */
 private object LoggerMacro {
+  // Trace
+
+  def traceMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
+  }
+
+  def traceMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  }
+
+  def traceCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, '{Level.TRACE}, messageFormat, Expr.ofSeq(args))
+  }
+
+  def traceMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, '{Level.TRACE}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def traceObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
+  }
+
+  def traceMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  }
+
   // Info
 
   def infoMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
