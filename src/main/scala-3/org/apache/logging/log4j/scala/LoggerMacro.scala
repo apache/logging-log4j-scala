@@ -38,12 +38,12 @@ private object LoggerMacro {
 
   def infoCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
-    infoMessageArgs(underlying, messageFormat, Expr.ofSeq(args))
+    logMessageArgs(underlying, '{Level.INFO}, messageFormat, Expr.ofSeq(args))
   }
 
   def infoMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
-    infoMarkerMessageArgs(underlying, marker, messageFormat, Expr.ofSeq(args))
+    logMarkerMessageArgs(underlying, '{Level.INFO}, marker, messageFormat, Expr.ofSeq(args))
   }
 
   def infoObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
@@ -54,24 +54,80 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
   }
 
-  private def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
-    val anyRefArgs = formatArgs(args)
-    if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}) }
-    else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
-    else
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+  //Warn
+
+  def warnMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
   }
 
-  private def infoMarkerMessageArgs(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+  def warnMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  }
+
+  def warnCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, '{Level.WARN}, messageFormat, Expr.ofSeq(args))
+  }
+
+  def warnMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, '{Level.WARN}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def warnObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
+  }
+
+  def warnMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  }
+
+  //Error
+
+  def errorMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
+  }
+
+  def errorMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  }
+
+  def errorCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, '{Level.ERROR}, messageFormat, Expr.ofSeq(args))
+  }
+
+  def errorMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, '{Level.ERROR}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def errorObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
+  }
+
+  def errorMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  }
+
+  private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}) }
+    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+  }
+
+  private def logMarkerMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+    val anyRefArgs = formatArgs(args)
+    if(anyRefArgs.isEmpty)
+    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}) }
+    else if(anyRefArgs.length == 1)
+    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    else
+    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */

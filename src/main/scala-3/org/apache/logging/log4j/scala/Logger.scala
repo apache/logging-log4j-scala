@@ -101,14 +101,15 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     //macro LoggerMacro.fatalObjectThrowable
 
 
-  def error(marker: Marker, message: Message): Unit = ???
-    //macro LoggerMacro.errorMarkerMsg
+  inline def error(inline marker: Marker, inline message: Message): Unit =
+    ${LoggerMacro.errorMarkerMsg('delegate, 'marker, 'message)}
 
-  def error(marker: Marker, message: CharSequence): Unit = ???
-    //macro LoggerMacro.errorMarkerCseq
+  inline def error(inline marker: Marker, inline message: CharSequence): Unit =
+    ${LoggerMacro.errorMarkerCseq('delegate, 'marker, 'message)}
 
-  def error(marker: Marker, message: AnyRef): Unit = ???
-    //macro LoggerMacro.errorMarkerObject
+  inline def error(inline marker: Marker, inline message: AnyRef): Unit =
+    ${LoggerMacro.errorMarkerObject('delegate, 'marker, 'message)}
+
 
   def error(marker: Marker, message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.errorMarkerMsgThrowable
@@ -119,14 +120,14 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   def error(marker: Marker, message: AnyRef, cause: Throwable): Unit = ???
     //macro LoggerMacro.errorMarkerObjectThrowable
 
-  def error(message: Message): Unit = ???
-    //macro LoggerMacro.errorMsg
+  inline def error(inline message: Message): Unit =
+    ${LoggerMacro.errorMsg('delegate, 'message)}
 
-  def error(message: CharSequence): Unit = ???
-    //macro LoggerMacro.errorCseq
+  inline def error(inline message: CharSequence): Unit =
+    ${LoggerMacro.errorCseq('delegate, 'message)}
 
-  def error(message: AnyRef): Unit = ???
-    //macro LoggerMacro.errorObject
+  inline def error(inline message: AnyRef): Unit =
+    ${LoggerMacro.errorObject('delegate, 'message)}
 
   def error(message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.errorMsgThrowable
@@ -138,14 +139,15 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     //macro LoggerMacro.errorObjectThrowable
 
 
-  def warn(marker: Marker, message: Message): Unit = ???
-    //macro LoggerMacro.warnMarkerMsg
+  inline def warn(inline marker: Marker, inline message: Message): Unit =
+    ${LoggerMacro.warnMarkerMsg('delegate, 'marker, 'message)}
 
-  def warn(marker: Marker, message: CharSequence): Unit = ???
-    //macro LoggerMacro.warnMarkerCseq
 
-  def warn(marker: Marker, message: AnyRef): Unit = ???
-    //macro LoggerMacro.warnMarkerObject
+  inline def warn(inline marker: Marker, inline message: CharSequence): Unit =
+    ${LoggerMacro.warnMarkerCseq('delegate, 'marker, 'message)}
+
+  inline def warn(inline marker: Marker, inline message: AnyRef): Unit =
+    ${LoggerMacro.warnMarkerObject('delegate, 'marker, 'message)}
 
   def warn(marker: Marker, message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.warnMarkerMsgThrowable
@@ -156,14 +158,14 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   def warn(marker: Marker, message: AnyRef, cause: Throwable): Unit = ???
     //macro LoggerMacro.warnMarkerObjectThrowable
 
-  def warn(message: Message): Unit = ???
-    //macro LoggerMacro.warnMsg
+  inline def warn(message: Message): Unit =
+    ${LoggerMacro.warnMsg('delegate, 'message)}
 
-  def warn(message: CharSequence): Unit = ???
-    //macro LoggerMacro.warnCseq
+  inline def warn(inline message: CharSequence): Unit =
+    ${LoggerMacro.warnCseq('delegate, 'message)}
 
-  def warn(message: AnyRef): Unit = ???
-    //macro LoggerMacro.warnObject
+  inline def warn(inline message: AnyRef): Unit =
+    ${LoggerMacro.warnObject('delegate, 'message)}
 
   def warn(message: Message, cause: Throwable): Unit = ???
     //macro LoggerMacro.warnMsgThrowable
