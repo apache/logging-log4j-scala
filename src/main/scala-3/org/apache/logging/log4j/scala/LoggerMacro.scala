@@ -50,8 +50,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
   }
 
+  def traceObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+  }
+
   def traceMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  }
+
+  def traceMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
   }
 
   // Debug
@@ -78,8 +88,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
   }
 
+  def debugObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+  }
+
   def debugMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  }
+
+  def debugMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
   }
 
   // Info
@@ -106,8 +126,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
   }
 
+  def infoObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+  }
+
   def infoMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+  }
+
+  def infoMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
   }
 
   //Warn
@@ -134,8 +164,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
   }
 
+  def warnObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+  }
+
   def warnMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  }
+
+  def warnMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
   }
 
   //Error
@@ -162,8 +202,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
   }
 
+  def errorObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+  }
+
   def errorMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  }
+
+  def errorMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
   }
 
   //Fatal
@@ -190,8 +240,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
   }
 
+  def fatalObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+  }
+
   def fatalMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  }
+
+  def fatalMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
   private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
