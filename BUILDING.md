@@ -18,6 +18,8 @@
 
 Moved to [site docs](./src/asciidoctor/build.adoc).
 
+Install [sbt](https://www.scala-sbt.org/) if you do not have it installed.
+
 Summary:
 
-    ./sbt "+ publishM2"
+    sbt "+ publishM2"

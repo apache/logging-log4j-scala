@@ -23,8 +23,8 @@ object Dependencies {
   val scala213 = "2.13.7"
   val scala3 = "3.0.2"
 
-  def scalaReflect(version: String): ModuleID =
-    "org.scala-lang" % "scala-reflect" % version
+  def scalaReflect(version: String) =
+    if (version.startsWith("3")) None else Some("org.scala-lang" % "scala-reflect" % version)
 
   private val log4jV = "2.15.0"
   val osgiCoreApi      = "org.osgi" % "org.osgi.core" % "6.0.0" % Provided

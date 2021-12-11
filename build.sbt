@@ -85,7 +85,7 @@ lazy val sourceSettings = Seq(
     Compile / unmanagedSourceDirectories ++= {
         (Compile / unmanagedSourceDirectories).value.map { dir =>
           CrossVersion.partialVersion(scalaVersion.value) match {
-            case Some((3, _)) => file(dir.getPath ++ "-2.11+")
+            case Some((3, _)) => file(dir.getPath ++ "-3")
             case Some((2, n11)) if n11 >= 11 => file(dir.getPath ++ "-2.11+")
             case Some((2, n10)) if n10 <= 10 => file(dir.getPath ++ "-2.10")
           }
@@ -139,8 +139,7 @@ lazy val siteSettings = Seq(
 )
 
 lazy val apiDependencies = Seq(
-  libraryDependencies ++= Seq(
-    scalaReflect(scalaVersion.value),
+  libraryDependencies ++= scalaReflect(scalaVersion.value).toSeq ++ Seq(
     osgiCoreApi,
     log4jApi,
     log4jApiTests,
