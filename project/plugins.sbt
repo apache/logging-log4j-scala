@@ -18,7 +18,6 @@ addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.1")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
 addSbtPlugin("com.typesafe.sbt" % "sbt-license-report" % "1.2.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.3.2")
-addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.3")
 // for quicker resolutions from Maven Central of new releases, uncomment:
 //resolvers += Resolver.sonatypeRepo("public")
