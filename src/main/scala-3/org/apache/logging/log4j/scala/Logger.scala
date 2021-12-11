@@ -193,11 +193,11 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   def info(marker: Marker, message: AnyRef, cause: Throwable): Unit = ???
     //macro LoggerMacro.infoMarkerObjectThrowable
 
-  def info(message: Message): Unit = ???
-    //macro LoggerMacro.infoMsg
+  inline def info(inline message: Message): Unit = ???
+    //${LoggerMacro.info('delegate, 'message)}
 
   def info(message: CharSequence): Unit = ???
-    //macro LoggerMacro.infoCseq
+    //${LoggerMacro.info('delegate, 'message)}
 
   def info(message: AnyRef): Unit = ???
     //macro LoggerMacro.infoObject
