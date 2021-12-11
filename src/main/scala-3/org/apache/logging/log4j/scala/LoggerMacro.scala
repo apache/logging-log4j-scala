@@ -54,6 +54,34 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
   }
 
+  // Debug
+
+  def debugMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+  }
+
+  def debugMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  }
+
+  def debugCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, '{Level.DEBUG}, messageFormat, Expr.ofSeq(args))
+  }
+
+  def debugMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, '{Level.DEBUG}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def debugObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+  }
+
+  def debugMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  }
+
   // Info
 
   def infoMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
