@@ -102,6 +102,26 @@ lazy val sourceSettings = Seq(
   }
   )
 
+lazy val testSourceSettings = Seq(
+  Test / unmanagedSourceDirectories ++= {
+    (Test / unmanagedSourceDirectories).value.map { dir =>
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => file(dir.getPath ++ "-3")
+        case Some((2, _)) => file(dir.getPath ++ "-2")
+      }
+    }
+  },
+  Compile / unmanagedSourceDirectories ++= {
+    (Compile / unmanagedSourceDirectories).value.map { dir =>
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => file(dir.getPath ++ "-2.13+")
+        case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
+        case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
+      }
+    }
+  }
+)
+
 lazy val releaseSettings = Seq(
   releaseCrossBuild := true,
   releasePublishArtifactsAction := PgpKeys.publishSigned.value,
@@ -166,6 +186,7 @@ lazy val root = (project in file("."))
   .settings(publishSettings: _*)
   .settings(licensePackagingSettings: _*)
   .settings(sourceSettings: _*)
+  .settings(testSourceSettings: _*)
   .settings(releaseSettings: _*)
   .settings(siteSettings: _*)
   .settings(apiDependencies: _*)

@@ -32,6 +32,10 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
   }
 
+  def infoMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+  }
+
   def infoCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     infoMessageArgs(underlying, messageFormat, Expr.ofSeq(args))
@@ -44,6 +48,10 @@ private object LoggerMacro {
 
   def infoObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+  }
+
+  def infoMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
   }
 
   private def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
@@ -124,6 +132,4 @@ private object LoggerMacro {
   private def charSequenceExprToStringExpr(expr: Expr[CharSequence])(using Quotes): Expr[String] = expr match {
     case '{ $cs } => Expr(cs.toString)
   }
-
-  private def anyRefExprToObjectExpr(expr: Expr[AnyRef])(using Quotes): Expr[Object] = expr
 }
