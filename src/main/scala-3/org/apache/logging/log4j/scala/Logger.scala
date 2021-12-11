@@ -196,8 +196,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def info(inline message: Message): Unit = ???
     //${LoggerMacro.info('delegate, 'message)}
 
-  def info(message: CharSequence): Unit = ???
-    //${LoggerMacro.info('delegate, 'message)}
+  inline def info(inline message: CharSequence): Unit =
+    ${LoggerMacro.infoMessage('delegate, 'message)}
 
   def info(message: AnyRef): Unit = ???
     //macro LoggerMacro.infoObject

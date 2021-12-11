@@ -28,23 +28,23 @@ import scala.quoted.*
 private object LoggerMacro {
   // Info
 
-  def infoMessage(underlying: Expr[ExtendedLogger], message: Expr[String])(using Quotes): Expr[Unit] = {
+  def infoMessage(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     infoMessageArgs(underlying, messageFormat, Expr.ofSeq(args))
   }
 
-  def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[String], args: Expr[Seq[Any]]) (using Quotes) = {
+  def infoMessageArgs(underlying: Expr[ExtendedLogger], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, ${anyRefArgs.head}) }
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, ${Expr.ofSeq(anyRefArgs)}*) }
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info(${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */
-  private def deconstructInterpolatedMessage(message: Expr[String])(using Quotes): (Expr[String], Seq[Expr[Any]]) = {
+  private def deconstructInterpolatedMessage(message: Expr[CharSequence])(using Quotes): (Expr[String], Seq[Expr[Any]]) = {
     import quotes.reflect.*
     import util.*
 
@@ -65,7 +65,7 @@ private object LoggerMacro {
             val format = messageTextParts.iterator
               // Emulate standard interpolator escaping
               .map(StringContext.processEscapes)
-              // Escape literal slf4j format anchors if the resulting call will require a format string
+              // Escape literal log4j format anchors if the resulting call will require a format string
               .map(str => if (args.nonEmpty) str.replace("{}", "\\{}") else str)
               .mkString("{}")
 
@@ -73,28 +73,32 @@ private object LoggerMacro {
 
             (Expr(format), formatArgs)
           case _ =>
-            (message, Seq.empty)
+            (charSequenceExprToStringExpr(message), Seq.empty)
         }
-      case _ => (message, Seq.empty)
+      case _ => (charSequenceExprToStringExpr(message), Seq.empty)
     }
   }
   
-  def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[AnyRef]] = {
+  def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[Object]] = {
     import quotes.reflect.*
     import util.*
 
     args.asTerm match {
       case p@Inlined(_, _, Typed(Repeated(v, _),_)) =>
         v.map{
-          case t if t.tpe <:< TypeRepr.of[AnyRef] => t.asExprOf[AnyRef]
-          case t => '{${t.asExpr}.asInstanceOf[AnyRef]}
+          case t if t.tpe <:< TypeRepr.of[AnyRef] => t.asExprOf[Object]
+          case t => '{${t.asExpr}.asInstanceOf[Object]}
         }
       case Repeated(v, _) =>
         v.map{
-          case t if t.tpe <:< TypeRepr.of[AnyRef] => t.asExprOf[AnyRef]
-          case t => '{${t.asExpr}.asInstanceOf[AnyRef]}
+          case t if t.tpe <:< TypeRepr.of[Object] => t.asExprOf[Object]
+          case t => '{${t.asExpr}.asInstanceOf[Object]}
         }
       case _ => Seq.empty
     }
+  }
+
+  def charSequenceExprToStringExpr(expr: Expr[CharSequence])(using Quotes): Expr[String] = expr match {
+    case '{ $cs } => Expr(cs.toString)
   }
 }
