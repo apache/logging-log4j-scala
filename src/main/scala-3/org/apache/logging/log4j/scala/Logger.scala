@@ -417,8 +417,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     *
     * @return The built `EntryMessage`
     */
-  def traceEntry(): EntryMessage = ???
-    //macro LoggerMacro.traceEntry
+  inline def traceEntry(): EntryMessage =
+    delegate.traceEntry()
 
   /**
     * Logs entry to a method along with its parameters.
@@ -433,8 +433,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param params the parameters to the method.
     * @return The built `EntryMessage`
     */
-  def traceEntry(params: AnyRef*): EntryMessage = ???
-    //macro LoggerMacro.traceEntryParams
+  inline def traceEntry(params: AnyRef*): EntryMessage = ???
+    //delegate.traceEntry(params)
 
   /**
     * Logs entry to a method using a `Message` to describe the parameters.
@@ -449,14 +449,14 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message
     * @return The built `EntryMessage`
     */
-  def traceEntry(message: Message): EntryMessage = ???
-    //macro LoggerMacro.traceEntryMessage
+  inline def traceEntry(message: Message): EntryMessage =
+    delegate.traceEntry(message)
 
   /**
     * Logs exit from a method with no result.
     */
-  def traceExit(): Unit = ???
-    //macro LoggerMacro.traceExit
+  inline def traceExit(): Unit =
+    delegate.traceExit()
 
   /**
     * Logs exiting from a method with result.
@@ -464,16 +464,16 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result The result being returned from the method call
     * @return `result`
     */
-  def traceExit[R](result: R): R = ???
-    //macro LoggerMacro.traceExitResult[R]
+  inline def traceExit[R](result: R): R =
+    delegate.traceExit(result)
 
   /**
     * Logs exiting from a method with no result.
     *
     * @param entryMessage the `EntryMessage` returned from one of the `traceEntry` methods
     */
-  def traceExit(entryMessage: EntryMessage): Unit = ???
-    //${LoggerMacro.traceExit('delegate, 'entryMessage)}
+  inline def traceExit(entryMessage: EntryMessage): Unit =
+    delegate.traceExit(entryMessage)
 
   /**
     * Logs exiting from a method with result.
@@ -490,8 +490,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result       The result being returned from the method call
     * @return `result`
     */
-  inline def traceExit[R](inline entryMessage: EntryMessage, inline result: R): R = ???
-    //${LoggerMacro.traceExit('delegate, 'entryMessage, 'result)}
+  inline def traceExit[R](entryMessage: EntryMessage, result: R): R = ???
+    //delegate.traceExit(entryMessage)
 
   /**
     * Logs exiting from a method with result. Allows custom formatting of the result.
@@ -500,8 +500,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result  The result being returned from the method call.
     * @return `result`
     */
-  inline def traceExit[R](inline message: Message, inline result: R): R = ???
-    //${LoggerMacro.traceExit('delegate, 'message, 'result)}
+  inline def traceExit[R](message: Message, result: R): R =
+    delegate.traceExit(message, result)
 
   /**
     * Logs an exception or error to be thrown.
