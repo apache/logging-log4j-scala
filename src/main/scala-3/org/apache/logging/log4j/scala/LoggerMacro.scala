@@ -51,9 +51,21 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.TRACE}, messageFormat, Expr.ofSeq(args))
   }
 
+  def traceCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.TRACE}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def traceMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.TRACE}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def traceMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.TRACE}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
   def traceObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
@@ -314,7 +326,8 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
-  private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+  private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+                             args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
     '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}) }
@@ -324,7 +337,21 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
-  private def logMarkerMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence], args: Expr[Seq[Any]]) (using Quotes) = {
+  private def logMessageArgsThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+                                      args: Expr[Seq[Any]], throwable: Expr[Throwable]) (using Quotes) = {
+    val anyRefArgs = formatArgs(args)
+    if(anyRefArgs.isEmpty)
+    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}) }
+    else if(anyRefArgs.length == 1)
+    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    else {
+      val extendedArgs = anyRefArgs :+ throwable
+      '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
+    }
+  }
+
+  private def logMarkerMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
+                                   args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
     '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}) }
@@ -332,6 +359,19 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
     '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+  }
+
+  private def logMarkerMessageArgsThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker],
+                                            message: Expr[CharSequence], args: Expr[Seq[Any]], throwable: Expr[Throwable]) (using Quotes) = {
+    val anyRefArgs = formatArgs(args)
+    if(anyRefArgs.isEmpty)
+    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, $throwable) }
+    else if(anyRefArgs.length == 1)
+    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}, $throwable) }
+    else {
+      val extendedArgs = anyRefArgs :+ throwable
+      '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
+    }
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */

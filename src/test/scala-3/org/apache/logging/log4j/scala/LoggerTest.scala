@@ -48,6 +48,11 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     logger.info(s"string msg with value: ${1 + 1}")
   }
 
+  test("trace enabled with String message") {
+    val logger = Logger(classOf[LoggerTest])
+    logger.trace(s"string msg with value: ${1 + 1}")
+  }
+
   def failedEval(): Int = {
     throw new RuntimeException("eval failed")
   }
