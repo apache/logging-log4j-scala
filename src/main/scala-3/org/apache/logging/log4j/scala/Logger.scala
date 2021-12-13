@@ -490,8 +490,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result       The result being returned from the method call
     * @return `result`
     */
-  inline def traceExit[R](entryMessage: EntryMessage, result: R): R = ???
-    //delegate.traceExit(entryMessage)
+  inline def traceExit[R](entryMessage: EntryMessage, result: R): R =
+    delegate.traceExit(entryMessage, result)
 
   /**
     * Logs exiting from a method with result. Allows custom formatting of the result.
@@ -513,8 +513,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t the Throwable
     * @return `t`
     */
-  def throwing[T <: Throwable](t: T): T = ???
-    //${LoggerMacro.throwing('delegate, 't)}
+  inline def throwing[T <: Throwable](t: T): T =
+    delegate.throwing(t)
 
   /**
     * Logs an exception or error to be thrown to a specific logging level.
@@ -527,16 +527,16 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t     the Throwable
     * @return `t`
     */
-  def throwing[T <: Throwable](level: Level, t: T): T = ???
-    //${LoggerMacro.throwing('delegate, 'level, 't)}
+  inline def throwing[T <: Throwable](level: Level, t: T): T =
+    delegate.throwing(level, t)
 
   /**
     * Logs an exception or error that has been caught.
     *
     * @param t the Throwable.
     */
-  inline def catching(inline t: Throwable): Unit = ???
-    //${LoggerMacro.catching('delegate, 't)}
+  inline def catching(t: Throwable): Unit =
+    delegate.catching(t)
 
   /**
     * Logs an exception or error that has been caught to a specific logging level.
@@ -544,8 +544,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param level The logging Level.
     * @param t     The Throwable.
     */
-  inline def catching(inline level: Level, inline t: Throwable): Unit = ???
-    //${LoggerMacro.catching('delegate, 'level, 't)}
+  inline def catching(level: Level, t: Throwable): Unit =
+    delegate.catching(level, t)
 
 
   /** Always logs a message at the specified level. It is the responsibility of the caller to ensure the specified
