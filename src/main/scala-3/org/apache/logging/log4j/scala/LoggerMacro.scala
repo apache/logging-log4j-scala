@@ -32,8 +32,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
   }
 
+  def traceMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+  }
+
   def traceMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  }
+
+  def traceMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
   }
 
   def traceCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -70,8 +80,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
   }
 
+  def debugMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+  }
+
   def debugMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  }
+
+  def debugMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
   }
 
   def debugCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -108,8 +128,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
   }
 
+  def infoMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                       throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+  }
+
   def infoMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+  }
+
+  def infoMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                             throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
   }
 
   def infoCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -146,8 +176,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
   }
 
+  def warnMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                       throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+  }
+
   def warnMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  }
+
+  def warnMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                             throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
   }
 
   def warnCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -184,8 +224,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
   }
 
+  def errorMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+  }
+
   def errorMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  }
+
+  def errorMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
   }
 
   def errorCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -222,8 +272,18 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
   }
 
+  def fatalMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+  }
+
   def fatalMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  }
+
+  def fatalMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
   def fatalCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
