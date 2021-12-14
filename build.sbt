@@ -92,14 +92,14 @@ lazy val sourceSettings = Seq(
         }
     },
     Compile / unmanagedSourceDirectories ++= {
-    (Compile / unmanagedSourceDirectories).value.map { dir =>
-      CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((3, _)) => file(dir.getPath ++ "-2.13+")
-        case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
-        case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
+      (Compile / unmanagedSourceDirectories).value.map { dir =>
+        CrossVersion.partialVersion(scalaVersion.value) match {
+          case Some((3, _)) => file(dir.getPath ++ "-2.13+")
+          case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
+          case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
+        }
       }
     }
-  }
   )
 
 lazy val testSourceSettings = Seq(
