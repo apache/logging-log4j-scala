@@ -26,14 +26,8 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 import org.scalatestplus.mockito.MockitoSugar
 
-case class Custom(i: Int)
-
-trait Manager {
-  def fetchValue(): Int
-}
-
 @RunWith(classOf[JUnitRunner])
-class LoggerTest extends AnyFunSuite with MockitoSugar {
+class TempLoggerTest extends AnyFunSuite with MockitoSugar {
 
   val msg                    = new ParameterizedMessage("msg {}", 17)
   val entryMsg: EntryMessage = new DefaultFlowMessageFactory().newEntryMessage(msg)
@@ -44,12 +38,12 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
   val result                 = "foo"
 
   test("info enabled with String message") {
-    val logger = Logger(classOf[LoggerTest])
+    val logger = Logger(classOf[TempLoggerTest])
     logger.info(s"string msg with value: ${1 + 1}")
   }
 
   test("trace enabled with String message") {
-    val logger = Logger(classOf[LoggerTest])
+    val logger = Logger(classOf[TempLoggerTest])
     logger.trace(s"string msg with value: ${1 + 1}")
   }
 

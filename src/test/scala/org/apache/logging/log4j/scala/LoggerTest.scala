@@ -16,7 +16,7 @@
  */
 package org.apache.logging.log4j.scala
 
-import org.apache.logging.log4j.message.{DefaultFlowMessageFactory, EntryMessage, Message, ParameterizedMessage, ParameterizedMessageFactory}
+import org.apache.logging.log4j.message._
 import org.apache.logging.log4j.spi.{AbstractLogger, ExtendedLogger}
 import org.apache.logging.log4j.{Level, Marker, MarkerManager}
 import org.junit.runner.RunWith
@@ -32,6 +32,8 @@ trait Manager {
   def fetchValue(): Int
 }
 
+case class TestFixture(mockLogger: ExtendedLogger, manager: Manager)
+
 @RunWith(classOf[JUnitRunner])
 class LoggerTest extends AnyFunSuite with MockitoSugar {
 
@@ -43,19 +45,19 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
   val marker  : Marker       = MarkerManager.getMarker("marker")
   val result                 = "foo"
 
-  def fixture =
-    new {
-      val mockLogger = {
-        val mockLogger = mock[ExtendedLogger]
-        when(mockLogger.getMessageFactory).thenReturn(new ParameterizedMessageFactory)
-        mockLogger
-      }
-      val manager = {
-        val mockManager = mock[Manager]
-        when(mockManager.fetchValue()).thenReturn(4711)
-        mockManager
-      }
+  def fixture: TestFixture = {
+    val mockLogger = {
+      val mockLogger = mock[ExtendedLogger]
+      when(mockLogger.getMessageFactory).thenReturn(new ParameterizedMessageFactory)
+      mockLogger
     }
+    val manager = {
+      val mockManager = mock[Manager]
+      when(mockManager.fetchValue()).thenReturn(4711)
+      mockManager
+    }
+    TestFixture(mockLogger, manager)
+  }
 
   test("fatal enabled with String message") {
     val f = fixture
