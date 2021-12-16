@@ -26,8 +26,6 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 import org.scalatestplus.mockito.MockitoSugar
 
-import scala.language.reflectiveCalls  // needed for Mockito mocking
-
 case class Custom(i: Int)
 
 trait Manager {
