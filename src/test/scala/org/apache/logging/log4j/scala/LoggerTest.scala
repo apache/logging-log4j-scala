@@ -16,7 +16,7 @@
  */
 package org.apache.logging.log4j.scala
 
-import org.apache.logging.log4j.message._
+import org.apache.logging.log4j.message.{DefaultFlowMessageFactory, EntryMessage, Message, ParameterizedMessage, ParameterizedMessageFactory}
 import org.apache.logging.log4j.spi.{AbstractLogger, ExtendedLogger}
 import org.apache.logging.log4j.{Level, Marker, MarkerManager}
 import org.junit.runner.RunWith
