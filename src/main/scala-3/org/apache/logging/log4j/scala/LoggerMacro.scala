@@ -111,9 +111,21 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.DEBUG}, messageFormat, Expr.ofSeq(args))
   }
 
+  def debugCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.DEBUG}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def debugMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.DEBUG}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def debugMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.DEBUG}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
   def debugObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
@@ -159,10 +171,23 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.INFO}, messageFormat, Expr.ofSeq(args))
   }
 
+  def infoCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.INFO}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def infoMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.INFO}, marker, messageFormat, Expr.ofSeq(args))
   }
+
+  def infoMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.INFO}, marker, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
 
   def infoObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
     '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
@@ -207,9 +232,21 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.WARN}, messageFormat, Expr.ofSeq(args))
   }
 
+  def warnCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.WARN}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def warnMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.WARN}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def warnMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.WARN}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
   def warnObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
@@ -255,9 +292,21 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.ERROR}, messageFormat, Expr.ofSeq(args))
   }
 
+  def errorCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.ERROR}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def errorMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.ERROR}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def errorMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.ERROR}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
   def errorObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
@@ -303,9 +352,21 @@ private object LoggerMacro {
     logMessageArgs(underlying, '{Level.FATAL}, messageFormat, Expr.ofSeq(args))
   }
 
+  def fatalCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, '{Level.FATAL}, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   def fatalMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.FATAL}, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def fatalMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, '{Level.FATAL}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
   def fatalObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {

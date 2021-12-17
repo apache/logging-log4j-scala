@@ -73,11 +73,11 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def fatal(inline marker: Marker, inline message: AnyRef): Unit =
     ${LoggerMacro.fatalMarkerObject('delegate, 'marker, 'message)}
 
-  inline def fatal(marker: Marker, inline message: Message, inline cause: Throwable): Unit =
+  inline def fatal(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.fatalMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def fatal(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.fatalMarkerCseqThrowable
+  inline def fatal(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def fatal(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.fatalMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
@@ -94,8 +94,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def fatal(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.fatalMsgThrowable('delegate, 'message, 'cause)}
 
-  def fatal(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.fatalCseqThrowable
+  inline def fatal(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.fatalCseqThrowable('delegate, 'message, 'cause)}
 
   inline def fatal(inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.fatalObjectThrowable('delegate, 'message, 'cause)}
@@ -113,8 +113,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def error(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.errorMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def error(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.errorMarkerCseqThrowable
+  inline def error(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.errorMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def error(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.errorMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
@@ -150,8 +150,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def warn(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.warnMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def warn(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.warnMarkerCseqThrowable
+  inline def warn(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.warnMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def warn(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.warnMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
@@ -188,8 +188,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def info(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.infoMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def info(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.infoMarkerCseqThrowable
+  inline def info(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.infoMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def info(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.infoMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
@@ -225,8 +225,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def debug(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.debugMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def debug(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.debugMarkerCseqThrowable
+  inline def debug(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def debug(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.debugMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
@@ -262,8 +262,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def trace(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.traceMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
 
-  def trace(marker: Marker, message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.traceMarkerCseqThrowable
+  inline def trace(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
 
   inline def trace(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.traceMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
