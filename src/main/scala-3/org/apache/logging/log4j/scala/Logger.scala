@@ -131,8 +131,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def error(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.errorMsgThrowable('delegate, 'message, 'cause)}
 
-  def error(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.errorCseqThrowable
+  inline def error(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.errorCseqThrowable('delegate, 'message, 'cause)}
 
   inline def error(inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.errorObjectThrowable('delegate, 'message, 'cause)}
@@ -169,8 +169,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def warn(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.warnMsgThrowable('delegate, 'message, 'cause)}
 
-  def warn(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.warnCseqThrowable
+  inline def warn(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.warnCseqThrowable('delegate, 'message, 'cause)}
 
   inline def warn(inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.warnObjectThrowable('delegate, 'message, 'cause)}
@@ -206,11 +206,11 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def info(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.infoMsgThrowable('delegate, 'message, 'cause)}
 
-  def info(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.infoCseqThrowable
+  inline def info(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.infoCseqThrowable('delegate, 'message, 'cause)}
 
   inline def info(inline message: AnyRef, inline cause: Throwable): Unit =
-   ${LoggerMacro.infoObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.infoObjectThrowable('delegate, 'message, 'cause)}
 
 
   inline def debug(inline marker: Marker, inline message: Message): Unit =
@@ -243,8 +243,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def debug(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.debugMsgThrowable('delegate, 'message, 'cause)}
 
-  def debug(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.debugCseqThrowable
+  inline def debug(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.debugCseqThrowable('delegate, 'message, 'cause)}
 
   inline def debug(inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.debugObjectThrowable('delegate, 'message, 'cause)}
@@ -280,8 +280,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
   inline def trace(inline message: Message, inline cause: Throwable): Unit =
     ${LoggerMacro.traceMsgThrowable('delegate, 'message, 'cause)}
 
-  def trace(message: CharSequence, cause: Throwable): Unit = ???
-    //macro LoggerMacro.traceCseqThrowable
+  inline def trace(inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.traceCseqThrowable('delegate, 'message, 'cause)}
 
   inline def trace(inline message: AnyRef, inline cause: Throwable): Unit =
     ${LoggerMacro.traceObjectThrowable('delegate, 'message, 'cause)}
@@ -307,11 +307,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param marker  the marker data specific to this log statement
     * @param message the message to be logged
     */
-  inline def apply(level: Level, marker: Marker, message: CharSequence): Unit = {
-    if (delegate.isEnabled(level, marker)) {
-      delegate.log(level, marker, message)
-    }
-  }
+  inline def apply(inline level: Level, inline marker: Marker, inline message: CharSequence): Unit =
+    ${LoggerMacro.logMarkerCseq('delegate, 'level, 'marker, 'message)}
 
   /**
     * Logs an object with the specific `Marker` at the given `Level`.
@@ -350,11 +347,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   the cause
     */
-  inline def apply(level: Level, marker: Marker, message: CharSequence, cause: Throwable): Unit = {
-    if (delegate.isEnabled(level, marker)) {
-      delegate.log(level, marker, message, cause)
-    }
-  }
+  inline def apply(level: Level, marker: Marker, message: CharSequence, cause: Throwable): Unit =
+    ${LoggerMacro.logMarkerCseqThrowable('delegate, 'level, 'marker, 'message, 'cause)}
 
   /**
     * Logs an object with the specific `Marker` at the given `Level` including the stack trace
@@ -389,11 +383,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param level   the logging level
     * @param message the message to be logged
     */
-  inline def apply(level: Level, message: CharSequence): Unit = {
-    if (delegate.isEnabled(level)) {
-      delegate.log(level, message)
-    }
-  }
+  inline def apply(inline level: Level, inline message: CharSequence): Unit =
+    ${LoggerMacro.logCseq('delegate, 'level, 'message)}
 
   /**
     * Logs an object at the given `Level`.
@@ -427,11 +418,8 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   a `Throwable`
     */
-  inline def apply(level: Level, message: CharSequence, cause: Throwable): Unit = {
-    if (delegate.isEnabled(level)) {
-      delegate.log(level, message, cause)
-    }
-  }
+  inline def apply(inline level: Level, inline message: CharSequence, inline cause: Throwable): Unit =
+    ${LoggerMacro.logCseqThrowable('delegate, 'level, 'message, 'cause)}
 
   /**
     * Logs an object at the given `Level` including the stack trace of the given `Throwable`.

@@ -387,6 +387,28 @@ private object LoggerMacro {
     '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
+  def logCseq(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgs(underlying, level, messageFormat, Expr.ofSeq(args))
+  }
+
+  def logCseqThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+                       throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMessageArgsThrowable(underlying, level, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
+  def logMarkerCseq(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgs(underlying, level, marker, messageFormat, Expr.ofSeq(args))
+  }
+
+  def logMarkerCseqThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
+                             throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
+    val (messageFormat, args) = deconstructInterpolatedMessage(message)
+    logMarkerMessageArgsThrowable(underlying, level, marker, messageFormat, Expr.ofSeq(args), throwable)
+  }
+
   private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
                              args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
