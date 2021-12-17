@@ -457,8 +457,15 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param params the parameters to the method.
     * @return The built `EntryMessage`
     */
-  inline def traceEntry(params: AnyRef*): EntryMessage = ???
-    //delegate.traceEntry(params)
+  inline def traceEntry(params: AnyRef*): EntryMessage = {
+    params match {
+      case Seq() => delegate.traceEntry()
+      case seq if seq.head.isInstanceOf[CharSequence] => {
+        delegate.traceEntry(seq.head.toString, seq.tail:_*)
+      }
+      case _ => ???
+    }
+  }
 
   /**
     * Logs entry to a method using a `Message` to describe the parameters.
