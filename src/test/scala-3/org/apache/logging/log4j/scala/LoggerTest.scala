@@ -173,7 +173,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, msg)
-    verify(f.mockLogger).logMessage(anyString(), eqv(Level.INFO), eqv(marker), eqv(msg), eqv(null))
+    verify(f.mockLogger).log(eqv(Level.INFO), eqv(marker), eqv(msg))
   }
 
   test("log disabled with Message message and Marker") {
@@ -181,7 +181,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, msg)
-    verify(f.mockLogger, never).logMessage(anyString(), any[Level], any[Marker], any[Message], any[Throwable])
+    verify(f.mockLogger, never).log(any[Level], any[Marker], any[Message])
   }
 
   test("log enabled with String message and Marker") {
@@ -198,7 +198,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, s"string msg with value: ${f.manager.fetchValue()}")
-    verify(f.mockLogger, never).logMessage(anyString(), any[Level], any[Marker], any[Message], any[Throwable])
+    verify(f.mockLogger, never).log(any[Level], any[Marker], any[String], any[String])
     verify(f.manager, never).fetchValue()
   }
 
@@ -215,7 +215,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, cseqMsg)
-    verify(f.mockLogger, never).logMessage(anyString(), any[Level], any[Marker], any[Message], any[Throwable])
+    verify(f.mockLogger, never).log(any[Level], any[Marker], any[String])
   }
 
   test("log enabled with Object message and Marker") {
@@ -223,7 +223,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, objectMsg)
-    verify(f.mockLogger).logMessage(anyString(), eqv(Level.INFO), eqv(marker), any[Message], eqv(null))
+    verify(f.mockLogger).log(eqv(Level.INFO), eqv(marker), any[Message])
   }
 
   test("log disabled with Object message and Marker") {
@@ -239,7 +239,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, msg, cause)
-    verify(f.mockLogger).logMessage(anyString(), eqv(Level.INFO), eqv(marker), eqv(msg), eqv(cause))
+    verify(f.mockLogger).log(eqv(Level.INFO), eqv(marker), eqv(msg), eqv(cause))
   }
 
   test("log disabled with Message message and cause and Marker") {
@@ -247,7 +247,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, msg, cause)
-    verify(f.mockLogger, never).logMessage(anyString(), any[Level], any[Marker], any[Message], any[Throwable])
+    verify(f.mockLogger, never).log(any[Level], any[Marker], any[Message], any[Throwable])
   }
 
   test("log enabled with String message and cause and Marker") {
@@ -255,7 +255,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, s"string msg with value: ${f.manager.fetchValue()}", cause)
-    verify(f.mockLogger).logMessage(anyString(), eqv(Level.INFO), eqv(marker), any[Message], eqv(cause))
+    verify(f.mockLogger).log(eqv(Level.INFO), eqv(marker), any[String], any[String], eqv(cause))
     verify(f.manager).fetchValue()
   }
 
@@ -264,7 +264,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.INFO, marker)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger(Level.INFO, marker, s"string msg with value: ${f.manager.fetchValue()}", cause)
-    verify(f.mockLogger, never).logMessage(anyString(), any[Level], any[Marker], any[Message], any[Throwable])
+    verify(f.mockLogger, never).log(any[Level], any[Marker], any[String], any[String], any[Throwable])
     verify(f.manager, never).fetchValue()
   }
 
