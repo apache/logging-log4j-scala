@@ -28,432 +28,432 @@ import scala.quoted.*
 private object LoggerMacro {
   // Trace
 
-  def traceMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
+  def traceMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message) }
   }
 
-  def traceMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def traceMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
   }
 
-  def traceMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  def traceMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
   }
 
-  def traceMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def traceMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
   }
 
-  def traceCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def traceCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.TRACE}, messageFormat, Expr.ofSeq(args))
   }
 
-  def traceCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def traceCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.TRACE}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def traceMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def traceMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.TRACE}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def traceMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def traceMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.TRACE}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def traceObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message) }
+  def traceObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message) }
   }
 
-  def traceObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def traceObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
   }
 
-  def traceMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+  def traceMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
   }
 
-  def traceMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def traceMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
   }
 
   // Debug
 
-  def debugMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+  def debugMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message) }
   }
 
-  def debugMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def debugMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
   }
 
-  def debugMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  def debugMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
   }
 
-  def debugMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def debugMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
   }
 
-  def debugCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def debugCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.DEBUG}, messageFormat, Expr.ofSeq(args))
   }
 
-  def debugCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def debugCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.DEBUG}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def debugMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def debugMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.DEBUG}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def debugMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def debugMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.DEBUG}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def debugObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+  def debugObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message) }
   }
 
-  def debugObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def debugObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
   }
 
-  def debugMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+  def debugMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
   }
 
-  def debugMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def debugMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
   }
 
   // Info
 
-  def infoMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+  def infoMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message) }
   }
 
-  def infoMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def infoMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
   }
 
-  def infoMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+  def infoMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
   }
 
-  def infoMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def infoMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
   }
 
-  def infoCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def infoCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.INFO}, messageFormat, Expr.ofSeq(args))
   }
 
-  def infoCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def infoCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.INFO}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def infoMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def infoMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.INFO}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def infoMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def infoMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.INFO}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
 
-  def infoObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message) }
+  def infoObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message) }
   }
 
-  def infoObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def infoObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
   }
 
-  def infoMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+  def infoMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
   }
 
-  def infoMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def infoMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
   }
 
   //Warn
 
-  def warnMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
+  def warnMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message) }
   }
 
-  def warnMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def warnMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
   }
 
-  def warnMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  def warnMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
   }
 
-  def warnMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def warnMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
   }
 
-  def warnCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def warnCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.WARN}, messageFormat, Expr.ofSeq(args))
   }
 
-  def warnCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def warnCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.WARN}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def warnMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def warnMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.WARN}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def warnMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def warnMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.WARN}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def warnObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message) }
+  def warnObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message) }
   }
 
-  def warnObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def warnObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
   }
 
-  def warnMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+  def warnMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
   }
 
-  def warnMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def warnMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
   }
 
   //Error
 
-  def errorMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
+  def errorMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message) }
   }
 
-  def errorMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def errorMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
   }
 
-  def errorMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  def errorMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
   }
 
-  def errorMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def errorMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
   }
 
-  def errorCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def errorCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.ERROR}, messageFormat, Expr.ofSeq(args))
   }
 
-  def errorCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def errorCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.ERROR}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def errorMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def errorMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.ERROR}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def errorMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def errorMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.ERROR}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def errorObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message) }
+  def errorObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message) }
   }
 
-  def errorObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def errorObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
   }
 
-  def errorMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+  def errorMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
   }
 
-  def errorMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def errorMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
   }
 
   //Fatal
 
-  def fatalMsg(underlying: Expr[ExtendedLogger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+  def fatalMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message) }
   }
 
-  def fatalMsgThrowable(underlying: Expr[ExtendedLogger], message: Expr[Message],
+  def fatalMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
   }
 
-  def fatalMarkerMsg(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  def fatalMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
   }
 
-  def fatalMarkerMsgThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[Message],
+  def fatalMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
-  def fatalCseq(underlying: Expr[ExtendedLogger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def fatalCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, '{Level.FATAL}, messageFormat, Expr.ofSeq(args))
   }
 
-  def fatalCseqThrowable(underlying: Expr[ExtendedLogger], message: Expr[CharSequence],
+  def fatalCseqThrowable(underlying: Expr[Logger], message: Expr[CharSequence],
                          throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, '{Level.FATAL}, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def fatalMarkerCseq(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def fatalMarkerCseq(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, '{Level.FATAL}, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def fatalMarkerCseqThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[CharSequence],
+  def fatalMarkerCseqThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[CharSequence],
                                throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, '{Level.FATAL}, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def fatalObject(underlying: Expr[ExtendedLogger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+  def fatalObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message) }
   }
 
-  def fatalObjectThrowable(underlying: Expr[ExtendedLogger], message: Expr[AnyRef],
+  def fatalObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
   }
 
-  def fatalMarkerObject(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+  def fatalMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
   }
 
-  def fatalMarkerObjectThrowable(underlying: Expr[ExtendedLogger], marker: Expr[Marker], message: Expr[AnyRef],
+  def fatalMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
   }
 
-  def logCseq(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def logCseq(underlying: Expr[Logger], level: Expr[Level], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgs(underlying, level, messageFormat, Expr.ofSeq(args))
   }
 
-  def logCseqThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+  def logCseqThrowable(underlying: Expr[Logger], level: Expr[Level], message: Expr[CharSequence],
                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMessageArgsThrowable(underlying, level, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  def logMarkerCseq(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
+  def logMarkerCseq(underlying: Expr[Logger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgs(underlying, level, marker, messageFormat, Expr.ofSeq(args))
   }
 
-  def logMarkerCseqThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
+  def logMarkerCseqThrowable(underlying: Expr[Logger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
     val (messageFormat, args) = deconstructInterpolatedMessage(message)
     logMarkerMessageArgsThrowable(underlying, level, marker, messageFormat, Expr.ofSeq(args), throwable)
   }
 
-  private def logMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+  private def logMessageArgs(underlying: Expr[Logger], level: Expr[Level], message: Expr[CharSequence],
                              args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}) }
+    '{ if ($underlying.delegate.isEnabled($level)) $underlying.logMessage($level, null, ${charSequenceExprToStringExpr(message)}, null) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    '{ if ($underlying.delegate.isEnabled($level)) $underlying.delegate.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
-    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+    '{ if ($underlying.delegate.isEnabled($level)) $underlying.delegate.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
-  private def logMessageArgsThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], message: Expr[CharSequence],
+  private def logMessageArgsThrowable(underlying: Expr[Logger], level: Expr[Level], message: Expr[CharSequence],
                                       args: Expr[Seq[Any]], throwable: Expr[Throwable]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}) }
+    '{ if ($underlying.delegate.isEnabled($level)) $underlying.logMessage($level, null, ${charSequenceExprToStringExpr(message)}, $throwable) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    '{ if ($underlying.delegate.isEnabled($level)) $underlying.delegate.log($level, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}, $throwable) }
     else {
       val extendedArgs = anyRefArgs :+ throwable
-      '{ if ($underlying.isEnabled($level)) $underlying.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
+      '{ if ($underlying.delegate.isEnabled($level)) $underlying.delegate.log($level, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
     }
   }
 
-  private def logMarkerMessageArgs(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
+  private def logMarkerMessageArgs(underlying: Expr[Logger], level: Expr[Level], marker: Expr[Marker], message: Expr[CharSequence],
                                    args: Expr[Seq[Any]]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}) }
+    '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.logMessage($level, $marker, ${charSequenceExprToStringExpr(message)}, null) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
+    '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.delegate.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}) }
     else
-    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
+    '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.delegate.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(anyRefArgs)}*) }
   }
 
-  private def logMarkerMessageArgsThrowable(underlying: Expr[ExtendedLogger], level: Expr[Level], marker: Expr[Marker],
+  private def logMarkerMessageArgsThrowable(underlying: Expr[Logger], level: Expr[Level], marker: Expr[Marker],
                                             message: Expr[CharSequence], args: Expr[Seq[Any]], throwable: Expr[Throwable]) (using Quotes) = {
     val anyRefArgs = formatArgs(args)
     if(anyRefArgs.isEmpty)
-    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, $throwable) }
+    '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.logMessage($level, $marker, ${charSequenceExprToStringExpr(message)}, $throwable) }
     else if(anyRefArgs.length == 1)
-    '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}, $throwable) }
+    '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.delegate.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${anyRefArgs.head}, $throwable) }
     else {
       val extendedArgs = anyRefArgs :+ throwable
-      '{ if ($underlying.isEnabled($level, $marker)) $underlying.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
+      '{ if ($underlying.delegate.isEnabled($level, $marker)) $underlying.delegate.log($level, $marker, ${charSequenceExprToStringExpr(message)}, ${Expr.ofSeq(extendedArgs)}*) }
     }
   }
 

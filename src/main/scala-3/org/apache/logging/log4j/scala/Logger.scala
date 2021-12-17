@@ -65,226 +65,226 @@ object Logger {
 class Logger private(val delegate: ExtendedLogger) extends AnyVal {
 
   inline def fatal(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.fatalMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.fatalMarkerMsg('this, 'marker, 'message)}
 
   inline def fatal(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.fatalMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.fatalMarkerCseq('this, 'marker, 'message)}
 
   inline def fatal(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.fatalMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.fatalMarkerObject('this, 'marker, 'message)}
 
   inline def fatal(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.fatalMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def fatal(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.fatalMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def fatal(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.fatalMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
   inline def fatal(inline message: Message): Unit =
-    ${LoggerMacro.fatalMsg('delegate, 'message)}
+    ${LoggerMacro.fatalMsg('this, 'message)}
 
   inline def fatal(inline message: CharSequence): Unit =
-    ${LoggerMacro.fatalCseq('delegate, 'message)}
+    ${LoggerMacro.fatalCseq('this, 'message)}
 
   inline def fatal(inline message: AnyRef): Unit =
-    ${LoggerMacro.fatalObject('delegate, 'message)}
+    ${LoggerMacro.fatalObject('this, 'message)}
 
   inline def fatal(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.fatalMsgThrowable('this, 'message, 'cause)}
 
   inline def fatal(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.fatalCseqThrowable('this, 'message, 'cause)}
 
   inline def fatal(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.fatalObjectThrowable('this, 'message, 'cause)}
 
   inline def error(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.errorMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.errorMarkerMsg('this, 'marker, 'message)}
 
   inline def error(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.errorMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.errorMarkerCseq('this, 'marker, 'message)}
 
   inline def error(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.errorMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.errorMarkerObject('this, 'marker, 'message)}
 
 
   inline def error(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.errorMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def error(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.errorMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def error(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.errorMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
   inline def error(inline message: Message): Unit =
-    ${LoggerMacro.errorMsg('delegate, 'message)}
+    ${LoggerMacro.errorMsg('this, 'message)}
 
   inline def error(inline message: CharSequence): Unit =
-    ${LoggerMacro.errorCseq('delegate, 'message)}
+    ${LoggerMacro.errorCseq('this, 'message)}
 
   inline def error(inline message: AnyRef): Unit =
-    ${LoggerMacro.errorObject('delegate, 'message)}
+    ${LoggerMacro.errorObject('this, 'message)}
 
   inline def error(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.errorMsgThrowable('this, 'message, 'cause)}
 
   inline def error(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.errorCseqThrowable('this, 'message, 'cause)}
 
   inline def error(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.errorObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.errorObjectThrowable('this, 'message, 'cause)}
 
 
   inline def warn(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.warnMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.warnMarkerMsg('this, 'marker, 'message)}
 
   inline def warn(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.warnMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.warnMarkerCseq('this, 'marker, 'message)}
 
   inline def warn(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.warnMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.warnMarkerObject('this, 'marker, 'message)}
 
   inline def warn(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.warnMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def warn(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.warnMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def warn(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.warnMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
 
   inline def warn(message: Message): Unit =
-    ${LoggerMacro.warnMsg('delegate, 'message)}
+    ${LoggerMacro.warnMsg('this, 'message)}
 
   inline def warn(inline message: CharSequence): Unit =
-    ${LoggerMacro.warnCseq('delegate, 'message)}
+    ${LoggerMacro.warnCseq('this, 'message)}
 
   inline def warn(inline message: AnyRef): Unit =
-    ${LoggerMacro.warnObject('delegate, 'message)}
+    ${LoggerMacro.warnObject('this, 'message)}
 
   inline def warn(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.warnMsgThrowable('this, 'message, 'cause)}
 
   inline def warn(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.warnCseqThrowable('this, 'message, 'cause)}
 
   inline def warn(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.warnObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.warnObjectThrowable('this, 'message, 'cause)}
 
 
   inline def info(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.infoMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.infoMarkerMsg('this, 'marker, 'message)}
 
   inline def info(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.infoMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.infoMarkerCseq('this, 'marker, 'message)}
 
   inline def info(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.infoMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.infoMarkerObject('this, 'marker, 'message)}
 
   inline def info(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.infoMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def info(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.infoMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def info(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.infoMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
   inline def info(inline message: Message): Unit =
-    ${LoggerMacro.infoMsg('delegate, 'message)}
+    ${LoggerMacro.infoMsg('this, 'message)}
 
   inline def info(inline message: CharSequence): Unit =
-    ${LoggerMacro.infoCseq('delegate, 'message)}
+    ${LoggerMacro.infoCseq('this, 'message)}
 
   inline def info(inline message: AnyRef): Unit =
-    ${LoggerMacro.infoObject('delegate, 'message)}
+    ${LoggerMacro.infoObject('this, 'message)}
 
   inline def info(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.infoMsgThrowable('this, 'message, 'cause)}
 
   inline def info(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.infoCseqThrowable('this, 'message, 'cause)}
 
   inline def info(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.infoObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.infoObjectThrowable('this, 'message, 'cause)}
 
 
   inline def debug(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.debugMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.debugMarkerMsg('this, 'marker, 'message)}
 
   inline def debug(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.debugMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.debugMarkerCseq('this, 'marker, 'message)}
 
   inline def debug(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.debugMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.debugMarkerObject('this, 'marker, 'message)}
 
   inline def debug(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.debugMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.debugMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def debug(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.fatalMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def debug(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.debugMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.debugMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
   inline def debug(inline message: Message): Unit =
-    ${LoggerMacro.debugMsg('delegate, 'message)}
+    ${LoggerMacro.debugMsg('this, 'message)}
 
   inline def debug(inline message: CharSequence): Unit =
-    ${LoggerMacro.debugCseq('delegate, 'message)}
+    ${LoggerMacro.debugCseq('this, 'message)}
 
   inline def debug(inline message: AnyRef): Unit =
-    ${LoggerMacro.debugObject('delegate, 'message)}
+    ${LoggerMacro.debugObject('this, 'message)}
 
   inline def debug(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.debugMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.debugMsgThrowable('this, 'message, 'cause)}
 
   inline def debug(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.debugCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.debugCseqThrowable('this, 'message, 'cause)}
 
   inline def debug(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.debugObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.debugObjectThrowable('this, 'message, 'cause)}
 
 
   inline def trace(inline marker: Marker, inline message: Message): Unit =
-    ${LoggerMacro.traceMarkerMsg('delegate, 'marker, 'message)}
+    ${LoggerMacro.traceMarkerMsg('this, 'marker, 'message)}
 
   inline def trace(inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.traceMarkerCseq('delegate, 'marker, 'message)}
+    ${LoggerMacro.traceMarkerCseq('this, 'marker, 'message)}
 
   inline def trace(inline marker: Marker, inline message: AnyRef): Unit =
-    ${LoggerMacro.traceMarkerObject('delegate, 'marker, 'message)}
+    ${LoggerMacro.traceMarkerObject('this, 'marker, 'message)}
 
   inline def trace(inline marker: Marker, inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.traceMarkerMsgThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.traceMarkerMsgThrowable('this, 'marker, 'message, 'cause)}
 
   inline def trace(inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.fatalMarkerCseqThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.fatalMarkerCseqThrowable('this, 'marker, 'message, 'cause)}
 
   inline def trace(inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.traceMarkerObjectThrowable('delegate, 'marker, 'message, 'cause)}
+    ${LoggerMacro.traceMarkerObjectThrowable('this, 'marker, 'message, 'cause)}
 
   inline def trace(inline message: Message): Unit =
-    ${LoggerMacro.traceMsg('delegate, 'message)}
+    ${LoggerMacro.traceMsg('this, 'message)}
 
   inline def trace(inline message: CharSequence): Unit =
-    ${LoggerMacro.traceCseq('delegate, 'message)}
+    ${LoggerMacro.traceCseq('this, 'message)}
 
   inline def trace(inline message: AnyRef): Unit =
-    ${LoggerMacro.traceObject('delegate, 'message)}
+    ${LoggerMacro.traceObject('this, 'message)}
 
   inline def trace(inline message: Message, inline cause: Throwable): Unit =
-    ${LoggerMacro.traceMsgThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.traceMsgThrowable('this, 'message, 'cause)}
 
   inline def trace(inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.traceCseqThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.traceCseqThrowable('this, 'message, 'cause)}
 
   inline def trace(inline message: AnyRef, inline cause: Throwable): Unit =
-    ${LoggerMacro.traceObjectThrowable('delegate, 'message, 'cause)}
+    ${LoggerMacro.traceObjectThrowable('this, 'message, 'cause)}
 
 
   /**
@@ -308,7 +308,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     */
   inline def apply(inline level: Level, inline marker: Marker, inline message: CharSequence): Unit =
-    ${LoggerMacro.logMarkerCseq('delegate, 'level, 'marker, 'message)}
+    ${LoggerMacro.logMarkerCseq('this, 'level, 'marker, 'message)}
 
   /**
     * Logs an object with the specific `Marker` at the given `Level`.
@@ -348,7 +348,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param cause   the cause
     */
   inline def apply(level: Level, marker: Marker, message: CharSequence, cause: Throwable): Unit =
-    ${LoggerMacro.logMarkerCseqThrowable('delegate, 'level, 'marker, 'message, 'cause)}
+    ${LoggerMacro.logMarkerCseqThrowable('this, 'level, 'marker, 'message, 'cause)}
 
   /**
     * Logs an object with the specific `Marker` at the given `Level` including the stack trace
@@ -384,7 +384,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     */
   inline def apply(inline level: Level, inline message: CharSequence): Unit =
-    ${LoggerMacro.logCseq('delegate, 'level, 'message)}
+    ${LoggerMacro.logCseq('this, 'level, 'message)}
 
   /**
     * Logs an object at the given `Level`.
@@ -419,7 +419,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param cause   a `Throwable`
     */
   inline def apply(inline level: Level, inline message: CharSequence, inline cause: Throwable): Unit =
-    ${LoggerMacro.logCseqThrowable('delegate, 'level, 'message, 'cause)}
+    ${LoggerMacro.logCseqThrowable('this, 'level, 'message, 'cause)}
 
   /**
     * Logs an object at the given `Level` including the stack trace of the given `Throwable`.
