@@ -50,8 +50,8 @@ lazy val metadataSettings = Seq(
 
 lazy val compileSettings = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
-  scalaVersion := scala3
-  //crossScalaVersions := Seq(scala210, scala211, scala212, scala213, scala3)
+  scalaVersion := scala213,
+  crossScalaVersions := Seq(scala210, scala211, scala212, scala213, scala3)
 )
 
 lazy val publishSettings = Seq(
