@@ -28,7 +28,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         scala: [2.10.7, 2.11.12, 2.12.15, 2.13.7, 3.0.2]
-        java: ['8', '11',  '17']
+        java: ['8', '11', '17']
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
