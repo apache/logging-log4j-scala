@@ -294,7 +294,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param marker  the marker data specific to this log statement
     * @param message the message to be logged
     */
-  inline def apply(level: Level, marker: Marker, message: Message): Unit = {
+  inline def apply(inline level: Level, inline marker: Marker, inline message: Message): Unit = {
     if (delegate.isEnabled(level, marker)) {
       delegate.log(level, marker, message)
     }
@@ -317,7 +317,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param marker  the marker data specific to this log statement
     * @param message the message to be logged
     */
-  inline def apply(level: Level, marker: Marker, message: AnyRef): Unit = {
+  inline def apply(inline level: Level, inline marker: Marker, inline message: AnyRef): Unit = {
     if (delegate.isEnabled(level, marker)) {
       delegate.log(level, marker, message)
     }
@@ -332,7 +332,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   the cause
     */
-  inline def apply(level: Level, marker: Marker, message: Message, cause: Throwable): Unit = {
+  inline def apply(inline level: Level, inline marker: Marker, inline message: Message, inline cause: Throwable): Unit = {
     if (delegate.isEnabled(level, marker)) {
       delegate.log(level, marker, message, cause)
     }
@@ -347,7 +347,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   the cause
     */
-  inline def apply(level: Level, marker: Marker, message: CharSequence, cause: Throwable): Unit =
+  inline def apply(inline level: Level, inline marker: Marker, inline message: CharSequence, inline cause: Throwable): Unit =
     ${LoggerMacro.logMarkerCseqThrowable('this, 'level, 'marker, 'message, 'cause)}
 
   /**
@@ -359,7 +359,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   the cause
     */
-  inline def apply(level: Level, marker: Marker, message: AnyRef, cause: Throwable): Unit = {
+  inline def apply(inline level: Level, inline marker: Marker, inline message: AnyRef, inline cause: Throwable): Unit = {
     if (delegate.isEnabled(level, marker)) {
       delegate.log(level, marker, message, cause)
     }
@@ -371,7 +371,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param level   the logging level
     * @param message the message to be logged
     */
-  inline def apply(level: Level, message: Message): Unit = {
+  inline def apply(inline level: Level, inline message: Message): Unit = {
     if (delegate.isEnabled(level)) {
       delegate.log(level, message)
     }
@@ -392,7 +392,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param level   the logging level
     * @param message the message to be logged
     */
-  inline def apply(level: Level, message: AnyRef): Unit = {
+  inline def apply(inline level: Level, inline message: AnyRef): Unit = {
     if (delegate.isEnabled(level)) {
       delegate.log(level, message)
     }
@@ -405,7 +405,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   a `Throwable`
     */
-  inline def apply(level: Level, message: Message, cause: Throwable): Unit = {
+  inline def apply(inline level: Level, inline message: Message, inline cause: Throwable): Unit = {
     if (delegate.isEnabled(level)) {
       delegate.log(level, message, cause)
     }
@@ -428,7 +428,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message to be logged
     * @param cause   a `Throwable`
     */
-  inline def apply(level: Level, message: AnyRef, cause: Throwable): Unit = {
+  inline def apply(inline level: Level, inline message: AnyRef, inline cause: Throwable): Unit = {
     if (delegate.isEnabled(level)) {
       delegate.log(level, message, cause)
     }
@@ -457,13 +457,10 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param params the parameters to the method.
     * @return The built `EntryMessage`
     */
-  inline def traceEntry(params: AnyRef*): EntryMessage = {
+  inline def traceEntry(inline params: AnyRef*): EntryMessage = {
     params match {
       case Seq() => delegate.traceEntry()
-      case seq if seq.head.isInstanceOf[CharSequence] => {
-        delegate.traceEntry(seq.head.toString, seq.tail:_*)
-      }
-      case _ => ???
+      case seq => delegate.traceEntry(seq.head.toString, seq.tail:_*)
     }
   }
 
@@ -480,7 +477,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param message the message
     * @return The built `EntryMessage`
     */
-  inline def traceEntry(message: Message): EntryMessage =
+  inline def traceEntry(inline message: Message): EntryMessage =
     delegate.traceEntry(message)
 
   /**
@@ -495,7 +492,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result The result being returned from the method call
     * @return `result`
     */
-  inline def traceExit[R](result: R): R =
+  inline def traceExit[R](inline result: R): R =
     delegate.traceExit(result)
 
   /**
@@ -503,7 +500,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     *
     * @param entryMessage the `EntryMessage` returned from one of the `traceEntry` methods
     */
-  inline def traceExit(entryMessage: EntryMessage): Unit =
+  inline def traceExit(inline entryMessage: EntryMessage): Unit =
     delegate.traceExit(entryMessage)
 
   /**
@@ -521,7 +518,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result       The result being returned from the method call
     * @return `result`
     */
-  inline def traceExit[R](entryMessage: EntryMessage, result: R): R =
+  inline def traceExit[R](inline entryMessage: EntryMessage, result: R): R =
     delegate.traceExit(entryMessage, result)
 
   /**
@@ -531,7 +528,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param result  The result being returned from the method call.
     * @return `result`
     */
-  inline def traceExit[R](message: Message, result: R): R =
+  inline def traceExit[R](inline message: Message, result: R): R =
     delegate.traceExit(message, result)
 
   /**
@@ -544,7 +541,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t the Throwable
     * @return `t`
     */
-  inline def throwing[T <: Throwable](t: T): T =
+  inline def throwing[T <: Throwable](inline t: T): T =
     delegate.throwing(t)
 
   /**
@@ -558,7 +555,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t     the Throwable
     * @return `t`
     */
-  inline def throwing[T <: Throwable](level: Level, t: T): T =
+  inline def throwing[T <: Throwable](inline level: Level, inline t: T): T =
     delegate.throwing(level, t)
 
   /**
@@ -566,7 +563,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     *
     * @param t the Throwable.
     */
-  inline def catching(t: Throwable): Unit =
+  inline def catching(inline t: Throwable): Unit =
     delegate.catching(t)
 
   /**
@@ -575,7 +572,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param level The logging Level.
     * @param t     The Throwable.
     */
-  inline def catching(level: Level, t: Throwable): Unit =
+  inline def catching(inline level: Level, inline t: Throwable): Unit =
     delegate.catching(level, t)
 
 
