@@ -82,7 +82,7 @@ Log4j Scala API requires Java 8 to build. To install to your local
 Maven repository, execute the following:
 
 ```sh
-./sbt "+ publishM2"
+sbt "+ publishM2"
 ```
 
 ## Contributing
