@@ -83,11 +83,11 @@ lazy val licensePackagingSettings =
 
 lazy val sourceSettings = Seq(
     Compile / unmanagedSourceDirectories ++= {
-        (Compile / unmanagedSourceDirectories).value.map { dir =>
+        (Compile / unmanagedSourceDirectories).value.flatMap { dir =>
           CrossVersion.partialVersion(scalaVersion.value) match {
-            case Some((3, _)) => file(dir.getPath ++ "-3")
-            case Some((2, n11)) if n11 >= 11 => file(dir.getPath ++ "-2.11+")
-            case Some((2, n10)) if n10 <= 10 => file(dir.getPath ++ "-2.10")
+            case Some((3, _)) => Seq(file(dir.getPath ++ "-3"))
+            case Some((2, n11)) if n11 >= 11 => Seq(file(dir.getPath ++ "-2"), file(dir.getPath ++ "-2.11+"))
+            case Some((2, n10)) if n10 <= 10 => Seq(file(dir.getPath ++ "-2"), file(dir.getPath ++ "-2.10"))
           }
         }
     },
