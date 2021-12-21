@@ -446,7 +446,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger.traceEntry("foo", "bar")
-    verify(f.mockLogger).traceEntry(null: String, "foo", "bar")
+    verify(f.mockLogger).traceEntry("foo", "bar")
   }
 
   test("traceEntry disabled with params") {
@@ -454,7 +454,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger.traceEntry("foo", "bar")
-    verify(f.mockLogger, never).traceEntry(anyString(), anyString(), anyString())
+    verify(f.mockLogger, never).traceEntry(anyString(), anyString())
   }
 
   test("traceEntry enabled with message") {
