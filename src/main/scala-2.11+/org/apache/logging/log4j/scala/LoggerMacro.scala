@@ -16,8 +16,7 @@
  */
 package org.apache.logging.log4j.scala
 
-import org.apache.logging.log4j.message.{EntryMessage, Message}
-import org.apache.logging.log4j.spi.AbstractLogger
+import org.apache.logging.log4j.message.Message
 import org.apache.logging.log4j.{Level, Marker}
 
 import scala.language.experimental.macros
@@ -335,91 +334,6 @@ private object LoggerMacro {
       if (c.prefix.splice.delegate.isEnabled(level.splice)) {
         c.prefix.splice.logMessage(level.splice, null, message.splice, cause.splice)
       }
-    )
-
-
-  def traceEntry(c: LoggerContext)(): c.Expr[EntryMessage] =
-    c.universe.reify(
-      c.prefix.splice.delegate.traceEntry()
-    )
-
-  def traceEntryParams(c: LoggerContext)(params: c.Expr[AnyRef]*): c.Expr[EntryMessage] = {
-    import c.universe._
-    val isEnabled = Apply(
-      Select(Select(c.prefix.tree, TermName("delegate")), TermName("isEnabled")),
-      List(
-        reify(Level.TRACE).tree,
-        reify(AbstractLogger.ENTRY_MARKER).tree,
-        reify(null: AnyRef).tree,
-        reify(null).tree
-      )
-    )
-
-    val log = Apply(
-      Select(Select(c.prefix.tree, TermName("delegate")), TermName("traceEntry")),
-      reify(null: String).tree :: (params map (_.tree)).toList
-    )
-    c.Expr[EntryMessage](If(isEnabled, log, reify(null).tree))
-  }
-
-
-  def traceEntryMessage(c: LoggerContext)(message: c.Expr[Message]): c.Expr[EntryMessage] =
-    c.universe.reify(
-      if (c.prefix.splice.delegate.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null: AnyRef, null)) {
-        c.prefix.splice.delegate.traceEntry(message.splice)  // TODO should not do ifEnabled check
-      } else {
-        null
-      }
-    )
-
-  def traceExit(c: LoggerContext)(): c.Expr[Unit] =
-    c.universe.reify(
-      c.prefix.splice.delegate.traceExit()
-    )
-
-  def traceExitResult[R: c.WeakTypeTag](c: LoggerContext)(result: c.Expr[R]): c.Expr[R] =
-    c.universe.reify(
-      c.prefix.splice.delegate.traceExit(result.splice)
-    )
-
-  def traceExitEntryMessage(c: LoggerContext)(entryMessage: c.Expr[EntryMessage]): c.Expr[Unit] =
-    c.universe.reify(
-      c.prefix.splice.delegate.traceExit(entryMessage.splice)
-    )
-
-  def traceExitEntryMessageResult[R: c.WeakTypeTag](c: LoggerContext)(entryMessage: c.Expr[EntryMessage], result: c.Expr[R]): c.Expr[R] =
-    c.universe.reify(
-      c.prefix.splice.delegate.traceExit(entryMessage.splice, result.splice)
-    )
-
-  def traceExitMessageResult[R: c.WeakTypeTag](c: LoggerContext)(message: c.Expr[Message], result: c.Expr[R]): c.Expr[R] =
-    c.universe.reify(
-      {
-        if (message.splice != null && c.prefix.splice.delegate.isEnabled(Level.TRACE, AbstractLogger.EXIT_MARKER, message.splice, null)) {
-          c.prefix.splice.delegate.traceExit(message.splice, result.splice)  // TODO should not do ifEnabled check
-        }
-        result.splice
-      }
-    )
-
-  def throwing[T <: Throwable: c.WeakTypeTag](c: LoggerContext)(t: c.Expr[T]): c.Expr[T] =
-    c.universe.reify(
-      c.prefix.splice.delegate.throwing(t.splice)
-    )
-
-  def throwingLevel[T <: Throwable: c.WeakTypeTag](c: LoggerContext)(level: c.Expr[Level], t: c.Expr[T]): c.Expr[T] =
-    c.universe.reify(
-      c.prefix.splice.delegate.throwing(level.splice, t.splice)
-    )
-
-  def catching(c: LoggerContext)(t: c.Expr[Throwable]): c.Expr[Unit] =
-    c.universe.reify(
-      c.prefix.splice.delegate.catching(t.splice)
-    )
-
-  def catchingLevel(c: LoggerContext)(level: c.Expr[Level], t: c.Expr[Throwable]): c.Expr[Unit] =
-    c.universe.reify(
-      c.prefix.splice.delegate.catching(level.splice, t.splice)
     )
 
 }

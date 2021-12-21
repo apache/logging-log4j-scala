@@ -446,7 +446,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger.traceEntry("foo", "bar")
-    verify(f.mockLogger).traceEntry(null: String, "foo", "bar")
+    verify(f.mockLogger).traceEntry("foo", "bar")
   }
 
   test("traceEntry disabled with params") {
@@ -454,7 +454,8 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger.traceEntry("foo", "bar")
-    verify(f.mockLogger, never).traceEntry(anyString(), anyString(), anyString())
+    //traceEntry is now passes through to the underlying logger without checking if logging is enabled (the delegate checks anyway)
+    verify(f.mockLogger).traceEntry("foo", "bar")
   }
 
   test("traceEntry enabled with message") {
@@ -470,7 +471,8 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger.traceEntry(msg)
-    verify(f.mockLogger, never).traceEntry(any[Message])
+    //traceEntry is now passes through to the underlying logger without checking if logging is enabled (the delegate checks anyway)
+    verify(f.mockLogger).traceEntry(eqv(msg))
   }
 
   test("traceExit") {
@@ -518,7 +520,8 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.EXIT_MARKER, msg, null)).thenReturn(false)
     val logger = Logger(f.mockLogger)
     logger.traceExit(msg, result)
-    verify(f.mockLogger, never).traceExit(any[Message], any[AnyRef])
+    //traceExit is now passes through to the underlying logger without checking if logging is enabled (the delegate checks anyway)
+    verify(f.mockLogger).traceExit(eqv(msg), eqv(result))
   }
 
   test("throwing") {
