@@ -16,6 +16,13 @@
 ////
 == ChangeLog
 
+=== Version 13.0
+
+[vertical]
+New Features::
+[horizontal]
+LOG4J2-3184::: Add support for Scala 3.0.
+
 === Version 12.0
 
 [vertical]
