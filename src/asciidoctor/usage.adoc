@@ -54,7 +54,7 @@ class MyClass extends BaseClass with Logging {
 |link:api/2.13/[ScalaDocs]
 
 |Scala 3
-|link:api/3/[ScalaDocs]
+|link:api/3/docs/[ScalaDocs]
 |===
 
 === Configuration
