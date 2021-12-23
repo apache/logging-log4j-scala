@@ -52,6 +52,9 @@ class MyClass extends BaseClass with Logging {
 
 |Scala 2.13
 |link:api/2.13/[ScalaDocs]
+
+|Scala 3
+|link:api/3/[ScalaDocs]
 |===
 
 === Configuration
