@@ -417,7 +417,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return The built `EntryMessage`
     */
   def traceEntry(): EntryMessage =
-  macro LoggerMacro.traceEntry
+    delegate.traceEntry()
 
   /**
     * Logs entry to a method along with its parameters.
@@ -432,8 +432,12 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param params the parameters to the method.
     * @return The built `EntryMessage`
     */
-  def traceEntry(params: AnyRef*): EntryMessage =
-  macro LoggerMacro.traceEntryParams
+  def traceEntry(params: AnyRef*): EntryMessage = {
+    params match {
+      case Seq() => delegate.traceEntry()
+      case seq => delegate.traceEntry(seq.head.toString, seq.tail:_*)
+    }
+  }
 
   /**
     * Logs entry to a method using a `Message` to describe the parameters.
@@ -449,13 +453,13 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return The built `EntryMessage`
     */
   def traceEntry(message: Message): EntryMessage =
-  macro LoggerMacro.traceEntryMessage
+    delegate.traceEntry(message)
 
   /**
     * Logs exit from a method with no result.
     */
   def traceExit(): Unit =
-  macro LoggerMacro.traceExit
+    delegate.traceExit()
 
   /**
     * Logs exiting from a method with result.
@@ -464,7 +468,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return `result`
     */
   def traceExit[R](result: R): R =
-  macro LoggerMacro.traceExitResult[R]
+    delegate.traceExit(result)
 
   /**
     * Logs exiting from a method with no result.
@@ -472,7 +476,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param entryMessage the `EntryMessage` returned from one of the `traceEntry` methods
     */
   def traceExit(entryMessage: EntryMessage): Unit =
-  macro LoggerMacro.traceExitEntryMessage
+    delegate.traceExit(entryMessage)
 
   /**
     * Logs exiting from a method with result.
@@ -490,7 +494,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return `result`
     */
   def traceExit[R](entryMessage: EntryMessage, result: R): R =
-  macro LoggerMacro.traceExitEntryMessageResult[R]
+    delegate.traceExit(entryMessage, result)
 
   /**
     * Logs exiting from a method with result. Allows custom formatting of the result.
@@ -500,7 +504,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return `result`
     */
   def traceExit[R](message: Message, result: R): R =
-  macro LoggerMacro.traceExitMessageResult[R]
+    delegate.traceExit(message, result)
 
   /**
     * Logs an exception or error to be thrown.
@@ -513,7 +517,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return `t`
     */
   def throwing[T <: Throwable](t: T): T =
-  macro LoggerMacro.throwing[T]
+    delegate.throwing(t)
 
   /**
     * Logs an exception or error to be thrown to a specific logging level.
@@ -527,7 +531,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return `t`
     */
   def throwing[T <: Throwable](level: Level, t: T): T =
-  macro LoggerMacro.throwingLevel[T]
+    delegate.throwing(level, t)
 
   /**
     * Logs an exception or error that has been caught.
@@ -535,7 +539,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t the Throwable.
     */
   def catching(t: Throwable): Unit =
-  macro LoggerMacro.catching
+    delegate.catching(t)
 
   /**
     * Logs an exception or error that has been caught to a specific logging level.
@@ -544,7 +548,7 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @param t     The Throwable.
     */
   def catching(level: Level, t: Throwable): Unit =
-  macro LoggerMacro.catchingLevel
+    delegate.catching(level, t)
 
 
   /** Always logs a message at the specified level. It is the responsibility of the caller to ensure the specified

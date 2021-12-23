@@ -51,12 +51,12 @@ lazy val metadataSettings = Seq(
 lazy val compileSettings = Seq(
   scalacOptions := Seq("-feature", "-unchecked", "-deprecation"),
   scalaVersion := scala213,
-  crossScalaVersions := Seq(scala210, scala211, scala212, scala213)
+  crossScalaVersions := Seq(scala210, scala211, scala212, scala213, scala3)
 )
 
 lazy val publishSettings = Seq(
   publishMavenStyle := true,
-  publishArtifact in Test := false,
+  Test / publishArtifact := false,
   publishTo := {
     if (isSnapshot.value) {
       Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
@@ -82,23 +82,45 @@ lazy val licensePackagingSettings =
     )
 
 lazy val sourceSettings = Seq(
-    unmanagedSourceDirectories in Compile ++= {
-        (unmanagedSourceDirectories in Compile).value.map { dir =>
+    Compile / unmanagedSourceDirectories ++= {
+        (Compile / unmanagedSourceDirectories).value.flatMap { dir =>
           CrossVersion.partialVersion(scalaVersion.value) match {
-            case Some((2, n11)) if n11 >= 11 => file(dir.getPath ++ "-2.11+")
-            case Some((2, n10)) if n10 <= 10 => file(dir.getPath ++ "-2.10")
+            case Some((3, _)) => Seq(file(dir.getPath ++ "-3"))
+            case Some((2, n11)) if n11 >= 11 => Seq(file(dir.getPath ++ "-2"), file(dir.getPath ++ "-2.11+"))
+            case Some((2, n10)) if n10 <= 10 => Seq(file(dir.getPath ++ "-2"), file(dir.getPath ++ "-2.10"))
           }
         }
     },
-    unmanagedSourceDirectories in Compile ++= {
-    (unmanagedSourceDirectories in Compile).value.map { dir =>
+    Compile / unmanagedSourceDirectories ++= {
+      (Compile / unmanagedSourceDirectories).value.map { dir =>
+        CrossVersion.partialVersion(scalaVersion.value) match {
+          case Some((3, _)) => file(dir.getPath ++ "-2.13+")
+          case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
+          case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
+        }
+      }
+    }
+  )
+
+lazy val testSourceSettings = Seq(
+  Test / unmanagedSourceDirectories ++= {
+    (Test / unmanagedSourceDirectories).value.map { dir =>
       CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => file(dir.getPath ++ "-3")
+        case Some((2, _)) => file(dir.getPath ++ "-2")
+      }
+    }
+  },
+  Compile / unmanagedSourceDirectories ++= {
+    (Compile / unmanagedSourceDirectories).value.map { dir =>
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((3, _)) => file(dir.getPath ++ "-2.13+")
         case Some((2, n13)) if n13 >= 13 => file(dir.getPath ++ "-2.13+")
         case Some((2, n12)) if n12 <= 12 => file(dir.getPath ++ "-2.12-")
       }
     }
   }
-  )
+)
 
 lazy val releaseSettings = Seq(
   releaseCrossBuild := true,
@@ -109,7 +131,7 @@ lazy val releaseSettings = Seq(
       checkSnapshotDependencies,
       inquireVersions,
       runClean,
-      releaseStepTask(auditCheck in Compile),
+      releaseStepTask(Compile / auditCheck),
       runTest,
       setReleaseVersion,
       commitReleaseVersion,
@@ -125,20 +147,19 @@ lazy val releaseSettings = Seq(
 
 lazy val siteSettings = Seq(
   apiURL := Some(url(s"https://logging.apache.org/log4j/log4j-scala-${version.value}/")),
-  siteSubdirName in SiteScaladoc := s"api/${scalaBinaryVersion.value}",
-  managedSources in Asciidoc += {
-    (auditReport in Compile).value
-    (target in Compile).value / "rat.adoc"
+  SiteScaladoc / siteSubdirName := s"api/${scalaBinaryVersion.value}",
+  Asciidoc / managedSources += {
+    (Compile / auditReport).value
+    (Compile / target).value / "rat.adoc"
   },
-  mappings in makeSite ++= Seq(
+  makeSite / mappings ++= Seq(
     (baseDirectory.value / "LICENSE.txt", "LICENSE"),
     (baseDirectory.value / "NOTICE.txt", "NOTICE")
   )
 )
 
 lazy val apiDependencies = Seq(
-  libraryDependencies ++= Seq(
-    scalaReflect(scalaVersion.value),
+  libraryDependencies ++= scalaReflect(scalaVersion.value).toSeq ++ Seq(
     osgiCoreApi,
     log4jApi,
     log4jApiTests,
@@ -165,6 +186,7 @@ lazy val root = (project in file("."))
   .settings(publishSettings: _*)
   .settings(licensePackagingSettings: _*)
   .settings(sourceSettings: _*)
+  .settings(testSourceSettings: _*)
   .settings(releaseSettings: _*)
   .settings(siteSettings: _*)
   .settings(apiDependencies: _*)
@@ -174,7 +196,7 @@ lazy val nopublish = Seq(
   publish := {},
   publishLocal := {},
   publishM2 := {},
-  skip in publish := true
+  publish / skip := true
 )
 
 lazy val sample = (project in file("sample"))
