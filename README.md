@@ -11,7 +11,7 @@ Note that this Scala API was versioned and released in sync with Log4j up until 
 be versioned and released independently, that's why the version was bumped to 11.0. 
 
 [![Jenkins Status](https://builds.apache.org/job/Log4jScala/job/master/badge/icon)](https://builds.apache.org/job/Log4jScala)
-[![Travis Status](https://travis-ci.org/apache/logging-log4j-scala.svg?branch=master)](https://travis-ci.org/apache/logging-log4j-scala)
+![Build Status](https://github.com/apache/logging-log4j-scala/actions/workflows/ci.yml/badge.svg)
 
 ## Usage
 
