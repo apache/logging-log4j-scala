@@ -20,8 +20,8 @@ SBT users can add the following dependencies to their `build.sbt` file:
 ```scala
 libraryDependencies ++= Seq(
   "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0",
-  "org.apache.logging.log4j" % "log4j-api" % "2.17.0",
-  "org.apache.logging.log4j" % "log4j-core" % "2.17.0" % Runtime
+  "org.apache.logging.log4j" % "log4j-api" % "2.17.1",
+  "org.apache.logging.log4j" % "log4j-core" % "2.17.1" % Runtime
 )
 ```
 
