@@ -16,6 +16,13 @@
 ////
 == ChangeLog
 
+=== Version 12.1
+
+[vertical]
+New Features::
+[horizontal]
+LOG4J2-3184::: Add support for Scala 3.0.
+
 === Version 12.0
 
 [vertical]
@@ -30,7 +37,6 @@ LOG4J2-2293::: Add required license files to sbt output artifacts.
 LOG4J2-2296::: Add sbt-site plugin and website configuration.
 LOG4J2-2291::: Add Jenkins pipeline for sbt build.
 LOG4J2-2668::: Add support for Scala 2.13.
-LOG4J2-3184::: Add support for Scala 3.0.
 
 [vertical]
 Bug Fixes:: None.
