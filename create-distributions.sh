@@ -24,13 +24,14 @@ function sign_file() {
 function create_sources_from_tag() {
   out_format=$1
   release_version=$2
-  git archive --prefix=apache-log4j-api-scala-${release_version}-src/ -o target/apache-log4j-api-scala-${release_version}-src.${out_format} v${release_version}
+  tag_name=v$release_version-rc$3
+  git archive --prefix=apache-log4j-api-scala-${release_version}-src/ -o target/apache-log4j-api-scala-${release_version}-src.${out_format} ${tag_name}
   sign_file target/apache-log4j-api-scala-${release_version}-src.${out_format}
 }
 
 function create_all_sources_from_tag() {
-  create_sources_from_tag zip $1
-  create_sources_from_tag tar.gz $1
+  create_sources_from_tag zip $1 $2
+  create_sources_from_tag tar.gz $1 $2
 }
 
 function create_sources() {
@@ -44,7 +45,7 @@ function create_all_sources() {
 }
 
 function create_all_binaries() {
-  ./sbt -batch "; + package; packageDistributions"
+  sbt -batch "; + package; packageDistributions"
 }
 
 function create_all() {
@@ -55,10 +56,11 @@ function create_all() {
 function main() {
   case $1 in
     SNAPSHOT) create_all;;
-    *) create_all_sources_from_tag $1; create_all_binaries;;
+    *) create_all_sources_from_tag $1 $2; create_all_binaries;;
   esac
 }
 
 tag=${1:-SNAPSHOT}
+rc=${2:-1}
 
-main ${tag}
+main ${tag} ${rc}
