@@ -17,6 +17,8 @@
 function sign_file() {
   release_key=${GPG_KEYID:-748F15B2CF9BA8F024155E6ED7C92B70FA1C814D}
   gpg --detach-sign --armor --user ${release_key} "$1"
+  shasum -a256 "$1" >"$1.sha256"
+  shasum -a512 "$1" >"$1.sha512"
 }
 
 function create_sources_from_tag() {
