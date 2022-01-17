@@ -20,7 +20,7 @@ object Dependencies {
   val scala210 = "2.10.7"
   val scala211 = "2.11.12"
   val scala212 = "2.12.15"
-  val scala213 = "2.13.7"
+  val scala213 = "2.13.8"
   val scala3 = "3.0.2"
 
   def scalaReflect(version: String) =
