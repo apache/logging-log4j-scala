@@ -26,7 +26,7 @@ object Dependencies {
   def scalaReflect(version: String) =
     if (version.startsWith("3")) None else Some("org.scala-lang" % "scala-reflect" % version)
 
-  private val log4jV = "2.17.1"
+  private val log4jV = "2.17.2"
   val osgiCoreApi      = "org.osgi" % "org.osgi.core" % "6.0.0" % Provided
   val log4jApi         = "org.apache.logging.log4j" % "log4j-api" % log4jV
   val log4jApiTests    = "org.apache.logging.log4j" % "log4j-api" % log4jV % Test classifier "tests"
