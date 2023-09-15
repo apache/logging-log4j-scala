@@ -23,27 +23,28 @@ lazy val metadataSettings = Seq(
   projectInfo := ModuleInfo(
     nameFormal = "Apache Log4j Scala API",
     description = "Scala logging API facade for Log4j",
-    homepage = Some(url("https://logging.apache.org/log4j/scala/")),
+    homepage = Some(url("https://github.com/apache/logging-log4j-scala")),
     startYear = Some(2016),
     licenses = Vector("Apache License, Version 2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
     organizationName = "Apache Software Foundation",
     organizationHomepage = Some(url("https://www.apache.org/")),
     scmInfo = Some(ScmInfo(
-      url("https://gitbox.apache.org/repos/asf?p=logging-log4j-scala.git;a=summary"),
-      "scm:git:https://gitbox.apache.org/repos/asf/logging-log4j-scala.git",
-      "scm:git:https://gitbox.apache.org/repos/asf/logging-log4j-scala.git"
+      url("https://github.com/apache/logging-log4j-scala.git"),
+      "scm:git:git@github.com:apache/logging-log4j-scala.git",
+      "scm:git:git@github.com:apache/logging-log4j-scala.git"
     )),
     developers = Vector(
       Developer("mikes", "Mikael Ståldal", "mikes@apache.org", null),
       Developer("mattsicker", "Matt Sicker", "mattsicker@apache.org", null),
-      Developer("ggregory", "Gary Gregory", "ggregory@apache.org", null)
+      Developer("ggregory", "Gary Gregory", "ggregory@apache.org", null),
+      Developer("vy", "Volkan Yazıcı", "vy@apache.org", null)
     )
   ),
   pomExtra := {
     <parent>
       <groupId>org.apache.logging</groupId>
       <artifactId>logging-parent</artifactId>
-      <version>2</version>
+      <version>10.0.0</version>
     </parent>
   }
 )
@@ -54,29 +55,9 @@ lazy val compileSettings = Seq(
   crossScalaVersions := Seq(scala210, scala211, scala212, scala213, scala3)
 )
 
-lazy val publishSettings = Seq(
-  publishMavenStyle := true,
-  Test / publishArtifact := false,
-  publishTo := {
-    if (isSnapshot.value) {
-      Some("Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots")
-    } else {
-      Some("Apache Releases" at "https://repository.apache.org/service/local/staging/deploy/maven2")
-    }
-  },
-  credentials ++= {
-    for {
-      username <- sys.env.get("NEXUS_USR")
-      password <- sys.env.get("NEXUS_PSW")
-    } yield Credentials("Sonatype Nexus Repository Manager", "repository.apache.org", username, password)
-  }.toList,
-  // FIXME: https://github.com/sbt/sbt/issues/3519
-  updateOptions := updateOptions.value.withGigahorse(false)
-)
-
 lazy val licensePackagingSettings =
   for (task <- Seq(packageBin, packageSrc, packageDoc)) yield
-    mappings in (Compile, task) ++= Seq(
+    Compile / task / mappings ++= Seq(
       (baseDirectory.value / "LICENSE.txt", "META-INF/LICENSE"),
       (baseDirectory.value / "NOTICE.txt", "META-INF/NOTICE")
     )
@@ -108,6 +89,7 @@ lazy val testSourceSettings = Seq(
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((3, _)) => file(dir.getPath ++ "-3")
         case Some((2, _)) => file(dir.getPath ++ "-2")
+        case _ => sys.error(s"unexpected `scalaVersion.value`: ${scalaVersion.value}")
       }
     }
   },
@@ -120,42 +102,6 @@ lazy val testSourceSettings = Seq(
       }
     }
   }
-)
-
-lazy val releaseSettings = Seq(
-  releaseCrossBuild := true,
-  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-  releaseProcess := {
-    import ReleaseTransformations._
-    Seq(
-      checkSnapshotDependencies,
-      inquireVersions,
-      runClean,
-      releaseStepTask(Compile / auditCheck),
-      runTest,
-      setReleaseVersion,
-      commitReleaseVersion,
-      tagRelease,
-      releaseStepTask(packageSite),
-      publishArtifacts,
-      setNextVersion,
-      commitNextVersion,
-      pushChanges
-    )
-  }
-)
-
-lazy val siteSettings = Seq(
-  apiURL := Some(url(s"https://logging.apache.org/log4j/log4j-scala-${version.value}/")),
-  SiteScaladoc / siteSubdirName := s"api/${scalaBinaryVersion.value}",
-  Asciidoc / managedSources += {
-    (Compile / auditReport).value
-    (Compile / target).value / "rat.adoc"
-  },
-  makeSite / mappings ++= Seq(
-    (baseDirectory.value / "LICENSE.txt", "LICENSE"),
-    (baseDirectory.value / "NOTICE.txt", "NOTICE")
-  )
 )
 
 lazy val apiDependencies = Seq(
@@ -180,32 +126,20 @@ lazy val bundleSettings = osgiSettings ++ Seq(
 
 lazy val root = (project in file("."))
   .settings(name := "log4j-api-scala")
-  .enablePlugins(AsciidocPlugin, SiteScaladocPlugin, SbtOsgi, Distributions)
+  .enablePlugins(SbtOsgi)
   .settings(metadataSettings: _*)
   .settings(compileSettings: _*)
-  .settings(publishSettings: _*)
   .settings(licensePackagingSettings: _*)
   .settings(sourceSettings: _*)
   .settings(testSourceSettings: _*)
-  .settings(releaseSettings: _*)
-  .settings(siteSettings: _*)
   .settings(apiDependencies: _*)
   .settings(bundleSettings: _*)
-
-lazy val nopublish = Seq(
-  publish := {},
-  publishLocal := {},
-  publishM2 := {},
-  publish / skip := true
-)
 
 lazy val sample = (project in file("sample"))
   .settings(metadataSettings: _*)
   .settings(compileSettings: _*)
-  .settings(nopublish: _*)
   .settings(
     name := "log4j-api-scala-sample",
     libraryDependencies := Seq(log4jApi, log4jCore)
   )
   .dependsOn(root)
-
