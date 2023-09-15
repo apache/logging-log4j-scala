@@ -1,0 +1,1 @@
+../../../../../../../../../log4j-api-scala_2.10/src/main/scala/org/apache/logging/log4j/scala/LoggingContext.scala

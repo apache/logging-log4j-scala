@@ -1,0 +1,1 @@
+../../../../../../../../../log4j-api-scala_2.11/src/main/scala/org/apache/logging/log4j/scala/LoggerMacro.scala

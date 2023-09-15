@@ -14,11 +14,17 @@
  * See the license for the specific language governing permissions and
  * limitations under the license.
  */
-addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.1.1")
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
-addSbtPlugin("com.typesafe.sbt" % "sbt-license-report" % "1.2.0")
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "1.3.2")
-addSbtPlugin("com.typesafe.sbt" % "sbt-osgi" % "0.9.3")
-// for quicker resolutions from Maven Central of new releases, uncomment:
-//resolvers += Resolver.sonatypeRepo("public")
-addSbtPlugin("org.musigma" % "sbt-rat" % "0.5.1")
+package org.apache.logging.log4j.scala
+
+/**
+  * Mix in this trait into classes from which you want to log,
+  * give you a `logger` value with a [[Logger]] named according to the class.
+  */
+trait Logging {
+
+  /**
+    * A [[Logger]] named according to the class.
+    */
+  protected val logger: Logger = Logger(getClass)
+
+}

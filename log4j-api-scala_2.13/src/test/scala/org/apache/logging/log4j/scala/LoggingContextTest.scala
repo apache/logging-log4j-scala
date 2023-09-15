@@ -1,0 +1,1 @@
+../../../../../../../../../log4j-api-scala_2.10/src/test/scala/org/apache/logging/log4j/scala/LoggingContextTest.scala
