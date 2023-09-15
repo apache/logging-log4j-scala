@@ -44,15 +44,22 @@
     <revision>13.0.0-SNAPSHOT</revision>
 
     <!-- javac version (should work with the minimum `scala.version`!) -->
-    <minimalJavaBuildVersion>[1.8,9)</minimalJavaBuildVersion>
+    <minimalJavaBuildVersion>[17,18)</minimalJavaBuildVersion>
 
     <!-- scala version (to be overridden by modules!) -->
     <scala.version.group>2.10</scala.version.group>
     <scala.version>${scala.version.group}.7</scala.version>
 
+    <!-- JDK 8 does not support -release -->
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+
     <!-- disable `maven-site-plugin`-->
     <maven.site.skip>true</maven.site.skip>
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
+
+    <!-- disable Spotbugs -->
+    <spotbugs.skip>true</spotbugs.skip>
 
     <!-- dependency version -->
     <junit.version>4.13.2</junit.version>
@@ -148,11 +155,32 @@
                 <goal>testCompile</goal>
               </goals>
               <configuration>
+                <release />
                 <scalaVersion>${scala.version}</scalaVersion>
                 <!-- disabling zinc, since it is causing compilation failures -->
                 <recompileMode>all</recompileMode>
                 <target>8</target>
               </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-toolchains-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <toolchains>
+              <jdk>
+                <version>[1.8,9)</version>
+              </jdk>
+            </toolchains>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>toolchain</goal>
+              </goals>
             </execution>
           </executions>
         </plugin>

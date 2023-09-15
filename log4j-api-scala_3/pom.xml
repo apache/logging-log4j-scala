@@ -40,6 +40,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala3-library_${scala.version.group}</artifactId>
+      <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
