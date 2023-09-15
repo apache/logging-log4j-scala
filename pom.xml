@@ -53,6 +53,7 @@
     <!-- JDK 8 does not support -release -->
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.release>8</maven.compiler.release>
 
     <!-- disable `maven-site-plugin`-->
     <maven.site.skip>true</maven.site.skip>
@@ -155,11 +156,9 @@
                 <goal>testCompile</goal>
               </goals>
               <configuration>
-                <release />
                 <scalaVersion>${scala.version}</scalaVersion>
                 <!-- disabling zinc, since it is causing compilation failures -->
                 <recompileMode>all</recompileMode>
-                <target>8</target>
               </configuration>
             </execution>
           </executions>
