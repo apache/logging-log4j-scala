@@ -44,7 +44,7 @@
     <revision>13.0.0-SNAPSHOT</revision>
 
     <!-- javac version (should work with the minimum `scala.version`!) -->
-    <minimalJavaBuildVersion>[1.8,1.9)</minimalJavaBuildVersion>
+    <minimalJavaBuildVersion>[1.8,9)</minimalJavaBuildVersion>
 
     <!-- scala version (to be overridden by modules!) -->
     <scala.version.group>2.10</scala.version.group>
@@ -62,6 +62,8 @@
     <scalatestplus.version>3.2.10.0</scalatestplus.version>
 
     <!-- plugin versions -->
+    <!-- Last one that runs on JDK 8 -->
+    <spotless-maven-plugin.version>2.30.0</spotless-maven-plugin.version>
     <scala-maven-plugin.version>4.8.1</scala-maven-plugin.version>
 
   </properties>
@@ -146,6 +148,7 @@
                 <scalaVersion>${scala.version}</scalaVersion>
                 <!-- disabling zinc, since it is causing compilation failures -->
                 <recompileMode>all</recompileMode>
+                <target>8</target>
               </configuration>
             </execution>
           </executions>
@@ -153,6 +156,21 @@
 
       </plugins>
     </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <configuration>
+          <excludes combine.children="append">
+            <!-- Unrecognized BSD license -->
+            <exclude>sbt</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+    </plugins>
 
   </build>
 
