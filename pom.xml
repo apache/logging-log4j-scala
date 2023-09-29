@@ -123,8 +123,6 @@
     <maven.compiler.target>8</maven.compiler.target>
     <maven.compiler.release>8</maven.compiler.release>
 
-    <bnd-module-name>${groupId}.api_scala</bnd-module-name>
-
     <!-- disable `maven-site-plugin`-->
     <maven.site.skip>true</maven.site.skip>
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
