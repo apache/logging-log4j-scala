@@ -51,5 +51,10 @@ This minor release contains various bug fixes and improvements.
 * Switch the CI to GitHub Actions
 * Switched from `sbt` to Maven to take advantage of `logging-parent` conveniences
 * Switched to semantic versioning
-* Updated Log4j version to `2.20.0`
+* Updated `org.apache.logging.log4j:log4j-api` version to `2.20.0`
+* Update `org.apache.logging:logging-parent` to version `10.1.0`
 * Started using `log4j-changelog`
+
+==== Fixed
+
+* Fixed Scala 3 macros (https://github.com/apache/logging-log4j-scala/pull/26[26])
