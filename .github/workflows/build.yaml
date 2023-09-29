@@ -39,6 +39,10 @@ jobs:
   build:
     if: github.actor != 'dependabot[bot]'
     uses: apache/logging-parent/.github/workflows/build-reusable.yaml@main
+    with:
+      java-version: |
+        8
+        17
 
   deploy-snapshot:
     needs: build
@@ -48,6 +52,10 @@ jobs:
     secrets:
       NEXUS_USER: ${{ secrets.NEXUS_USER }}
       NEXUS_PW: ${{ secrets.NEXUS_PW }}
+    with:
+      java-version: |
+        8
+        17
 
   deploy-release:
     needs: build
@@ -67,3 +75,6 @@ jobs:
       project-id: log4j-scala
       distribution-attachment-count: 5
       site-enabled: true
+      java-version: |
+        8
+        17
