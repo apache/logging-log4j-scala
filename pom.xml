@@ -22,13 +22,64 @@
   <parent>
     <groupId>org.apache.logging</groupId>
     <artifactId>logging-parent</artifactId>
-    <version>10.0.0</version>
+    <version>10.1.0</version>
     <relativePath />
   </parent>
 
+  <groupId>org.apache.logging.log4j</groupId>
   <artifactId>log4j-api-scala-parent</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
+
+  <url>https://logging.apache.org/log4j/scala/</url>
+
+  <developers>
+
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory@apache.org</email>
+      <url>https://www.garygregory.com</url>
+      <organization>The Apache Software Foundation</organization>
+      <organizationUrl>https://www.apache.org/</organizationUrl>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+    </developer>
+
+    <developer>
+      <id>mattsicker</id>
+      <name>Matt Sicker</name>
+      <email>mattsicker@apache.org</email>
+      <organization>Apple</organization>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/Chicago</timezone>
+    </developer>
+
+    <developer>
+      <id>pkarwasz</id>
+      <name>Piotr P. Karwasz</name>
+      <email>pkarwasz@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>Europe/Warsaw</timezone>
+    </developer>
+
+    <developer>
+      <id>vy</id>
+      <name>Volkan Yazıcı</name>
+      <email>vy@apache.org</email>
+      <roles>
+        <role>PMC Chair</role>
+      </roles>
+      <timezone>Europe/Amsterdam</timezone>
+    </developer>
+
+  </developers>
 
   <modules>
     <module>log4j-api-scala_2.10</module>
@@ -38,6 +89,23 @@
     <module>log4j-api-scala_3</module>
   </modules>
 
+  <scm>
+    <connection>scm:git:git@github.com:apache/logging-log4j-scala.git</connection>
+    <developerConnection>scm:git:git@github.com:apache/logging-log4j-scala.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/apache/logging-log4j-scala</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/apache/logging-log4j-scala/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/apache/logging-log4j-scala/actions</url>
+  </ciManagement>
+
   <properties>
 
     <!-- project version -->
@@ -46,14 +114,16 @@
     <!-- javac version (should work with the minimum `scala.version`!) -->
     <minimalJavaBuildVersion>[17,18)</minimalJavaBuildVersion>
 
-    <!-- scala version (to be overridden by modules!) -->
+    <!-- Scala version (to be overridden by modules!) -->
     <scala.version.group>2.10</scala.version.group>
     <scala.version>${scala.version.group}.7</scala.version>
 
-    <!-- JDK 8 does not support -release -->
+    <!-- JDK 8 does not support `-release` flag -->
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
     <maven.compiler.release>8</maven.compiler.release>
+
+    <bnd-module-name>${groupId}.api_scala</bnd-module-name>
 
     <!-- disable `maven-site-plugin`-->
     <maven.site.skip>true</maven.site.skip>
@@ -68,9 +138,9 @@
     <mockito.version>4.11.0</mockito.version>
     <scalatest.version>3.2.10</scalatest.version>
     <scalatestplus.version>3.2.10.0</scalatestplus.version>
-    <spotbugs-annotations.version>4.7.3</spotbugs-annotations.version>
 
     <!-- plugin versions -->
+    <maven-toolchains-plugin.version>3.1.0</maven-toolchains-plugin.version>
     <!-- Last one that runs on JDK 8 -->
     <spotless-maven-plugin.version>2.30.0</spotless-maven-plugin.version>
     <scala-maven-plugin.version>4.8.1</scala-maven-plugin.version>
@@ -130,12 +200,6 @@
         <version>${scalatestplus.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-annotations</artifactId>
-        <version>${spotbugs-annotations.version}</version>
-      </dependency>
-
     </dependencies>
   </dependencyManagement>
 
@@ -167,40 +231,26 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-toolchains-plugin</artifactId>
-          <version>3.1.0</version>
-          <configuration>
-            <toolchains>
-              <jdk>
-                <version>[1.8,9)</version>
-              </jdk>
-            </toolchains>
-          </configuration>
+          <version>${maven-toolchains-plugin.version}</version>
           <executions>
             <execution>
+              <id>java-8</id>
               <goals>
                 <goal>toolchain</goal>
               </goals>
+              <configuration>
+                <toolchains>
+                  <jdk>
+                    <version>[1.8,9)</version>
+                  </jdk>
+                </toolchains>
+              </configuration>
             </execution>
           </executions>
         </plugin>
 
       </plugins>
     </pluginManagement>
-
-    <plugins>
-
-      <plugin>
-        <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-        <configuration>
-          <excludes combine.children="append">
-            <!-- Unrecognized BSD license -->
-            <exclude>sbt</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-
-    </plugins>
 
     <sourceDirectory>src/main/scala</sourceDirectory>
 
