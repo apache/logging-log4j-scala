@@ -18,8 +18,8 @@
 root = true
 
 [*]
-indent_size = 2
-ij_continuation_indent_size = 4
+indent_size = 4
+ij_continuation_indent_size = 8
 indent_style = space
 trim_trailing_whitespace = true
 
@@ -64,3 +64,7 @@ indent_size = 2
 ij_any_wrap_long_lines = false
 # The `no` value doesn't work in IntelliJ IDEA so a big number does the trick as well in most cases:
 max_line_length = 9999
+
+[*.scala]
+indent_size = 2
+ij_continuation_indent_size = 4
