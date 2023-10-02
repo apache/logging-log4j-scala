@@ -31,6 +31,8 @@
   <properties>
     <scala.version.group>2.11</scala.version.group>
     <scala.version>${scala.version.group}.12</scala.version>
+    <!-- Prevent usage of `release` parameter to Javac -->
+    <maven.compiler.release/>
   </properties>
 
   <dependencies>
@@ -44,6 +46,12 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.annotation</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -93,15 +101,24 @@
 
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-toolchains-plugin</artifactId>
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- No advanced configuration required for a single `package-info.java` -->
+        <configuration combine.self="override" />
+      </plugin>
+
+      <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
       </plugin>
+
     </plugins>
   </build>
 

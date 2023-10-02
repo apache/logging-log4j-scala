@@ -31,6 +31,8 @@
   <properties>
     <scala.version.group>2.10</scala.version.group>
     <scala.version>${scala.version.group}.7</scala.version>
+    <!-- Prevent usage of `release` parameter to Javac -->
+    <maven.compiler.release/>
   </properties>
 
   <dependencies>
@@ -51,6 +53,12 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-reflect</artifactId>
       <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.annotation</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -104,6 +112,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-toolchains-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- No advanced configuration required for a single `package-info.java` -->
+        <configuration combine.self="override" />
       </plugin>
 
       <plugin>
