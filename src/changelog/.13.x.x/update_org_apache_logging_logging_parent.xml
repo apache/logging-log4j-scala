@@ -20,5 +20,5 @@
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.2.xsd"
        type="changed">
   <author id="github:vy"/>
-  <description format="asciidoc">Update `org.apache.logging:logging-parent` to version `10.1.0`</description>
+  <description format="asciidoc">Update `org.apache.logging:logging-parent` to version `10.1.1`</description>
 </entry>
