@@ -32,7 +32,7 @@
     <scala.version.group>2.11</scala.version.group>
     <scala.version>${scala.version.group}.12</scala.version>
     <!-- Prevent usage of `release` parameter to Javac -->
-    <maven.compiler.release/>
+    <maven.compiler.release />
   </properties>
 
   <dependencies>
@@ -46,12 +46,6 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi.annotation</artifactId>
       <scope>provided</scope>
     </dependency>
 
