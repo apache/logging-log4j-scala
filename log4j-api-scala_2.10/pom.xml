@@ -31,6 +31,9 @@
   <properties>
     <scala.version.group>2.10</scala.version.group>
     <scala.version>${scala.version.group}.7</scala.version>
+
+    <!-- Prevents usage of `release` parameter to Javac -->
+    <maven.compiler.release />
   </properties>
 
   <dependencies>
@@ -104,6 +107,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-toolchains-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- No advanced configuration required for a single `package-info.java` -->
+        <configuration combine.self="override" />
       </plugin>
 
       <plugin>

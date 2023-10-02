@@ -123,6 +123,21 @@
     <maven.compiler.target>8</maven.compiler.target>
     <maven.compiler.release>8</maven.compiler.release>
 
+    <!--
+      ~ Common OSGi and JPMS configuration.
+      ~ Please don't overwrite in modules.
+      -->
+    <bnd-module-name>org.apache.logging.log4j.scala</bnd-module-name>
+    <bnd-extra-package-options>
+      <!-- Scala reflection is optional -->
+      scala.reflect.*;resolution:=optional
+    </bnd-extra-package-options>
+    <bnd-extra-module-options>
+      <!-- Fix module names -->
+      scala.library;substitute="scala-library",
+      scala.reflect;substitute="scala-reflect";transitive=false
+    </bnd-extra-module-options>
+
     <!-- disable `maven-site-plugin`-->
     <maven.site.skip>true</maven.site.skip>
     <maven.site.deploy.skip>true</maven.site.deploy.skip>
@@ -200,6 +215,28 @@
 
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bnd.annotation</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.annotation</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
 
   <build>
 

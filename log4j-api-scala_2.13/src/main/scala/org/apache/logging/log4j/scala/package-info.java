@@ -1,0 +1,1 @@
+../../../../../../../../../log4j-api-scala_3/src/main/scala/org/apache/logging/log4j/scala/package-info.java
