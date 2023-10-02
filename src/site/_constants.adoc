@@ -38,4 +38,4 @@
 :project-name: Log4j Scala API
 :project-id: log4j-scala
 :java-compiler-version: [17,18)
-:bnd-module-name: org.apache.logging.log4j.scala
+:bnd-module-name: org.apache.logging.log4j.api.scala

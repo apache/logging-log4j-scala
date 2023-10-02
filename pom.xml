@@ -125,9 +125,9 @@
 
     <!--
       ~ Common OSGi and JPMS configuration.
-      ~ Please don't overwrite in modules.
+      ~ Don't overwrite in modules!
       -->
-    <bnd-module-name>org.apache.logging.log4j.scala</bnd-module-name>
+    <bnd-module-name>org.apache.logging.log4j.api.scala</bnd-module-name>
     <bnd-extra-package-options>
       <!-- Scala reflection is optional -->
       scala.reflect.*;resolution:=optional
