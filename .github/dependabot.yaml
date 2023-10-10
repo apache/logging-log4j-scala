@@ -26,13 +26,13 @@ updates:
     ignore:
       # Keep `scala-library` baseline
       - dependency-name: "org.scala-lang:scala-library"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # Keep `scala-reflect` baseline
       - dependency-name: "org.scala-lang:scala-reflect"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # Keep Mockito baseline (5+ requires Java 11)
       - dependency-name: "org.mockito.kotlin:*"
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       - dependency-name: "org.mockito:*"
         update-types: ["version-update:semver-major"]
 
