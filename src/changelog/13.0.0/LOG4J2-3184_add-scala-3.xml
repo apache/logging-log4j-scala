@@ -4,7 +4,10 @@
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.1.xsd"
        type="added">
   <issue id="LOG4J2-3184" link="https://issues.apache.org/jira/browse/LOG4J2-3184"/>
+  <issue id="26" link="https://github.com/apache/logging-log4j-scala/pull/26"/>
+  <author id="github:Flowdalic" name="Florian Schmaus"/>
   <author id="github:pjfanning"/>
   <author id="github:jvz"/>
+  <author id="github:vy"/>
   <description format="asciidoc">Added support for Scala 3</description>
 </entry>
