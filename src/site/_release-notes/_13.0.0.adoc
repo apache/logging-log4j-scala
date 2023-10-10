@@ -38,7 +38,7 @@
 
 Release date:: 2023-10-10
 
-The highlights of this major release are Scala 3 support, JPMS descriptors, and the switch to https://semver.org[semantic versioning].
+The highlights of this major release are Scala 3 support, OSGi and JPMS descriptors, and the switch to https://semver.org[semantic versioning].
 
 Note that this release is still binary backward compatible with the earlier release `12.0`.
 Though we needed to bump the major version number for the semantic versioning switch to avoid the confusion related with version ordering.

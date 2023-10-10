@@ -42,7 +42,8 @@ libraryDependencies ++= Seq(
 )
 ----
 
-Java module name and OSGi `Bundle-SymbolicName` are both set to `org.apache.logging.log4j.api_scala_2_10`, `org.apache.logging.log4j.api_scala_2_11`, and so on.
+Java module name is set to `org.apache.logging.log4j.api.scala`.
+OSGi ``Bundle-SymbolicName``s are set to `org.apache.logging.log4j.api.scala.2.10`, `org.apache.logging.log4j.api.scala.2.11`, and so on.
 
 [#usage]
 == Usage
