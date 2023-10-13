@@ -22,20 +22,25 @@
     ██ ███ ██ ██   ██ ██   ██ ██  ██ ██ ██ ██  ██ ██ ██    ██
      ███ ███  ██   ██ ██   ██ ██   ████ ██ ██   ████  ██████  ██
 
-    IF THIS FILE DOESN'T HAVE A `.tmpl.adoc` SUFFIX, IT IS AUTO-GENERATED, DO NOT EDIT IT!
+    IF THIS FILE DOESN'T HAVE A `.ftl` SUFFIX, IT IS AUTO-GENERATED, DO NOT EDIT IT!
 
-    `_constants.adoc` is auto-generated from `_constants.tmpl.adoc`.
-    Auto-generation happens during `process-sources` phase of Maven.
+    Version-specific release notes (`7.8.0.adoc`, etc.) are generated from `src/changelog/*/.release-notes.adoc.ftl`.
+    Auto-generation happens during `generate-sources` phase of Maven.
     Hence, you must always
 
-    1. Edit `_constants.tmpl.adoc`
-    2. Run `./mvnw process-sources`
-    3. Commit both `_constants.tmpl.adoc` and the generated `_constants.adoc`
+    1. Find and edit the associated `.release-notes.adoc.ftl`
+    2. Run `./mvnw generate-sources`
+    3. Commit both `.release-notes.adoc.ftl` and the generated `7.8.0.adoc`
 ////
 
-:project-github-url: https://github.com/apache/logging-log4j-scala
-:project-version: 13.0.0
-:project-name: Log4j Scala API
-:project-id: log4j-scala
-:java-compiler-version: [17,18)
-:bnd-module-name: org.apache.logging.log4j.api.scala
+[#release-notes-${release.version?replace("[^a-zA-Z0-9]", "-", "r")}]
+=== ${release.version}
+
+<#if release.date?has_content>Release date:: ${release.date}</#if>
+
+The highlights of this major release are Scala 3 support, OSGi and JPMS descriptors, and the switch to https://semver.org[semantic versioning].
+
+Note that this release is still binary backward compatible with the earlier release `12.0`.
+Though we needed to bump the major version number for the semantic versioning switch to avoid the confusion related with version ordering.
+
+<#include "../.changelog.adoc.ftl">

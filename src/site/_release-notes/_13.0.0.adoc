@@ -33,10 +33,28 @@
     3. Commit both `.release-notes.adoc.ftl` and the generated `7.8.0.adoc`
 ////
 
-[#release-notes-13-x-x]
-=== 13.x.x
+[#release-notes-13-0-0]
+=== 13.0.0
+
+Release date:: 2023-10-10
+
+The highlights of this major release are Scala 3 support, OSGi and JPMS descriptors, and the switch to https://semver.org[semantic versioning].
+
+Note that this release is still binary backward compatible with the earlier release `12.0`.
+Though we needed to bump the major version number for the semantic versioning switch to avoid the confusion related with version ordering.
 
 
+==== Added
 
-This minor release contains various bug fixes and improvements.
+* Added support for Scala 3 (https://issues.apache.org/jira/browse/LOG4J2-3184[LOG4J2-3184], https://github.com/apache/logging-log4j-scala/pull/26[26])
+* Added OSGi and JPMS support
 
+==== Changed
+
+* Bumped the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using `maven-toolchains-plugin`)
+* Switch the CI to GitHub Actions
+* Switched from `sbt` to Maven to take advantage of `logging-parent` conveniences
+* Switched to semantic versioning
+* Updated `org.apache.logging.log4j:log4j-api` version to `2.20.0`
+* Update `org.apache.logging:logging-parent` to version `10.1.1`
+* Started using `log4j-changelog`
