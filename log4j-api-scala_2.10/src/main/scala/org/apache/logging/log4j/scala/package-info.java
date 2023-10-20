@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 @Export
-@Version("13.0.0")
+@Version("13.1.0")
 package org.apache.logging.log4j.scala;
 
 import org.osgi.annotation.bundle.Export;
