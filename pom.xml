@@ -15,14 +15,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" child.project.url.inherit.append.path="false" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.apache.logging</groupId>
     <artifactId>logging-parent</artifactId>
-    <version>10.1.1</version>
+    <version>10.2.0</version>
     <relativePath />
   </parent>
 
@@ -89,7 +89,7 @@
     <module>log4j-api-scala_3</module>
   </modules>
 
-  <scm>
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:git@github.com:apache/logging-log4j-scala.git</connection>
     <developerConnection>scm:git:git@github.com:apache/logging-log4j-scala.git</developerConnection>
     <tag>HEAD</tag>
@@ -105,6 +105,10 @@
     <system>GitHub Actions</system>
     <url>https://github.com/apache/logging-log4j-scala/actions</url>
   </ciManagement>
+
+  <distributionManagement>
+    <downloadUrl>https://logging.apache.org/log4j/scala/latest/#distribution</downloadUrl>
+  </distributionManagement>
 
   <properties>
 

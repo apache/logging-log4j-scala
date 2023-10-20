@@ -34,7 +34,7 @@
 ////
 
 :project-github-url: https://github.com/apache/logging-log4j-scala
-:project-version: 13.0.0
+:project-version: 13.1.0-SNAPSHOT
 :project-name: Log4j Scala API
 :project-id: log4j-scala
 :java-compiler-version: [17,18)

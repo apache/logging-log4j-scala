@@ -125,6 +125,12 @@ In accordance with the Apache Software Foundation's release https://infra.apache
 
 See xref:#release-instructions[the release instructions] for details.
 
+[#cyclonedx-sbom]
+=== CycloneDX Software Bill of Materials (SBOM)
+
+Starting with version `13.1.0`, {project-name} distributes https://cyclonedx.org/capabilities/sbom/[CyclenoDX Software Bill of Materials (SBOM)] along with each deployed artifact.
+This is streamlined by `logging-parent`, see https://logging.apache.org/logging-parent/latest/#cyclonedx-sbom[its website] for details.
+
 [#support]
 == Support
 
