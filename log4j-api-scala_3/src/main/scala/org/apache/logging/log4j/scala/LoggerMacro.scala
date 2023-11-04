@@ -496,7 +496,7 @@ private object LoggerMacro {
   }
 
   /** Checks whether `message` is an interpolated string and transforms it into LOG4J string interpolation. */
-  private def deconstructInterpolatedMessage(message: Expr[CharSequence])(using Quotes): (Expr[CharSequence], Seq[Expr[Any]]) = {
+  private[scala] def deconstructInterpolatedMessage(message: Expr[CharSequence])(using Quotes): (Expr[CharSequence], Seq[Expr[Any]]) = {
     import quotes.reflect.*
     import util.*
 
@@ -530,8 +530,8 @@ private object LoggerMacro {
       case _ => (message, Seq.empty)
     }
   }
-  
-  private def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[Object]] = {
+
+  private[scala] def formatArgs(args: Expr[Seq[Any]])(using q: Quotes): Seq[Expr[Object]] = {
     import quotes.reflect.*
     import util.*
 
