@@ -19,12 +19,14 @@ package org.apache.logging.log4j.scala
 import org.apache.logging.log4j.message.*
 import org.apache.logging.log4j.spi.{AbstractLogger, ExtendedLogger}
 import org.apache.logging.log4j.{Level, Marker, MarkerManager}
+import org.apache.logging.log4j.message.MapMessage
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.{any, anyString, eq as eqv}
 import org.mockito.Mockito.*
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatestplus.junit.JUnitRunner
 import org.scalatestplus.mockito.MockitoSugar
+import scala.jdk.CollectionConverters._
 
 case class Custom(i: Int)
 
@@ -41,6 +43,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
   val entryMsg: EntryMessage = new DefaultFlowMessageFactory().newEntryMessage(msg)
   val cseqMsg : CharSequence = new StringBuilder().append("cseq msg")
   val objectMsg              = Custom(17)
+  val mapMessage             = MapMessage(Map("foo" -> "bar").asJava)
   val cause                  = new RuntimeException("cause")
   val marker  : Marker       = MarkerManager.getMarker("marker")
   val result                 = "foo"
@@ -552,4 +555,11 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     verify(f.mockLogger).catching(eqv(Level.INFO), eqv(cause))
   }
 
+  test("log enabled with Map message") {
+    val f = fixture
+    when(f.mockLogger.isEnabled(Level.INFO)).thenReturn(true)
+    val logger = Logger(f.mockLogger)
+    logger.info(mapMessage)
+    verify(f.mockLogger).log(eqv(Level.INFO), eqv(mapMessage))
+  }
 }
