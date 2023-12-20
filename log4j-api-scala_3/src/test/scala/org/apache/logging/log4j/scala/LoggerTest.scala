@@ -43,7 +43,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
   val entryMsg: EntryMessage = new DefaultFlowMessageFactory().newEntryMessage(msg)
   val cseqMsg : CharSequence = new StringBuilder().append("cseq msg")
   val objectMsg              = Custom(17)
-  val mapMessage             = MapMessage(Map("foo" -> "bar").asJava)
+  val mapMsg                 = MapMessage(Map("foo" -> "bar").asJava)
   val cause                  = new RuntimeException("cause")
   val marker  : Marker       = MarkerManager.getMarker("marker")
   val result                 = "foo"
@@ -559,7 +559,23 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     val f = fixture
     when(f.mockLogger.isEnabled(Level.INFO)).thenReturn(true)
     val logger = Logger(f.mockLogger)
-    logger.info(mapMessage)
-    verify(f.mockLogger).log(eqv(Level.INFO), eqv(mapMessage))
+    logger.info(mapMsg)
+    verify(f.mockLogger).info(eqv(mapMsg))
+  }
+
+  test("log with entry message") {
+    val f = fixture
+    when(f.mockLogger.isEnabled(Level.INFO)).thenReturn(true)
+    val logger = Logger(f.mockLogger)
+    logger.info(entryMsg)
+    verify(f.mockLogger).info(eqv(entryMsg))
+  }
+
+  test("log with object message") {
+    val f = fixture
+    when(f.mockLogger.isEnabled(Level.INFO)).thenReturn(true)
+    val logger = Logger(f.mockLogger)
+    logger.info(objectMsg)
+    verify(f.mockLogger).info(eqv(objectMsg))
   }
 }

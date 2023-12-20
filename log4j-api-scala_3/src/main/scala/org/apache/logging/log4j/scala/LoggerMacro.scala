@@ -29,21 +29,21 @@ private object LoggerMacro {
   // Trace
 
   def traceMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.delegate.trace($message) }
   }
 
   def traceMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.delegate.trace($message, $throwable) }
   }
 
   def traceMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.delegate.trace($marker, $message) }
   }
 
   def traceMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.delegate.trace($marker, $message, $throwable) }
   }
 
   def traceCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -69,41 +69,41 @@ private object LoggerMacro {
   }
 
   def traceObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.delegate.trace($message) }
   }
 
   def traceObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.trace($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE)) $underlying.delegate.trace($message, $throwable) }
   }
 
   def traceMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.delegate.trace($marker, $message) }
   }
 
   def traceMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.trace($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.TRACE, $marker)) $underlying.delegate.trace($marker, $message, $throwable) }
   }
 
   // Debug
 
   def debugMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.delegate.debug($message) }
   }
 
   def debugMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.delegate.debug($message, $throwable) }
   }
 
   def debugMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.delegate.debug($marker, $message) }
   }
 
   def debugMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.delegate.debug($marker, $message, $throwable) }
   }
 
   def debugCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -129,41 +129,41 @@ private object LoggerMacro {
   }
 
   def debugObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.delegate.debug($message) }
   }
 
   def debugObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.debug($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG)) $underlying.delegate.debug($message, $throwable) }
   }
 
   def debugMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.delegate.debug($marker, $message) }
   }
 
   def debugMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.debug($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.DEBUG, $marker)) $underlying.delegate.debug($marker, $message, $throwable) }
   }
 
   // Info
 
   def infoMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.delegate.info($message) }
   }
 
   def infoMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.delegate.info($message, $throwable) }
   }
 
   def infoMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.delegate.info($marker, $message) }
   }
 
   def infoMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.delegate.info($marker, $message, $throwable) }
   }
 
   def infoCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -190,41 +190,41 @@ private object LoggerMacro {
 
 
   def infoObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.delegate.info($message) }
   }
 
   def infoObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.info($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO)) $underlying.delegate.info($message, $throwable) }
   }
 
   def infoMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.delegate.info($marker, $message) }
   }
 
   def infoMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.info($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.INFO, $marker)) $underlying.delegate.info($marker, $message, $throwable) }
   }
 
   //Warn
 
   def warnMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.delegate.warn($message) }
   }
 
   def warnMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                        throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.delegate.warn($message, $throwable) }
   }
 
   def warnMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.delegate.warn($marker, $message) }
   }
 
   def warnMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                              throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.delegate.warn($marker, $message, $throwable) }
   }
 
   def warnCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -250,41 +250,41 @@ private object LoggerMacro {
   }
 
   def warnObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.delegate.warn($message) }
   }
 
   def warnObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                           throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.warn($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN)) $underlying.delegate.warn($message, $throwable) }
   }
 
   def warnMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.delegate.warn($marker, $message) }
   }
 
   def warnMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                 throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.warn($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.WARN, $marker)) $underlying.delegate.warn($marker, $message, $throwable) }
   }
 
   //Error
 
   def errorMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.delegate.error($message) }
   }
 
   def errorMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.delegate.error($message, $throwable) }
   }
 
   def errorMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.delegate.error($marker, $message) }
   }
 
   def errorMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.delegate.error($marker, $message, $throwable) }
   }
 
   def errorCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -310,41 +310,41 @@ private object LoggerMacro {
   }
 
   def errorObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.delegate.error($message) }
   }
 
   def errorObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.error($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR)) $underlying.delegate.error($message, $throwable) }
   }
 
   def errorMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.delegate.error($marker, $message) }
   }
 
   def errorMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.error($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.ERROR, $marker)) $underlying.delegate.error($marker, $message, $throwable) }
   }
 
   //Fatal
 
   def fatalMsg(underlying: Expr[Logger], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.delegate.fatal($message) }
   }
 
   def fatalMsgThrowable(underlying: Expr[Logger], message: Expr[Message],
                         throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.delegate.fatal($message, $throwable) }
   }
 
   def fatalMarkerMsg(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.delegate.fatal($marker, $message) }
   }
 
   def fatalMarkerMsgThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[Message],
                               throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.delegate.fatal($marker, $message, $throwable) }
   }
 
   def fatalCseq(underlying: Expr[Logger], message: Expr[CharSequence])(using Quotes): Expr[Unit] = {
@@ -370,21 +370,21 @@ private object LoggerMacro {
   }
 
   def fatalObject(underlying: Expr[Logger], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.delegate.fatal($message) }
   }
 
   def fatalObjectThrowable(underlying: Expr[Logger], message: Expr[AnyRef],
                            throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.fatal($message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL)) $underlying.delegate.fatal($message, $throwable) }
   }
 
   def fatalMarkerObject(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.delegate.fatal($marker, $message) }
   }
 
   def fatalMarkerObjectThrowable(underlying: Expr[Logger], marker: Expr[Marker], message: Expr[AnyRef],
                                  throwable: Expr[Throwable])(using Quotes): Expr[Unit] = {
-    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.fatal($marker, $message, $throwable) }
+    '{ if ($underlying.delegate.isEnabled(Level.FATAL, $marker)) $underlying.delegate.fatal($marker, $message, $throwable) }
   }
 
   def logMsg(underlying: Expr[Logger], level: Expr[Level], message: Expr[Message])(using Quotes): Expr[Unit] = {
