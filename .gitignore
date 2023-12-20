@@ -1,0 +1,14 @@
+.project
+.idea
+**/*.iml
+**/target
+target/
+.settings
+.classpath
+.cache-main
+.cache-tests
+.flattened-pom.xml
+velocity.log
+felix-cache/
+bin/
+.bsp/sbt.json
