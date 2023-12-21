@@ -3,7 +3,5 @@
        xmlns="http://logging.apache.org/log4j/changelog"
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.2.xsd"
        type="changed">
-  <author id="github:ppkarwasz"/>
-  <author id="github:vy"/>
-  <description format="asciidoc">Bumped the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using `maven-toolchains-plugin`) </description>
+  <description format="asciidoc">Bump the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using `maven-toolchains-plugin`) </description>
 </entry>

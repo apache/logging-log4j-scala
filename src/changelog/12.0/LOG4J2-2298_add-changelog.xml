@@ -4,6 +4,5 @@
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.2.xsd"
        type="added">
   <issue id="LOG4J2-2298" link="https://issues.apache.org/jira/browse/LOG4J2-2298"/>
-  <author id="github:jvz"/>
-  <description format="asciidoc">Added changelog to site</description>
+  <description format="asciidoc">Add changelog to site</description>
 </entry>

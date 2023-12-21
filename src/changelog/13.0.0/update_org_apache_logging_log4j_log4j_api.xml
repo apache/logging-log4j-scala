@@ -3,6 +3,5 @@
        xmlns="http://logging.apache.org/log4j/changelog"
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.2.xsd"
        type="changed">
-  <author id="github:vy"/>
-  <description format="asciidoc">Updated `org.apache.logging.log4j:log4j-api` version to `2.20.0`</description>
+  <description format="asciidoc">Update `org.apache.logging.log4j:log4j-api` version to `2.20.0`</description>
 </entry>

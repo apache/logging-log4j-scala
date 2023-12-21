@@ -3,6 +3,5 @@
        xmlns="http://logging.apache.org/log4j/changelog"
        xsi:schemaLocation="http://logging.apache.org/log4j/changelog https://logging.apache.org/log4j/changelog-0.1.2.xsd"
        type="changed">
-  <author id="github:vy"/>
-  <description format="asciidoc">Switched to semantic versioning</description>
+  <description format="asciidoc">Switch to semantic versioning</description>
 </entry>

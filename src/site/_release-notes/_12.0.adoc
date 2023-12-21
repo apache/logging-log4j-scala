@@ -43,15 +43,15 @@ This is the first release of the project.
 
 ==== Added
 
-* Added Jenkins pipeline for `sbt` build (https://issues.apache.org/jira/browse/LOG4J2-2291[LOG4J2-2291])
-* Added required license files to `sbt` output artifacts (https://issues.apache.org/jira/browse/LOG4J2-2293[LOG4J2-2293])
-* Added `apache-rat-plugin` reports (https://issues.apache.org/jira/browse/LOG4J2-2294[LOG4J2-2294])
-* Added OSGi descriptors (https://issues.apache.org/jira/browse/LOG4J2-2295[LOG4J2-2295])
-* Added `sbt-site` plugin and website configuration (https://issues.apache.org/jira/browse/LOG4J2-2296[LOG4J2-2296])
-* Added changelog to site (https://issues.apache.org/jira/browse/LOG4J2-2298[LOG4J2-2298])
-* Added support for Scala 2.13 (https://issues.apache.org/jira/browse/LOG4J2-2668[LOG4J2-2668])
+* Add Jenkins pipeline for `sbt` build (https://issues.apache.org/jira/browse/LOG4J2-2291[LOG4J2-2291])
+* Add required license files to `sbt` output artifacts (https://issues.apache.org/jira/browse/LOG4J2-2293[LOG4J2-2293])
+* Add `apache-rat-plugin` reports (https://issues.apache.org/jira/browse/LOG4J2-2294[LOG4J2-2294])
+* Add OSGi descriptors (https://issues.apache.org/jira/browse/LOG4J2-2295[LOG4J2-2295])
+* Add `sbt-site` plugin and website configuration (https://issues.apache.org/jira/browse/LOG4J2-2296[LOG4J2-2296])
+* Add changelog to site (https://issues.apache.org/jira/browse/LOG4J2-2298[LOG4J2-2298])
+* Add support for Scala 2.13 (https://issues.apache.org/jira/browse/LOG4J2-2668[LOG4J2-2668])
 
 ==== Changed
 
-* Switched from `sbt` to Maven to take advantage of `logging-parent` conveniences (https://issues.apache.org/jira/browse/LOG4J2-1882[LOG4J2-1882])
-* Added release distribution script (https://issues.apache.org/jira/browse/LOG4J2-2303[LOG4J2-2303])
+* Switch from `sbt` to Maven to take advantage of `logging-parent` conveniences (https://issues.apache.org/jira/browse/LOG4J2-1882[LOG4J2-1882])
+* Add release distribution script (https://issues.apache.org/jira/browse/LOG4J2-2303[LOG4J2-2303])

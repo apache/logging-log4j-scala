@@ -43,7 +43,8 @@ This minor release contains various bug fixes and improvements.
 
 ==== Added
 
-* Started generating CycloneDX SBOM with the recent update of `logging-parent` to version `10.2.0`
+* Start generating CycloneDX SBOM with the recent update of `logging-parent` to version `10.2.0`
+* Fix recursive inlining issues in Scala 3 macros (https://github.com/apache/logging-log4j-scala/pull/40[40])
 
 ==== Changed
 
