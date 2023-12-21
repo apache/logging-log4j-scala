@@ -74,7 +74,6 @@ jobs:
       contents: write
     with:
       project-id: log4j-scala
-      distribution-attachment-count: 5
       site-enabled: true
       java-version: |
         8
