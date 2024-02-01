@@ -537,11 +537,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#params">Parameter substitution</a></li>
 <li><a href="#logger-names">Logger names</a></li>
 <li><a href="#development">Development</a></li>
-<li><a href="#distribution">Distribution</a></li>
+<li><a href="#distribution">Distribution</a>
+<ul class="sectlevel2">
+<li><a href="#cyclonedx-sbom">CycloneDX Software Bill of Materials (SBOM)</a></li>
+</ul>
+</li>
 <li><a href="#support">Support</a></li>
 <li><a href="#security">Security</a></li>
 <li><a href="#release-notes">Release Notes</a>
 <ul class="sectlevel2">
+<li><a href="#release-notes-13-1-0">13.1.0</a></li>
 <li><a href="#release-notes-13-0-0">13.0.0</a></li>
 <li><a href="#release-notes-12-0">12.0</a></li>
 </ul>
@@ -584,7 +589,7 @@ Your application still needs to have a logging backend (e.g., <a href="https://l
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sbt">libraryDependencies ++= Seq(
-  &quot;org.apache.logging.log4j&quot; %% &quot;log4j-api-scala&quot; % &quot;13.0.0&quot;
+  &quot;org.apache.logging.log4j&quot; %% &quot;log4j-api-scala&quot; % &quot;13.1.0&quot;
 )</code></pre>
 </div>
 </div>
@@ -705,6 +710,13 @@ python -m http.server -d target/site</code></pre>
 <div class="paragraph">
 <p>See <a href="#release-instructions">the release instructions</a> for details.</p>
 </div>
+<div class="sect2">
+<h3 id="cyclonedx-sbom">CycloneDX Software Bill of Materials (SBOM)</h3>
+<div class="paragraph">
+<p>Starting with version <code>13.1.0</code>, Log4j Scala API distributes <a href="https://cyclonedx.org/capabilities/sbom/">CyclenoDX Software Bill of Materials (SBOM)</a> along with each deployed artifact.
+This is streamlined by <code>logging-parent</code>, see <a href="https://logging.apache.org/logging-parent/latest/#cyclonedx-sbom">its website</a> for details.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -730,6 +742,53 @@ See <a href="https://logging.apache.org/log4j/2.x/security.html">the Log4j Secur
 <h2 id="release-notes">Release Notes</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="release-notes-13-1-0">13.1.0</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Release date</dt>
+<dd>
+<p>2024-02-01</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>This minor release contains a bug fix, Software Bill of Materials (SBOM) generation, and some dependency updates.</p>
+</div>
+<div class="sect3">
+<h4 id="_added">Added</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Start generating CycloneDX SBOM</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fixed">Fixed</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Fix recursive inlining issues in Scala 3 macros (<a href="https://github.com/apache/logging-log4j-scala/pull/40">40</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_updated">Updated</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Update <code>org.apache.logging.log4j:log4j-bom</code> to version <code>2.22.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/43">43</a>)</p>
+</li>
+<li>
+<p>Update <code>org.apache.logging:logging-parent</code> to version <code>10.6.0</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/44">44</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="release-notes-13-0-0">13.0.0</h3>
 <div class="dlist">
 <dl>
@@ -747,14 +806,14 @@ See <a href="https://logging.apache.org/log4j/2.x/security.html">the Log4j Secur
 Though we needed to bump the major version number for the semantic versioning switch to avoid the confusion related with version ordering.</p>
 </div>
 <div class="sect3">
-<h4 id="_added">Added</h4>
+<h4 id="_added_2">Added</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Added support for Scala 3 (<a href="https://issues.apache.org/jira/browse/LOG4J2-3184">LOG4J2-3184</a>, <a href="https://github.com/apache/logging-log4j-scala/pull/26">26</a>)</p>
+<p>Add support for Scala 3 (<a href="https://issues.apache.org/jira/browse/LOG4J2-3184">LOG4J2-3184</a>, <a href="https://github.com/apache/logging-log4j-scala/pull/26">26</a>)</p>
 </li>
 <li>
-<p>Added OSGi and JPMS support</p>
+<p>Add OSGi and JPMS support</p>
 </li>
 </ul>
 </div>
@@ -764,25 +823,25 @@ Though we needed to bump the major version number for the semantic versioning sw
 <div class="ulist">
 <ul>
 <li>
-<p>Bumped the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using <code>maven-toolchains-plugin</code>)</p>
+<p>Bump the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using <code>maven-toolchains-plugin</code>)</p>
 </li>
 <li>
 <p>Switch the CI to GitHub Actions</p>
 </li>
 <li>
-<p>Switched from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences</p>
+<p>Switch from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences</p>
 </li>
 <li>
-<p>Switched to semantic versioning</p>
+<p>Switch to semantic versioning</p>
 </li>
 <li>
-<p>Updated <code>org.apache.logging.log4j:log4j-api</code> version to <code>2.20.0</code></p>
+<p>Update <code>org.apache.logging.log4j:log4j-api</code> version to <code>2.20.0</code></p>
 </li>
 <li>
 <p>Update <code>org.apache.logging:logging-parent</code> to version <code>10.1.1</code></p>
 </li>
 <li>
-<p>Started using <code>log4j-changelog</code></p>
+<p>Start using <code>log4j-changelog</code></p>
 </li>
 </ul>
 </div>
@@ -802,29 +861,29 @@ Though we needed to bump the major version number for the semantic versioning sw
 <p>This is the first release of the project.</p>
 </div>
 <div class="sect3">
-<h4 id="_added_2">Added</h4>
+<h4 id="_added_3">Added</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Added Jenkins pipeline for <code>sbt</code> build (<a href="https://issues.apache.org/jira/browse/LOG4J2-2291">LOG4J2-2291</a>)</p>
+<p>Add Jenkins pipeline for <code>sbt</code> build (<a href="https://issues.apache.org/jira/browse/LOG4J2-2291">LOG4J2-2291</a>)</p>
 </li>
 <li>
-<p>Added required license files to <code>sbt</code> output artifacts (<a href="https://issues.apache.org/jira/browse/LOG4J2-2293">LOG4J2-2293</a>)</p>
+<p>Add required license files to <code>sbt</code> output artifacts (<a href="https://issues.apache.org/jira/browse/LOG4J2-2293">LOG4J2-2293</a>)</p>
 </li>
 <li>
-<p>Added <code>apache-rat-plugin</code> reports (<a href="https://issues.apache.org/jira/browse/LOG4J2-2294">LOG4J2-2294</a>)</p>
+<p>Add <code>apache-rat-plugin</code> reports (<a href="https://issues.apache.org/jira/browse/LOG4J2-2294">LOG4J2-2294</a>)</p>
 </li>
 <li>
-<p>Added OSGi descriptors (<a href="https://issues.apache.org/jira/browse/LOG4J2-2295">LOG4J2-2295</a>)</p>
+<p>Add OSGi descriptors (<a href="https://issues.apache.org/jira/browse/LOG4J2-2295">LOG4J2-2295</a>)</p>
 </li>
 <li>
-<p>Added <code>sbt-site</code> plugin and website configuration (<a href="https://issues.apache.org/jira/browse/LOG4J2-2296">LOG4J2-2296</a>)</p>
+<p>Add <code>sbt-site</code> plugin and website configuration (<a href="https://issues.apache.org/jira/browse/LOG4J2-2296">LOG4J2-2296</a>)</p>
 </li>
 <li>
-<p>Added changelog to site (<a href="https://issues.apache.org/jira/browse/LOG4J2-2298">LOG4J2-2298</a>)</p>
+<p>Add changelog to site (<a href="https://issues.apache.org/jira/browse/LOG4J2-2298">LOG4J2-2298</a>)</p>
 </li>
 <li>
-<p>Added support for Scala 2.13 (<a href="https://issues.apache.org/jira/browse/LOG4J2-2668">LOG4J2-2668</a>)</p>
+<p>Add support for Scala 2.13 (<a href="https://issues.apache.org/jira/browse/LOG4J2-2668">LOG4J2-2668</a>)</p>
 </li>
 </ul>
 </div>
@@ -834,10 +893,10 @@ Though we needed to bump the major version number for the semantic versioning sw
 <div class="ulist">
 <ul>
 <li>
-<p>Switched from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences (<a href="https://issues.apache.org/jira/browse/LOG4J2-1882">LOG4J2-1882</a>)</p>
+<p>Switch from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences (<a href="https://issues.apache.org/jira/browse/LOG4J2-1882">LOG4J2-1882</a>)</p>
 </li>
 <li>
-<p>Added release distribution script (<a href="https://issues.apache.org/jira/browse/LOG4J2-2303">LOG4J2-2303</a>)</p>
+<p>Add release distribution script (<a href="https://issues.apache.org/jira/browse/LOG4J2-2303">LOG4J2-2303</a>)</p>
 </li>
 </ul>
 </div>
@@ -872,7 +931,7 @@ See the License for the specific language governing permissions and limitations 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-10 09:12:25 UTC
+Last updated 2024-02-01 09:49:45 UTC
 </div>
 </div>
 </body>
