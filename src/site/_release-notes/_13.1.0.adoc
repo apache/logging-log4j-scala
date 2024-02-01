@@ -33,10 +33,23 @@
     3. Commit both `.release-notes.adoc.ftl` and the generated `7.8.0.adoc`
 ////
 
-[#release-notes-13-x-x]
-=== 13.x.x
+[#release-notes-13-1-0]
+=== 13.1.0
+
+Release date:: 2024-02-01
+
+This minor release contains a bug fix, Software Bill of Materials (SBOM) generation, and some dependency updates.
 
 
+==== Added
 
-This minor release contains various bug fixes and improvements.
+* Start generating CycloneDX SBOM
 
+==== Fixed
+
+* Fix recursive inlining issues in Scala 3 macros (https://github.com/apache/logging-log4j-scala/pull/40[40])
+
+==== Updated
+
+* Update `org.apache.logging.log4j:log4j-bom` to version `2.22.1` (https://github.com/apache/logging-log4j-scala/pull/43[43])
+* Update `org.apache.logging:logging-parent` to version `10.6.0` (https://github.com/apache/logging-log4j-scala/pull/44[44])
