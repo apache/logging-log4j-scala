@@ -106,7 +106,7 @@ EOF
 
 announce)
     cat <<EOF
-To: log4j-user@logging.apache.org, dev@logging.apache.org
+To: announce@apache.org, log4j-user@logging.apache.org, dev@logging.apache.org
 Title: [ANNOUNCE] $PROJECT_NAME $PROJECT_VERSION released
 
 ${PROJECT_NAME} team is pleased to announce the $PROJECT_VERSION
@@ -116,9 +116,10 @@ etc.) see the project website[1].
 
 [1] $PROJECT_SITE
 
-# Release Notes
+=== Release Notes
+
+$(dump_release_notes)
 EOF
-    dump_release_notes
     ;;
 
 *) fail_for_invalid_args
