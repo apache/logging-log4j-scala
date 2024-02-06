@@ -113,7 +113,7 @@
   <properties>
 
     <!-- project version -->
-    <revision>13.1.0</revision>
+    <revision>13.2.0-SNAPSHOT</revision>
 
     <!-- javac version (should work with the minimum `scala.version`!) -->
     <minimalJavaBuildVersion>[17,18)</minimalJavaBuildVersion>
