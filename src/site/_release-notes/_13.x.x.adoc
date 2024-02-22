@@ -43,4 +43,5 @@ This minor release contains various bug fixes and improvements.
 
 ==== Updated
 
+* Update `org.apache.logging.log4j:log4j-bom` to version `2.23.0` (https://github.com/apache/logging-log4j-scala/pull/48[48])
 * Update `org.scala-lang:scala3-library_3` to version `3.4.0` (https://github.com/apache/logging-log4j-scala/pull/46[46])
