@@ -30,7 +30,7 @@
 
   <properties>
     <scala.version.group>2.12</scala.version.group>
-    <scala.version>${scala.version.group}.18</scala.version>
+    <scala.version>${scala.version.group}.19</scala.version>
   </properties>
 
   <dependencies>

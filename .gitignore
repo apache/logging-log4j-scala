@@ -12,3 +12,8 @@ velocity.log
 felix-cache/
 bin/
 .bsp/sbt.json
+# Node
+node
+node_modules
+package-lock.json
+

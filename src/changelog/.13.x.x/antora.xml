@@ -2,7 +2,7 @@
 <entry xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="https://logging.apache.org/xml/ns"
        xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-changelog-0.xsd"
-       type="updated">
-  <issue id="43" link="https://github.com/apache/logging-log4j-scala/pull/43"/>
-  <description format="asciidoc">Update `org.apache.logging.log4j:log4j-bom` to version `2.22.1`</description>
+       type="changed">
+  <issue id="apache/logging-log4j2#2443" link="https://github.com/apache/logging-log4j2/pull/2443"/>
+  <description format="asciidoc">Website is migrated to Antora with several formatting</description>
 </entry>
