@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Release notes :: Apache Log4j Scala</title>
+    <link rel="canonical" href="https://logging.apache.org/log4j/scala/release-notes.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.4">
+<link rel="stylesheet" href="./_/css/site.css">
+<link rel="icon" href="./_/../_images/favicon.ico" type="image/x-icon">
+<!-- `@asciidoctor/tabs` extension styles -->
+<link rel="stylesheet" href="./_/css/vendor/tabs.css">
+<style>
+  /* `page-toclevels` greater than 4 are not supported by Antora UI, patching it: */
+  .toc .toc-menu li[data-level="4"] a {
+    padding-left: 2.75rem
+  }
+  /* Replace the default highlight.js color for strings from red to green: */
+  .hljs-string {
+    color: #0f8532;
+  }
+</style>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <span class="navbar-item title">Apache Log4j Scala</span>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://logging.apache.org">a subproject of&nbsp;<strong>Apache Logging Services</strong></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Home</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="development.html">Development</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="release-notes.html">Release notes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://logging.apache.org/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://logging.apache.org/support.html">Support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="https://logging.apache.org/security.html">Security</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="release-notes.html">Release notes</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="https://github.com/apache/logging-log4j-kotlin/edit/main/src/site/antora/modules/ROOT/pages/release-notes.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="1">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Release notes</h1>
+<div class="sect1">
+<h2 id="release-notes-13-x-x"><a class="anchor" href="#release-notes-13-x-x"></a>13.x.x</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This minor release contains various bug fixes and improvements.</p>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-x-x-changed"><a class="anchor" href="#release-notes-13-x-x-changed"></a>Changed</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Website is migrated to Antora with several formatting (<a href="https://github.com/apache/logging-log4j2/pull/2443">apache/logging-log4j2#2443</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-x-x-updated"><a class="anchor" href="#release-notes-13-x-x-updated"></a>Updated</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Update <code>org.apache.logging.log4j:log4j-bom</code> to version <code>2.23.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/49">49</a>)</p>
+</li>
+<li>
+<p>Update <code>org.apache.logging:logging-parent</code> to version <code>11.0.0</code></p>
+</li>
+<li>
+<p>Update <code>org.scala-lang:scala3-library_3</code> to version <code>3.4.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/50">50</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="release-notes-13-1-0"><a class="anchor" href="#release-notes-13-1-0"></a>13.1.0</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Release date</dt>
+<dd>
+<p>2024-02-01</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>This minor release contains a bug fix, Software Bill of Materials (SBOM) generation, and some dependency updates.</p>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-1-0-added"><a class="anchor" href="#release-notes-13-1-0-added"></a>Added</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Start generating CycloneDX SBOM</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-1-0-fixed"><a class="anchor" href="#release-notes-13-1-0-fixed"></a>Fixed</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Fix recursive inlining issues in Scala 3 macros (<a href="https://github.com/apache/logging-log4j-scala/pull/40">40</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-1-0-updated"><a class="anchor" href="#release-notes-13-1-0-updated"></a>Updated</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Update <code>org.apache.logging.log4j:log4j-bom</code> to version <code>2.22.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/43">43</a>)</p>
+</li>
+<li>
+<p>Update <code>org.apache.logging:logging-parent</code> to version <code>10.6.0</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/44">44</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="release-notes-13-0-0"><a class="anchor" href="#release-notes-13-0-0"></a>13.0.0</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Release date</dt>
+<dd>
+<p>2023-10-10</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The highlights of this major release are Scala 3 support, OSGi and JPMS descriptors, and the switch to <a href="https://semver.org">semantic versioning</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that this release is still binary backward compatible with the earlier release <code>12.0</code>.
+Though we needed to bump the major version number for the semantic versioning switch to avoid the confusion related with version ordering.</p>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-0-0-added"><a class="anchor" href="#release-notes-13-0-0-added"></a>Added</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add support for Scala 3 (<a href="https://issues.apache.org/jira/browse/LOG4J2-3184">LOG4J2-3184</a>, <a href="https://github.com/apache/logging-log4j-scala/pull/26">26</a>)</p>
+</li>
+<li>
+<p>Add OSGi and JPMS support</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="release-notes-13-0-0-changed"><a class="anchor" href="#release-notes-13-0-0-changed"></a>Changed</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Bump the Java version to 17 (Scala 2.10 and 2.11 targets still require Java 8 that build switches to using <code>maven-toolchains-plugin</code>)</p>
+</li>
+<li>
+<p>Switch the CI to GitHub Actions</p>
+</li>
+<li>
+<p>Switch from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences</p>
+</li>
+<li>
+<p>Switch to semantic versioning</p>
+</li>
+<li>
+<p>Update <code>org.apache.logging.log4j:log4j-api</code> version to <code>2.20.0</code></p>
+</li>
+<li>
+<p>Update <code>org.apache.logging:logging-parent</code> to version <code>10.1.1</code></p>
+</li>
+<li>
+<p>Start using <code>log4j-changelog</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="release-notes-12-0"><a class="anchor" href="#release-notes-12-0"></a>12.0</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Release date</dt>
+<dd>
+<p>2020-05-03</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>This is the first release of the project.</p>
+</div>
+<div class="sect2">
+<h3 id="release-notes-12-0-added"><a class="anchor" href="#release-notes-12-0-added"></a>Added</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add Jenkins pipeline for <code>sbt</code> build (<a href="https://issues.apache.org/jira/browse/LOG4J2-2291">LOG4J2-2291</a>)</p>
+</li>
+<li>
+<p>Add required license files to <code>sbt</code> output artifacts (<a href="https://issues.apache.org/jira/browse/LOG4J2-2293">LOG4J2-2293</a>)</p>
+</li>
+<li>
+<p>Add <code>apache-rat-plugin</code> reports (<a href="https://issues.apache.org/jira/browse/LOG4J2-2294">LOG4J2-2294</a>)</p>
+</li>
+<li>
+<p>Add OSGi descriptors (<a href="https://issues.apache.org/jira/browse/LOG4J2-2295">LOG4J2-2295</a>)</p>
+</li>
+<li>
+<p>Add <code>sbt-site</code> plugin and website configuration (<a href="https://issues.apache.org/jira/browse/LOG4J2-2296">LOG4J2-2296</a>)</p>
+</li>
+<li>
+<p>Add changelog to site (<a href="https://issues.apache.org/jira/browse/LOG4J2-2298">LOG4J2-2298</a>)</p>
+</li>
+<li>
+<p>Add support for Scala 2.13 (<a href="https://issues.apache.org/jira/browse/LOG4J2-2668">LOG4J2-2668</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="release-notes-12-0-changed"><a class="anchor" href="#release-notes-12-0-changed"></a>Changed</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Switch from <code>sbt</code> to Maven to take advantage of <code>logging-parent</code> conveniences (<a href="https://issues.apache.org/jira/browse/LOG4J2-1882">LOG4J2-1882</a>)</p>
+</li>
+<li>
+<p>Add release distribution script (<a href="https://issues.apache.org/jira/browse/LOG4J2-2303">LOG4J2-2303</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>
+    Copyright © 1999-2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+    Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache Software License, Version 2.0</a>.
+    Please read our <a href="https://privacy.apache.org/policies/privacy-policy-public.html">privacy policy</a>.
+  </p>
+  <p>
+    Apache, Log4j, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation.
+    Oracle and Java are registered trademarks of Oracle and/or its affiliates.
+    Other names may be trademarks of their respective owners.
+  </p>
+</footer>
+<script id="site-script" src="./_/js/site.js" data-ui-root-path="./_"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+<!-- `@asciidoctor/tabs` extension scripts -->
+<script async src="./_/js/vendor/tabs.js"></script>
+  </body>
+</html>
