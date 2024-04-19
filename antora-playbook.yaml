@@ -114,4 +114,4 @@ ui:
     # Fix the `Edit this page` link
     - path: partials/edit-this-page.hbs
       contents: |
-        <div class="edit-this-page"><a href="https://github.com/apache/logging-log4j-kotlin/edit/main/src/site/antora/modules/{{page.module}}/pages/{{page.relativeSrcPath}}">Edit this Page</a></div>
+        <div class="edit-this-page"><a href="https://github.com/apache/logging-log4j-scala/edit/main/src/site/antora/modules/{{page.module}}/pages/{{page.relativeSrcPath}}">Edit this Page</a></div>
