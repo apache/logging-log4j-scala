@@ -21,6 +21,9 @@
   .doc .colist>table code, .doc p code, .doc thead code { font-size: 0.8em; }
   .doc pre { font-size: 0.7rem; }
   .doc .colist { font-size: 0.75rem; }
+  /* Make links more visible: */
+  .doc a { text-decoration: underline; }
+  .doc a code { text-decoration: underline; color: #1565c0; }
   /* Tab header fonts aren't rendered good, adjusting the font weight: */
   .tablist > ul li { font-weight: 500; }
   /* `page-toclevels` greater than 4 are not supported by Antora UI, patching it: */
@@ -119,13 +122,16 @@
 <div class="ulist">
 <ul>
 <li>
+<p>Update <code>apache/logging-parent</code> to version `` (<a href="https://github.com/apache/logging-log4j-scala/pull/57">57</a>)</p>
+</li>
+<li>
 <p>Update <code>net.alchim31.maven:scala-maven-plugin</code> to version <code>4.9.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/54">54</a>)</p>
 </li>
 <li>
 <p>Update <code>org.apache.logging.log4j:log4j-bom</code> to version <code>2.23.1</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/49">49</a>)</p>
 </li>
 <li>
-<p>Update <code>org.apache.logging:logging-parent</code> to version <code>11.0.0</code></p>
+<p>Update <code>org.apache.logging:logging-parent</code> to version `` (<a href="https://github.com/apache/logging-log4j-scala/pull/56">56</a>)</p>
 </li>
 <li>
 <p>Update <code>org.apache.maven.plugins:maven-toolchains-plugin</code> to version <code>3.2.0</code> (<a href="https://github.com/apache/logging-log4j-scala/pull/52">52</a>)</p>
