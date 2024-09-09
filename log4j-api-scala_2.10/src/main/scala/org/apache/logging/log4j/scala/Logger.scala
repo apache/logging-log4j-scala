@@ -433,9 +433,10 @@ class Logger private(val delegate: ExtendedLogger) extends AnyVal {
     * @return The built `EntryMessage`
     */
   def traceEntry(params: AnyRef*): EntryMessage = {
-    params match {
-      case Seq() => delegate.traceEntry()
-      case seq => delegate.traceEntry(seq.head.toString, seq.tail:_*)
+    if (params.isEmpty) {
+      delegate.traceEntry()
+    } else {
+      delegate.traceEntry(params.head.toString, params.tail:_*)
     }
   }
 
