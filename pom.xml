@@ -160,7 +160,7 @@
 
     <!-- dependency version -->
     <junit.version>4.13.2</junit.version>
-    <log4j.version>2.23.1</log4j.version>
+    <log4j.version>2.24.0</log4j.version>
     <mockito.version>4.11.0</mockito.version>
     <scalatest.version>3.2.10</scalatest.version>
     <scalatestplus.version>3.2.10.0</scalatestplus.version>
