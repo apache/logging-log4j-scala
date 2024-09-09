@@ -1,7 +1,7 @@
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
-# The ASF licenses this file to you under the Apache License, Version 2.0
+# The ASF licenses this file to You under the Apache License, Version 2.0
 # (the "License"); you may not use this file except in compliance with
 # the License.  You may obtain a copy of the License at
 #
@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Checked by Spotless (LF line endings)
-*.java text eol=lf
-*.xml  text eol=lf
-*.yaml text eol=lf
-*.yml  text eol=lf
+# All text files with LF line endings
+* text=auto eol=lf
+# Maven Wrapper cmd script
+/mvnw.cmd eol=crlf
+# Maven Wrapper need LF line endings
+/.mvn/wrapper/maven-wrapper.properties eol=lf
