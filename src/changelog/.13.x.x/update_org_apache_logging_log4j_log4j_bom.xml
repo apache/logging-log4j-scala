@@ -3,6 +3,5 @@
        xmlns="https://logging.apache.org/xml/ns"
        xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-changelog-0.xsd"
        type="updated">
-  <issue id="49" link="https://github.com/apache/logging-log4j-scala/pull/49"/>
-  <description format="asciidoc">Update `org.apache.logging.log4j:log4j-bom` to version `2.23.1`</description>
+  <description format="asciidoc">Update `org.apache.logging.log4j:log4j-bom` to version `2.24.0`</description>
 </entry>
