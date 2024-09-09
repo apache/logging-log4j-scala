@@ -1,3 +1,4 @@
+/.mvn/wrapper/maven-wrapper.jar
 .project
 .idea
 **/*.iml
@@ -16,4 +17,3 @@ bin/
 node
 node_modules
 package-lock.json
-
