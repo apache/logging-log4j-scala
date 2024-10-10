@@ -21,3 +21,5 @@ publish:
   profile: ~
   whoami: asf-site
   subdir: content/log4j/scala
+
+# Dummy
