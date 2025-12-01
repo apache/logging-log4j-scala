@@ -3,6 +3,6 @@
        xmlns="https://logging.apache.org/xml/ns"
        xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-changelog-0.xsd"
        type="updated">
-  <issue id="68" link="https://github.com/apache/logging-log4j-scala/pull/68"/>
-  <description format="asciidoc">Update `org.apache.logging.log4j:log4j-bom` to version `2.24.3`</description>
+  <issue id="70" link="https://github.com/apache/logging-log4j-scala/pull/70"/>
+  <description format="asciidoc">Update `apache/logging-parent/.github/workflows/deploy-release-reusable.yaml@rel/11.3.0` to version `12.0.0`</description>
 </entry>
