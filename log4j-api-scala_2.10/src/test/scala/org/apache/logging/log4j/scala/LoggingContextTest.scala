@@ -113,4 +113,14 @@ class LoggingContextTest extends AnyFunSuite with Matchers {
     result shouldBe Set("key1" -> "value1", "key2" -> "value2")
   }
 
+  test("withContext") {
+    LoggingContext.clear()
+    LoggingContext.withContext(Map("key1" -> "value1", "key2" -> "value2")) {
+      LoggingContext.get("key1") shouldBe Some("value1")
+      LoggingContext.get("key2") shouldBe Some("value2")
+    }
+    LoggingContext.get("key1") shouldBe None
+    LoggingContext.get("key2") shouldBe None
+  }
+
 }

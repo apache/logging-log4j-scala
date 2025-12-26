@@ -81,4 +81,23 @@ object LoggingContext extends mutable.Map[String, String] {
 
   override def isEmpty: Boolean = ThreadContext.isEmpty
 
+  /**
+   * Runs the given block with the provided context data effectively added to the
+   * {@link org.apache.logging.log4j.ThreadContext ThreadContext} and removed after the block completes.
+   *
+   * @param context the map of key-value pairs to add to the context
+   * @param body the block of code to execute
+   * @tparam R the return type of the block
+   * @return the result of the block
+   * @since 13.2.0
+   */
+  def withContext[R](context: Map[String, String])(body: => R): R = {
+    ThreadContext.putAll(context.asJava)
+    try {
+      body
+    } finally {
+      ThreadContext.removeAll(context.keys.asJavaCollection)
+    }
+  }
+
 }
