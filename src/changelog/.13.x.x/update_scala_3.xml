@@ -3,6 +3,6 @@
        xmlns="https://logging.apache.org/xml/ns"
        xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-changelog-0.xsd"
        type="updated">
-  <issue id="50" link="https://github.com/apache/logging-log4j-scala/pull/50"/>
-  <description format="asciidoc">Update `org.scala-lang:scala3-library_3` to version `3.3.3`</description>
+  <issue id="99" link="https://github.com/apache/logging-log4j-scala/pull/99"/>
+  <description format="asciidoc">Update Scala `3` baseline to `3.7.4`</description>
 </entry>
