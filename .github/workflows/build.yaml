@@ -37,7 +37,6 @@ permissions: read-all
 jobs:
 
   build:
-    if: github.actor != 'dependabot[bot]'
     uses: apache/logging-parent/.github/workflows/build-reusable.yaml@rel/11.3.0
     with:
       java-version: |
