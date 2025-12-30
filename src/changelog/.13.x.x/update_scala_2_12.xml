@@ -3,6 +3,6 @@
        xmlns="https://logging.apache.org/xml/ns"
        xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-changelog-0.xsd"
        type="updated">
-  <issue id="64" link="https://github.com/apache/logging-log4j-scala/pull/64"/>
-  <description format="asciidoc">Update `apache/logging-parent` to version ``</description>
+  <issue id="99" link="https://github.com/apache/logging-log4j-scala/pull/99"/>
+  <description format="asciidoc">Update Scala `2.12` baseline to `2.12.21`</description>
 </entry>

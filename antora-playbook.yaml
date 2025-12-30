@@ -34,6 +34,10 @@ runtime:
     failure_level: warn
 
 asciidoc:
+  attributes:
+    tabs-sync-option: true
+    # Force Kroki to download images at build time
+    kroki-fetch-diagram: true
   extensions:
     - "@asciidoctor/tabs"
 

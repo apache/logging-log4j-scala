@@ -28,12 +28,12 @@ stderr() {
 
 fail_for_invalid_args() {
     stderr "Invalid arguments!"
-    stderr "Expected arguments: <vote|announce> <version> <commitId>"
+    stderr "Expected arguments: <vote|announce> <version> <commitId> <nexusUrl>"
     exit 1
 }
 
 # Check arguments
-[ $# -ne 3 ] && fail_for_invalid_args
+[ $# -ne 4 ] && fail_for_invalid_args
 
 # Constants
 PROJECT_NAME="Apache Log4j Scala"
@@ -43,6 +43,7 @@ PROJECT_STAGING_SITE="${PROJECT_SITE/apache.org/staged.apache.org}"
 PROJECT_REPO="https://github.com/apache/logging-log4j-scala"
 PROJECT_VERSION="$2"
 COMMIT_ID="$3"
+NEXUS_URL="$4"
 PROJECT_DIST_URL="https://dist.apache.org/repos/dist/dev/logging/$PROJECT_ID/$PROJECT_VERSION"
 
 # Check release notes file
@@ -54,8 +55,8 @@ RELEASE_NOTES_FILE="$SCRIPT_DIR/../target/generated-site/antora/modules/ROOT/pag
 
 dump_release_notes() {
     awk "f{print} /^Release date::/{f=1}" "$RELEASE_NOTES_FILE" \
-        | sed -r -e 's|'$PROJECT_REPO'/(issues|pull)/[0-9]+\[([0-9]+)\]|#\2|g
-                     s|https://github.com/([^/]+)/([^/]+)/(pull|issues)/([0-9]+)\[(\1/\2#\4)\]|\5|g'
+        | sed -r -e 's!'$PROJECT_REPO'/(issues|pull)/[0-9]+\[([0-9]+)\]!#\2!g
+                     s!https://github.com/([^/]+)/([^/]+)/(pull|issues)/([0-9]+)\[(\1/\2#\4)\]!\5!g'
 }
 
 case $1 in
@@ -71,7 +72,7 @@ Website: $PROJECT_STAGING_SITE-$PROJECT_VERSION
 GitHub: $PROJECT_REPO
 Commit: $COMMIT_ID
 Distribution: $PROJECT_DIST_URL
-Nexus: https://repository.apache.org/content/repositories/orgapachelogging-<FIXME>
+Nexus: $NEXUS_URL
 Signing key: 0x077e8893a6dcc33dd4a4d5b256e73ba9a0b592d0
 Review kit: https://s.apache.org/logging-parent-release-review-kit
 

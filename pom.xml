@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.logging</groupId>
     <artifactId>logging-parent</artifactId>
-    <version>11.3.0</version>
+    <version>12.1.1</version>
     <relativePath />
   </parent>
 
@@ -159,17 +159,22 @@
     <spotbugs.skip>true</spotbugs.skip>
 
     <!-- dependency version -->
+    <bnd.annotation.version>7.2.0</bnd.annotation.version>
     <junit.version>4.13.2</junit.version>
-    <log4j.version>2.25.2</log4j.version>
+    <log4j.version>2.25.3</log4j.version>
     <mockito.version>4.11.0</mockito.version>
-    <scalatest.version>3.2.10</scalatest.version>
-    <scalatestplus.version>3.2.10.0</scalatestplus.version>
+    <!-- The OSGi API version MUST always be the MINIMUM version Log4j supports: -->
+    <osgi.annotation.bundle.version>2.0.0</osgi.annotation.bundle.version>
+    <osgi.annotation.versioning.version>1.1.2</osgi.annotation.versioning.version>
+    <scalatest.version>3.2.19</scalatest.version>
+    <scalatestplus-junit4.version>3.2.17.0</scalatestplus-junit4.version>
+    <scalatestplus-mockito.version>3.2.10.0</scalatestplus-mockito.version>
 
     <!-- plugin versions -->
     <maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
     <!-- Last one that runs on JDK 8 -->
     <spotless-maven-plugin.version>2.30.0</spotless-maven-plugin.version>
-    <scala-maven-plugin.version>4.9.2</scala-maven-plugin.version>
+    <scala-maven-plugin.version>4.9.8</scala-maven-plugin.version>
 
   </properties>
 
@@ -217,13 +222,13 @@
       <dependency>
         <groupId>org.scalatestplus</groupId>
         <artifactId>junit-4-13_${scala.version.group}</artifactId>
-        <version>${scalatestplus.version}</version>
+        <version>${scalatestplus-junit4.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.scalatestplus</groupId>
         <artifactId>mockito-3-12_${scala.version.group}</artifactId>
-        <version>${scalatestplus.version}</version>
+        <version>${scalatestplus-mockito.version}</version>
       </dependency>
 
     </dependencies>
@@ -232,8 +237,23 @@
   <dependencies>
 
     <dependency>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bnd.annotation</artifactId>
+      <version>${bnd.annotation.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.osgi</groupId>
-      <artifactId>osgi.annotation</artifactId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <version>${osgi.annotation.bundle.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.versioning</artifactId>
+      <version>${osgi.annotation.versioning.version}</version>
       <scope>provided</scope>
     </dependency>
 
