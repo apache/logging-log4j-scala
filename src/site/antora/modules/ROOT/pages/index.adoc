@@ -88,3 +88,20 @@ logger.debug(s"Logging in user ${user.getName} with birthday ${user.calcBirthday
 Most logging implementations use a hierarchical scheme for matching logger names with logging configuration.
 In this scheme the logger name hierarchy is represented by `.` characters in the logger name, in a fashion very similar to the hierarchy used for Java/Scala package names.
 The `Logger` property added by the `Logging` trait follows this convention: the trait ensures the `Logger` is automatically named according to the class it is being used in.
+
+[#scoped-context]
+== Scoped Context (Loan Pattern)
+
+To ensure that the `ThreadContext` is properly cleaned up after execution—especially in asynchronous environments where thread reuse can lead to context leaks—you can use the `LoggingContext.withContext` method.
+
+[source,scala]
+----
+import org.apache.logging.log4j.scala.LoggingContext
+
+// Context is automatically cleared after the block finishes
+LoggingContext.withContext(Map("userId" -> "user-123", "role" -> "admin")) {
+    logger.info("This log has context data")
+    // Do some work...
+}
+// Context is clean here
+----
