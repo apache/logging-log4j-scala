@@ -74,7 +74,7 @@ object LoggingContext extends mutable.Map[String, String] {
 
   /**
    * Runs the given block with the provided context data effectively added to the
-   * {@link org.apache.logging.log4j.ThreadContext ThreadContext} and removed after the block completes.
+   * {@link ThreadContext} and removed after the block completes.
    *
    * @param context the map of key-value pairs to add to the context
    * @param body the block of code to execute
@@ -83,11 +83,18 @@ object LoggingContext extends mutable.Map[String, String] {
    * @since 13.2.0
    */
   def withContext[R](context: Map[String, String])(body: => R): R = {
+    val oldState = context.keys.map(key => key -> ThreadContext.get(key)).toMap
     ThreadContext.putAll(context.asJava)
     try {
       body
     } finally {
-      ThreadContext.removeAll(context.keys.asJava)
+      oldState.foreach { case (key, oldValue) =>
+        if (oldValue == null) {
+          ThreadContext.remove(key)
+        } else {
+          ThreadContext.put(key, oldValue)
+        }
+      }
     }
   }
 
