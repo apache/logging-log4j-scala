@@ -166,8 +166,8 @@
     <!-- The OSGi API version MUST always be the MINIMUM version Log4j supports: -->
     <osgi.annotation.bundle.version>2.0.0</osgi.annotation.bundle.version>
     <osgi.annotation.versioning.version>1.1.2</osgi.annotation.versioning.version>
-    <scalatest.version>3.2.19</scalatest.version>
-    <scalatestplus-junit4.version>3.2.17.0</scalatestplus-junit4.version>
+    <scalatest.version>3.3.0-SNAP3</scalatest.version>
+    <scalatestplus-junit4.version>3.3.0.0-SNAP3</scalatestplus-junit4.version>
     <scalatestplus-mockito.version>3.2.10.0</scalatestplus-mockito.version>
 
     <!-- plugin versions -->
