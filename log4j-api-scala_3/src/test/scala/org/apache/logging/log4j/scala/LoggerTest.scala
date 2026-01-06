@@ -437,6 +437,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
 
   test("traceEntry") {
     val f = fixture
+    when(f.mockLogger.isTraceEnabled).thenReturn(true)
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger.traceEntry()
@@ -445,6 +446,7 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
 
   test("traceEntry enabled with params") {
     val f = fixture
+    when(f.mockLogger.isTraceEnabled).thenReturn(true)
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
     val logger = Logger(f.mockLogger)
     logger.traceEntry("foo", "bar")
@@ -455,14 +457,37 @@ class LoggerTest extends AnyFunSuite with MockitoSugar {
     val f = fixture
     when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(false)
     val logger = Logger(f.mockLogger)
-    logger.traceEntry("foo", "bar")
-    //traceEntry is now passes through to the underlying logger without checking if logging is enabled (the delegate checks anyway)
-    verify(f.mockLogger).traceEntry("foo", "bar")
+    val entryMessage = logger.traceEntry("foo", "bar")
+    assert(entryMessage == null)
+    verify(f.mockLogger, never).traceEntry(anyString(), any[AnyRef])
+  }
+
+  test("traceEntry enabled with null params") {
+    val f = fixture
+    when(f.mockLogger.isTraceEnabled).thenReturn(true)
+    when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
+    val logger = Logger(f.mockLogger)
+    logger.traceEntry(null, null)
+    verify(f.mockLogger).traceEntry(any[String], any[AnyRef])
+  }
+
+  test("traceEntry disabled with throwing params") {
+    val f = fixture
+    when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(false)
+    val logger = Logger(f.mockLogger)
+    
+    // This should NOT crash because toString should not be called
+    val entryMessage = logger.traceEntry(new AnyRef {
+      override def toString: String = throw new RuntimeException("Should not be called")
+    })
+    
+    assert(entryMessage == null)
   }
 
   test("traceEntry enabled with message") {
     val f = fixture
-    when(f.mockLogger.isEnabled(Level.TRACE, AbstractLogger.ENTRY_MARKER, null.asInstanceOf[AnyRef], null)).thenReturn(true)
+    // traceEntry(Message) currently doesn't check isEnabled in the Scala wrapper, 
+    // it delegates directly to the underlying logger which does the check.
     val logger = Logger(f.mockLogger)
     logger.traceEntry(msg)
     verify(f.mockLogger).traceEntry(eqv(msg))
