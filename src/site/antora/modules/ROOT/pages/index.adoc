@@ -82,6 +82,20 @@ As all logger calls are implemented as macros, using string interpolation direct
 logger.debug(s"Logging in user ${user.getName} with birthday ${user.calcBirthday}")
 ----
 
+[#flow-logging]
+== Flow logging
+
+The Scala API supports flow logging (tracing method entry and exit) via `traceEntry` and `traceExit` methods.
+Starting from version `13.2.0`, `traceEntry` is safe to use with `null` parameters and evaluates arguments lazily, ensuring no overhead or crashes when trace logging is disabled.
+
+[source,scala]
+----
+def doSomething(foo: String, bar: Int): Unit = {
+  logger.traceEntry(foo, bar)
+  // do something
+}
+----
+
 [#logger-names]
 == Logger names
 
