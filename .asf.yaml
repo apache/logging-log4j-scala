@@ -18,8 +18,5 @@
 # `.asf.yaml` documentation: https://cwiki.apache.org/confluence/display/INFRA/Git+-+.asf.yaml+features
 
 publish:
-  profile: ~
   whoami: asf-site
   subdir: content/log4j/scala
-
-# Dummy
