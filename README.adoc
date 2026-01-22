@@ -15,6 +15,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ////
 
+[WARNING]
+====
+*This project is not maintained anymore!*
+https://lists.apache.org/thread/ky89yqxgd7sccpyozhhlsgok0mov503m[It has been retired by Apache Logging Services consensus on 2026-01-19.]
+Users are advised to migrate to alternatives.
+For other inquiries, see https://logging.apache.org/support.html[the support policy].
+====
+
 https://github.com/apache/logging-log4j-scala/actions[image:https://github.com/apache/logging-log4j-scala/actions/workflows/build.yaml/badge.svg[Actions Status]]
 https://search.maven.org/search?q=g:org.apache.logging.log4j%20a:log4j-api-scala_2.10[image:https://img.shields.io/maven-central/v/org.apache.logging.log4j/log4j-api-scala_2.10.svg[Maven Central]]
 https://www.apache.org/licenses/LICENSE-2.0.txt[image:https://img.shields.io/github/license/apache/logging-log4j-scala.svg[License]]

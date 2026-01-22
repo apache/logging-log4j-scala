@@ -103,11 +103,25 @@ ui:
           .hljs-string {
             color: #0f8532;
           }
+          div#retirement-banner {
+            color: #000;
+            background-color: #fff000;
+            width: 100%;
+            padding: 1em;
+            border-bottom: 1px solid #000;
+            text-align: center;
+          }
         </style>
 
     - path: partials/header-content.hbs
       contents: |
         <header class="header">
+          <div id="retirement-banner">
+            <b>This project is not maintained anymore!</b>
+            <a href="https://lists.apache.org/thread/ky89yqxgd7sccpyozhhlsgok0mov503m">It has been retired by Apache Logging Services consensus on 2026-01-19.</a>
+            Users are advised to migrate to alternatives.
+            For other inquiries, see <a href="https://logging.apache.org/support.html">the support policy</a>.
+          </div>
           <nav class="navbar">
             <div class="navbar-brand">
               <span class="navbar-item title">{{site.title}}</span>
