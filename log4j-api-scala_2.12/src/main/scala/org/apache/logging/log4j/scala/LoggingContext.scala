@@ -81,4 +81,30 @@ object LoggingContext extends mutable.Map[String, String] {
 
   override def isEmpty: Boolean = ThreadContext.isEmpty
 
+  /**
+   * Runs the given block with the provided context data effectively added to the
+   * {@link ThreadContext} and removed after the block completes.
+   *
+   * @param context the map of key-value pairs to add to the context
+   * @param body the block of code to execute
+   * @tparam R the return type of the block
+   * @return the result of the block
+   * @since 13.2.0
+   */
+  def withContext[R](context: Map[String, String])(body: => R): R = {
+    val oldState = context.keys.map(key => key -> ThreadContext.get(key)).toMap
+    ThreadContext.putAll(context.asJava)
+    try {
+      body
+    } finally {
+      oldState.foreach { case (key, oldValue) =>
+        if (oldValue == null) {
+          ThreadContext.remove(key)
+        } else {
+          ThreadContext.put(key, oldValue)
+        }
+      }
+    }
+  }
+
 }

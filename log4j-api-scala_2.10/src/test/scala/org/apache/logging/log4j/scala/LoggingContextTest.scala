@@ -113,4 +113,58 @@ class LoggingContextTest extends AnyFunSuite with Matchers {
     result shouldBe Set("key1" -> "value1", "key2" -> "value2")
   }
 
+  test("withContext should add and remove values") {
+    LoggingContext.clear()
+    LoggingContext.withContext(Map("key" -> "value")) {
+      LoggingContext.get("key") shouldBe Some("value")
+    }
+    LoggingContext.contains("key") shouldBe false
+  }
+
+  test("withContext should save and restore existing values") {
+    LoggingContext.clear()
+    LoggingContext += "key" -> "oldValue"
+
+    LoggingContext.withContext(Map("key" -> "newValue")) {
+      LoggingContext.get("key") shouldBe Some("newValue")
+    }
+
+    // Harus balik ke oldValue, bukan dihapus
+    LoggingContext.get("key") shouldBe Some("oldValue")
+  }
+
+  test("withContext should handle nested contexts") {
+    LoggingContext.clear()
+
+    LoggingContext.withContext(Map("outer" -> "outerValue", "common" -> "outerCommon")) {
+      LoggingContext.get("outer") shouldBe Some("outerValue")
+      LoggingContext.get("common") shouldBe Some("outerCommon")
+
+      LoggingContext.withContext(Map("inner" -> "innerValue", "common" -> "innerCommon")) {
+        LoggingContext.get("outer") shouldBe Some("outerValue")
+        LoggingContext.get("inner") shouldBe Some("innerValue")
+        // Inner harus override outer
+        LoggingContext.get("common") shouldBe Some("innerCommon")
+      }
+
+      // Pas keluar inner, common harus balik ke outerCommon
+      LoggingContext.get("common") shouldBe Some("outerCommon")
+      LoggingContext.contains("inner") shouldBe false
+    }
+
+    LoggingContext.isEmpty shouldBe true
+  }
+
+  test("withContext should cleanup on exception") {
+    LoggingContext.clear()
+    intercept[RuntimeException] {
+      LoggingContext.withContext(Map("key" -> "value")) {
+        throw new RuntimeException("Test exception")
+      }
+    }
+
+    // Pastikan tetap bersih meski ada error
+    LoggingContext.contains("key") shouldBe false
+  }
+
 }
